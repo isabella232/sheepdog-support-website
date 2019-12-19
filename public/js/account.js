@@ -72,6 +72,7 @@ const signUp = () => {
             else if (this.status === 400) {
                 const signupErr = document.getElementById('signup-error')
                 const response = JSON.parse(xhr.responseText)
+                console.log(response.message)
                 if (response.message) {
                     // Check Required
                     if (response.message.includes('required')) {
@@ -95,6 +96,51 @@ const signUp = () => {
                     if (response.errmsg.includes(dupeErr)) {
                         signupErr.textContent = "That email already exists!"
                         signupErr.style.display = "block"
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+ * Contact Us Form
+ */
+{/* <form action="event.preventDefault();sendForm()" method=POST>
+<div id="signup-error" class="error-message" style="display:none">That email already exists!</div>
+<input type="name" class="signin-bar input-name" placeholder="Name" id="contact-name">
+<input type="email" class="signin-bar input-email" placeholder="Email Address (Optional)" id="contact-email">
+<input type="subject" class="signin-bar input-subject" placeholder="Subject" id="contact-subject">    
+<input type="body" class="signin-bar input-body" placeholder="Body" id="contact-body">     */}
+
+
+const sendForm = () => {
+    const formObj = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        subject: document.getElementById('contact-subject').value,
+        body: document.getElementById('contact-body').value
+    }
+    const jsonData = JSON.stringify(formObj);
+
+    // save to database
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/contact-us/forms', true);
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.send(jsonData)
+    xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            if (this.status === 200) {
+                console.log('Logged in!')
+                // redirect to profile or home
+            }
+            else if (this.status === 400) {
+                const signinErr = document.getElementById('contact-form-error')
+                const response = JSON.parse(xhr.responseText)
+                if (Object.keys(response).length === 0) {
+                    if (formObj.name === '' || formObj.subject === '' || formObj.body === '') {
+                        signinErr.textContent = 'Missing information'
+                        signinErr.style.display = 'block'
                     }
                 }
             }

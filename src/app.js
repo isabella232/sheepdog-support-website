@@ -34,6 +34,7 @@ app.use(require('./routers/assistance'))
 app.use(require('./routers/events'))
 app.use(require('./routers/account-user'))
 app.use(require('./routers/task'))
+app.use(require('./routers/contact-us')) // TODO
 
 app.get('*', (req, res) => {
     res.render('404', {

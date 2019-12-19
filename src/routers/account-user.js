@@ -75,45 +75,41 @@ router.get('/account/profile', auth, async (req, res) => {
     res.send(req.user)
 })
 
-// router.get('/users/:_id', async (req, res) => {
-//     const _id = req.params._id
+router.get('/users/:_id', async (req, res) => {
+    const _id = req.params._id
 
-//     try {
-//         const user = await User.findById(_id)
+    try {
+        const user = await User.findById(_id)
 
-//         if (!user) {
-//             return res.status(404).send()
-//         }
-//         res.send(user)
-//     } catch (e) {
-//         res.status(500).send()
-//     }
-// })
+        if (!user) {
+            return res.status(404).send()
+        }
+        res.status.send(user)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
 
-// router.patch('/users/:_id', async (req, res) => {
-//     const updates = Object.keys(req.body)
-//     const allowedUpdates = ['name', 'email', 'password', 'age']
-//     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+router.patch('/users/:_id', async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'email', 'password', 'age']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-//     if (!isValidOperation) {
-//         return res.status(400).send({ error: 'Invalid updates!' })
-//     }
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
 
-//     try {
-//         const user = await User.findById(req.params._id)
-//         updates.forEach((update) => user[update] = req.body[update])
-//         await user.save()
+    try {
+        const user = await User.findByIdAndUpdate(req.params._id, req.body, { new: true, runValidators: true })
 
-//         // const user = await User.findByIdAndUpdate(req.params._id, req.body, { new: true, runValidators: true })
-
-//         if (!user) {
-//             return res.status(404).send()
-//         }
-//         res.send(user)
-//     } catch (e) {
-//         res.status(400).send(e)
-//     }
-// })
+        if (!user) {
+            return res.status(404).send()
+        }
+        res.send(user)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
 
 /*
  * User Update Profile

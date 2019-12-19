@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Us</title>
+        {{> head}}
+		<link rel="stylesheet" type="text/css" href="/css/account-style.css">
+    </head>
+    <body>
+        {{> header}}        
+        <main class="container-veteran fill-screen-y">
+            <div class="form-container">
+                <h1 class="form-text">Contact Us</h1>
+                <form onsubmit="event.preventDefault();sendForm()">
+                    <div id="contact-form-error" class="error-message" style="display:none">That email already exists!</div>
+                    <input type="name" class="signin-bar input-name" placeholder="Name" id="contact-name">
+                    <input type="email" class="signin-bar input-email" placeholder="Email Address (Optional)" id="contact-email">
+                    <input type="subject" class="signin-bar input-subject" placeholder="Subject" id="contact-subject">    
+                    <input type="body" class="signin-bar input-body" placeholder="Body" id="contact-body">    
+
+                    <button class="submit-button center-block-elem">SEND</button>
+                </form>
+            </div>
+        </main>
+        {{>footer}}
+        <script src="/js/contact-us.js"></script>
+    </body>
+</html>

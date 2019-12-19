@@ -23,6 +23,8 @@
     "express": "^4.17.1",
     "hbs": "^4.0.6",
     "jsonwebtoken": "^8.5.1",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.4.1",
     "mongoose": "^5.8.1",
     "request": "^2.88.0",
     "validator": "^12.1.0"
