@@ -1,0 +1,228 @@
+/*
+ * GENERAL
+ */
+
+* {
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box; /* accounts for width after padding */
+}
+
+body {
+    margin: 0;
+    position: relative; 
+}
+
+:focus {
+    outline: none;
+}
+
+/*
+ * True CSS Class Use
+ * - Create more reusable code. It's really important in reducing the amount of CSS to maintain.
+ *		o ie. `.lightgreen: { color: #B1FF54 }`
+ *			> The purpose of this is so you don't have to repeat `color: #B1FF54` across every 
+ * 				styling and use lightgreen as a class instead on the HTML element directly
+ *		o A more practical case is when you can reuse styling for buttons by literally just
+ *			doing `class="fancy-button"`
+ *		o Off topic, but SASS/SCSS CSS preprocessors both support variables that can fix this problem
+ *			by just doing: `$lightgreen: #B1FF54; ... .button { color: $lightgreen }` but the whole 
+ *			point is you can't do the same for button example shown above
+ *
+ * - Tips:
+ * 		o View HTML as your canvas and CSS as your API
+ *		o Another way to look a it is seeing CSS as functions and HTML as function calls
+ *			> You don't want to hardcode every function specific for everything you're doing
+ *
+ * - Important Messages:
+ *      o CSS is not a language that offers a lot of flexibility. You have to create it yourself.
+ *          But don't get carried away in merging styles like `.button.lightgreen` to create styles
+ *          specific to a lightgreen button. (That's where BEM helps in maintaining that!) You can 
+ *          only override so many styles before you begin to use `!important` and that's def a problem
+ *
+ * - Final Note:
+ *      o Sometimes it isn't worth to hassle/time to create separate reusable styling for something 
+ *          super specific like a landing page. Use your best judgement!
+ *
+ * - Note: If styles not already created, add new styles to your API
+ * - Additional Note: Someone used BEM and that's legit and offers even more scalability
+ *
+ * #TODO: REFACTOR CODE TO FOLLOW THIS STYLE **FOR GOOD PRACTICE** :) So far we only have that below :(
+ */
+
+.lightblue {
+    background-color:  #2f3542;
+}
+
+.center-block-elem {
+	margin: 0 auto;
+}
+
+.fill-screen-y {
+	/* height 100% might not work as expected; seems to only work starting from <html> */
+    min-height: 100vh;
+}
+
+.fill-screen-y-head-foot {
+    height: calc(100vh - 400px)
+}
+
+.fancy-button {
+	content: 'I am fancy'
+}
+.fancy-button:hover {
+	content: 'ooOh'
+}
+
+/*
+ * HEADER
+ */
+.header {  
+    z-index: 100; 
+    height: 135px; 
+    position: relative;  
+} 
+
+/*Container for logo */
+.header__logo-box{  
+    padding-top: .5%; 
+    padding-left:1.5%;  
+} 
+
+/* the logo link */
+.header__logo{
+    position: absolute;
+    height: 90%;
+}
+
+.header__logo img {
+    height: 100%;
+}
+
+  /*The container for the text in the header*/  
+.header__text-box {  
+    width:100%; 
+    height:auto;  
+    position: absolute; 
+      
+} 
+
+/*The actual text*/ 
+.header__text{  
+    margin-top: 25px;
+    color: white; 
+    text-align: center; 
+}
+
+/*Container for buttons*/ 
+.button-container {  
+    text-align: right;  
+    padding-right:1%; 
+}
+
+.nav-button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 16px;
+    color: white;
+    background: none;
+    cursor: pointer;
+    border: none;
+    transition: color 250ms;
+}
+
+.nav-button:hover {
+    color: #aaa;
+}
+
+.button__take-action {
+    background: #994532;
+    border-radius: 3px;
+    transition: background 250ms;
+}
+
+.button__take-action:hover {
+    color: #fff;
+    background: #753426;
+}
+
+/* 
+ * FOOTER 
+ */
+.social-media {
+    padding: 40px;
+    text-align: center;
+}
+
+.social-media-title {
+    margin-bottom: 20px;
+    color: white;
+    font-size: 24px;
+}
+
+.social-media-icons {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+.social-media-icons:hover > * {
+    opacity: 0.6;
+}
+
+.logo {
+    border-radius: 50%;
+    margin: 5px;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-color: white;
+    color: black;
+    transition: opacity 250ms;
+}
+
+.logo i {
+    padding-top: 25%;
+}
+
+.logo:nth-child(1):hover,
+.logo:nth-child(2):hover,
+.logo:nth-child(3):hover,
+.logo:nth-child(4):hover { opacity: 1; }
+
+.sub-email {
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    border-top: solid 1px white;
+    border-bottom: solid 1px white;
+    background: none;
+    color: white;
+}
+
+.sub-email::placeholder {
+    color: white;
+}
+
+.subscribe {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 250ms;
+}
+
+.subscribe:hover {
+    background-color: #ccc;
+}
+
+.lower-info {
+    padding: 10px;
+    color: white;
+    text-align: center;
+}

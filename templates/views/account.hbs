@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Account Temp</title>
+        {{> head}}
+		<link rel="stylesheet" type="text/css" href="/css/account-style.css">
+    </head>
+    <body>
+        {{> header}}        
+        <main class="container-veteran fill-screen-y">
+            <div class="form-container">
+                <h1 class="form-text">Sign In</h1>
+                <form onsubmit="event.preventDefault();signIn()">
+                    <div id="signin-error" class="error-message" style="display:none"></div>
+                    <input class="signin-bar input-email" placeholder="Email Address" id="signin-email">
+                    <input class="signin-bar input-password" placeholder="Password" id="signin-password">    
+
+                    <button class="submit-button center-block-elem">LOGIN</button>
+                </form>
+            </div>
+
+            <div class="form-container">
+                <h1 class="form-text">Sign Up</h1>
+                <form onsubmit="event.preventDefault();signUp()">
+                    <div id="signup-error" class="error-message" style="display:none">That email already exists!</div>
+                    <input class="signin-bar input-name" placeholder="Name" id="signup-name">
+                    <input class="signin-bar input-email" placeholder="Email Address" id="signup-email">
+                    <input class="signin-bar input-password" placeholder="Password" id="signup-password">    
+
+                    <button class="submit-button center-block-elem">SIGN UP</button>
+                </form>
+            </div>
+        </main>
+        {{>footer}}
+        <script src="/js/account.js"></script>
+    </body>
+</html>

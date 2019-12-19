@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Events</title>
+		{{> head}}
+		<link rel="stylesheet" type="text/css" href="/css/event-style.css">
+
+		<script src="/js/event-script.js"></script>
+	</head>
+	<body onload="init()">
+		{{> header}}
+		<main class="event-column-background fill-screen-y">
+			<div class="event-column">
+				<li class="event">
+					<div class="collapsible">
+						<h1>Event Title</h1>
+						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
+					</div>
+					<div class="content">
+						<p>Description: Lorem</p>	
+						<p>Time: Ispum</p>
+						<p>Place: Merol</p>	
+					</div>
+				</li>
+
+				<li class="event">
+					<div class="collapsible">
+						<h1>Event Title2</h1>
+						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
+					</div>
+					<div class="content">
+						<p>Description: Nice</p>
+						<p>Time: Today</p>
+						<p>Place: Here</p>	
+					</div>
+				</li>
+
+				<li class="event">
+					<div class="collapsible">
+						<h1>Event Title3</h1>
+						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
+					</div>
+					<div class="content">
+						<p>Description: Nice</p>	
+						<p>Time: Today</p>
+						<p>Place: Here</p>	
+					</div>
+				</li>
+			</div>
+		</main>
+		{{> footer}}
+	</body>
+</html>

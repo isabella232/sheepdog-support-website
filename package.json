@@ -1,0 +1,30 @@
+{
+  "name": "Sheepdog---Website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js -e js,hbs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitprj/Sheepdog---Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bitprj/Sheepdog---Website/issues"
+  },
+  "homepage": "https://github.com/bitprj/Sheepdog---Website#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "hbs": "^4.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.1",
+    "request": "^2.88.0",
+    "validator": "^12.1.0"
+  }
+}

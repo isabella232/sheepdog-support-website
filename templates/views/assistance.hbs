@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Request for Assistance</title>
+        {{> head}}
+        <link rel="stylesheet" type="text/css" href="/css/assistance-style.css">
+
+        <!-- <script src="/app.js"></script> -->
+    </head>
+    <body>
+        {{>header}}
+        <main id="main">
+            <div class="form-wrapper fill-screen-y">
+                <div class="description-panel">
+                    <div class="panel-title">Soldier Request for Support</div>
+                    
+                    <div class="description">
+                        <h2>We are here to help.</h2>
+                        
+                        <p>
+                            Fill out the form if you would like to request assistance for yourself or your platoon.
+                        </p>
+                        
+                        <p class="note">
+                            Please use your military email address if you would not like to provide official documentation. 
+                        </p>
+                    </div>
+                </div>
+                
+                <form class="request-form-panel" action ="#">
+                    <div class="field">
+                        <div class="field-title">PROGRAM</div>
+                        
+                        <select class="program-selection user-input" required>
+                            <option value="" disabled selected>Select One</option>
+                            <option value="Financial Peace for Veterans">
+                                Financial Peace for Veterans
+                            </option>
+                        </select>
+                    </div>
+                        
+                    <div class="field">
+                        <div class="field-title">YOUR NAME</div>
+                        
+                        <div class="field-line">
+                            <input type="text" class="user-input" placeholder="First Name" required>
+                            <input type="text" class="user-input" placeholder="Last Name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <div class="field-title">NAME OF RECIPIENT</div>
+                        <div class="field-note">Leave blank if you are the intended recipient.</div>
+                        
+                        <div class="field-line">
+                            <input type="text" class="user-input" placeholder="First Name">
+                            <input type="text" class="user-input" placeholder="Last Name">
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <div class="field-title">E-MAIL ADDRESS</div>
+                        <input type="text" class="user-input" placeholder="E-mail Address" required>
+                    </div>  
+                    
+                    <div class="field">
+                        <input type="submit" class="submit" value="SUBMIT YOUR REQUEST" class="center">
+                    </div>
+                </form>
+            </div>
+        </main>
+        {{>footer}}
+    </body>
+</html>

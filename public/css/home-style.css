@@ -1,0 +1,139 @@
+/*
+ * GENERAL
+ */
+main * {
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * MAIN
+ */
+main {
+	background: #e6852e url('https://images.squarespace-cdn.com/content/v1/5aabc9909d5abbaa5f9cff43/1538936345957-4E5YIQU071INO6PWHS55/ke17ZwdGBToddI8pDm48kNZr331BLc-Rota1ZP1Yh3h7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0hReLB75oIvKxcDxwlnLXaYNPa96OWO5Z21xzWqpQF_bv3E39NLc0xdQYNJZ7z0n0g/army-military-museum-9250+%281%29.jpg');
+	background-size: auto 137%;
+	background-position: center;
+	display: flex;
+    align-items: center;
+}
+
+.mission-wrapper {
+	margin: 0 auto;
+	margin-bottom: 8%;
+	padding: 20px;
+	max-width: 750px;
+	background: rgba(212, 206, 206, 0.8);
+	box-shadow: 0px 0px 20px 30px rgba(212, 206, 206, 0.8);
+	text-align: center;
+}
+
+.intro-hook {
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-style: italic;
+}
+
+.intro-followup {
+	padding: 0 30px;
+	font-size: 48px;
+	font-weight: 300;
+}
+
+/* BUTTON! */
+.button__learn-more {
+	display: block;
+	position: relative;
+	margin: 20px auto;
+	margin-top: 40px;
+	padding: 1em;
+	border-radius: 75px;
+	cursor: pointer;
+	max-width: 150px;
+	color: white;
+	background: #994532;
+	z-index: 0;
+	transition: background 250ms;
+}
+
+.button__learn-more:hover {
+	background: #753426;
+}
+
+/* ease; see below for individual info */
+.button__learn-more::before,
+.button__learn-more::after {
+	position: absolute;
+	padding: 1em;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* text sliding down upon hover */
+.button__learn-more::before {
+	content:'Learn More';
+	opacity: 1;
+	z-index: 0;
+	transition: transform 250ms, opacity 250ms;
+}
+
+.button__learn-more:hover::before {
+	transform: translate(0, 25%);
+	opacity: 0;
+}
+
+/* pseudo-increase in width */
+.button__learn-more::after {
+	content: '';
+	left: 0;
+	border-radius: 75px;
+	background: #994532;
+	z-index: -1;
+	transition: left 250ms, background 250ms;
+}
+
+.button__learn-more:hover::after {
+	left: 10%;
+	background: #753426;
+}
+
+/* text flying down */
+.button__learn-more span {
+	display: inline-block;
+	position: relative;
+	transform: translate(0, -75%);
+	opacity: 0;
+	z-index: 0;
+	transition: transform 250ms, opacity 250ms;
+}
+
+.button__learn-more:hover span {
+	transform: none;
+	opacity: 1;
+}
+
+.button__learn-more:hover span:nth-child(1) { transition-delay: 0.03s }
+.button__learn-more:hover span:nth-child(2) { transition-delay: 0.06s }
+.button__learn-more:hover span:nth-child(3) { transition-delay: 0.09s }
+.button__learn-more:hover span:nth-child(4) { transition-delay: 0.12s }
+.button__learn-more:hover span:nth-child(5) { transition-delay: 0.15s }
+.button__learn-more:hover span:nth-child(6) { transition-delay: 0.18s }
+.button__learn-more:hover span:nth-child(7) { transition-delay: 0.21s }
+.button__learn-more:hover span:nth-child(8) { transition-delay: 0.24s }
+.button__learn-more:hover span:nth-child(9) { transition-delay: 0.27s }
+.button__learn-more:hover span:nth-child(10) { transition-delay: 0.30s }
+
+/* right arrow */
+.button__learn-more i {
+	position: absolute;
+	margin-top: 2px;
+	transform: translate(-10px, 0);
+	opacity: 0;
+	transition: transform 250ms, opacity 250ms;
+}
+
+.button__learn-more:hover i {
+	transform: translate(15px, 0);
+	opacity: 1;
+}

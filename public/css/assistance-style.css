@@ -1,0 +1,130 @@
+main * {
+    margin: 0;
+    padding: 0;
+}
+
+/* main */
+main {
+    background: lightgray url('../res/grass-dew.jpg');
+    background-position: center;
+    background-size: auto 107%;
+}
+
+.form-wrapper {
+    margin: 0 auto;
+    max-width: 900px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+/* DESCRIPTION PANEL */
+.description-panel {
+    border-radius: 20px 0 0 20px;
+    height: 70%;
+    background: linear-gradient(to bottom, #eee, #999);
+    text-align: center;
+    opacity: 0.7;
+/*    width: 40%;*/
+    flex: 2;
+}
+
+.panel-title {
+    border-radius: 20px 0 0 0;
+    padding: 45px 24px;
+    font-size: 32px;
+    background: linear-gradient(to bottom, #666, #111);
+    color: white;
+}
+
+.description {
+    padding: 18px;
+    line-height: 20px;
+}
+
+.description > * {
+    margin-bottom: 40px;
+}
+
+.description h2 {
+    margin-top: 27px;
+}
+
+.description .note {
+    margin: 0;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 15px;
+}
+
+/* FORMS */
+.request-form-panel {
+    padding: 36px;
+    border-radius: 24px;
+    height: 80%;
+    background: #fff;
+/*    width: 60%;*/
+    flex: 3;
+}
+
+.program-selection {
+    width: 96%;
+}
+
+.field {
+    margin: 13px;
+    padding: 7px;
+    color: #999;
+}
+
+.field-title {
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.field-note {
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.field-line {
+    display: flex;
+    justify-content: space-around;
+}
+
+.field-line input {
+    margin-right: 18px;
+    width: 100%;
+}
+
+.user-input {
+    padding: 9px;
+    border: 0;
+    border-bottom: 1px solid #999;
+    width: 100%;
+    font-size: 12px;
+}
+
+select.user-input:invalid {
+    color: #999;
+}
+
+select.user-input option:not(:first-child) {
+    color: #000;
+}
+
+.submit {
+    margin: 0 auto;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    background: black;
+    color: white;
+    transition: background 250ms;
+}
+
+.submit:hover {
+    background: #444;
+    cursor: pointer;
+}

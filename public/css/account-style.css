@@ -1,0 +1,74 @@
+/*
+ * This is a temp page for simple styling to make everything look passable.
+ */
+ 
+.container-veteran{
+    background-image:linear-gradient(to right, 
+    #7bed9f,
+    #2ed573);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap
+}
+.container-veteran > :first-child {
+    margin-right: 3vw;
+}
+
+.form-text{
+    text-align: center;
+}
+
+.form-container{
+    padding: 50px;
+    padding-top: 10px;
+    width: 33%;
+    border: 1px solid #2c3e50;
+    border-radius: 25px;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 1.5rem #2c3e50;
+}
+
+.signin-bar,
+.error-message {
+    border: none;
+    margin: 10px 0;
+    border-bottom: 1px solid;
+    padding: 10px;
+    width: 100%;
+}
+
+.error-message {
+    text-align: center;
+    background-color: #FFDDD6;
+    border: none;
+    color: #FF6F51;
+    font-size: 14px;
+}
+
+
+.submit-button{
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 15px;
+    padding: 3% 3%;
+    background-color: none;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 60%;
+    transition: color 250ms, background-color 250ms;
+}
+
+.submit-button:hover{
+    background-color: #2c3e50;
+    color:#f1f2f6;
+}
+
+.button-wrapper{
+    padding: 15px 0;
+    display:flex;
+    justify-content: space-around;
+    text-align: center;
+}
