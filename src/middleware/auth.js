@@ -9,9 +9,11 @@ const User = require('../models/user')
  *      whenever a user does something, the token of the current login is sent over with the 
  *      call and the server performs operations depending on what was decoded from the token.
  */
-const auth = async (req, res, next) => { 
+const auth = async (req, res, next) => {
     try {
-        const token = req.header('Authorization').replace('Bearer ', '')
+        // const token = req.header('Authorization').replace('Bearer ', '')
+        const token = req.cookies.auth.replace('Bearer ', '')
+        
         const decoded = jwt.verify(token, 'BL1T-8R0J$CT')
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
 

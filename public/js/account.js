@@ -8,8 +8,6 @@ console.log('Client side JavaScript is loaded!')
 /*
  * Sign In Form
  */
-// signinForm.addEventListener('submit', (e) => {
-//     e.preventDefault()
 const signIn = () => {
     const userObj = {
         email: document.getElementById('signin-email').value,
@@ -27,8 +25,7 @@ const signIn = () => {
             const response = JSON.parse(xhr.responseText)
             if (this.status === 200) {
                 console.log('Logged in!')
-                saveTokenAsCookie(response.token)
-
+                
                 // redirect to profile or home
             }
             else if (this.status === 400) {
@@ -50,8 +47,6 @@ const signIn = () => {
 /*
  * Sign Up Form
  */
-// signupForm.addEventListener('submit', (e) => {
-//     e.preventDefault()
 const signUp = () => {
     const userObj = {
         name: document.getElementById('signup-name').value,
@@ -102,8 +97,4 @@ const signUp = () => {
             }
         }
     }
-}
-
-const saveTokenAsCookie = (token) => {
-    document.cookie=token
 }

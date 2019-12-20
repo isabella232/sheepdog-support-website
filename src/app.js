@@ -1,6 +1,7 @@
 const path = require('path')
 const hbs = require('hbs')
 const express = require('express')
+const cookieParser = require('cookie-parser')
 require('./db/mongoose')
 
 // /*
@@ -26,6 +27,7 @@ hbs.registerPartials(partialsPath)
 
 // Setup and serve static directories
 app.use(express.static(publicDirPath))
+app.use(cookieParser())
 
 // Serve pages
 app.use(express.json())
