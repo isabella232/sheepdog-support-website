@@ -12,6 +12,9 @@ router.post('/account/signup', async (req, res) => {
     try {
         await user.save()
         const token = await user.generateAuthToken()
+
+        res.setHeader('Content-Type', 'text/html');
+        res.setHeader('Set-Cookie: authToken=' + token + '; Secure; HttpOnly')
         res.status(201).send({ user, token })
     } catch (e) {
         res.status(400).send(e)
@@ -25,6 +28,9 @@ router.post('/account/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
+
+        res.setHeader('Content-Type', 'text/html');
+        res.setHeader('Set-Cookie: authToken=' + token + '; Secure; HttpOnly')
         res.send({ user, token })
     } catch (e) {
         res.status(400).send(e)
@@ -71,7 +77,7 @@ router.get('/account', async (req, res) => {
 /*
  * User Access Profile
  */
-router.get('/account/profile', auth, async (req, res) => {
+router.get('/account/portal', auth, async (req, res) => {
     res.send(req.user)
 })
 

@@ -24,13 +24,15 @@ const signIn = () => {
     xhr.send(jsonData)
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
+            const response = JSON.parse(xhr.responseText)
             if (this.status === 200) {
                 console.log('Logged in!')
+                saveTokenAsCookie(response.token)
+
                 // redirect to profile or home
             }
             else if (this.status === 400) {
                 const signinErr = document.getElementById('signin-error')
-                const response = JSON.parse(xhr.responseText)
                 if (Object.keys(response).length === 0) {
                     if (userObj.email === '' || userObj.password === '') {
                         signinErr.textContent = 'Enter Your Login Information'
@@ -65,13 +67,13 @@ const signUp = () => {
     xhr.send(jsonData)
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
+            const response = JSON.parse(xhr.responseText)
             if (this.status === 201) {
                 console.log('Signed up!')
                 // redirect to profile or home
             }
             else if (this.status === 400) {
                 const signupErr = document.getElementById('signup-error')
-                const response = JSON.parse(xhr.responseText)
                 if (response.message) {
                     // Check Required
                     if (response.message.includes('required')) {
@@ -100,4 +102,8 @@ const signUp = () => {
             }
         }
     }
+}
+
+const saveTokenAsCookie = (token) => {
+    document.cookie=token
 }
