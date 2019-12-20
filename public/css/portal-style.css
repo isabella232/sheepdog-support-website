@@ -1,0 +1,42 @@
+.user-info {
+    background: pink;
+    padding: 50px 80px;
+    margin: 40px auto;
+    width: 700px;
+}
+
+.info-field {
+    margin: 40px 0;
+    display: flex;
+}
+
+.info-field > * {
+    flex: 3;
+}
+
+.button-edit {
+    margin-left: 20px;
+    flex: none;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.field-container * {
+    line-height: 30px;
+    height: 30px;
+    display: block;
+}
+
+.input-value {
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid #333;
+    background: transparent;
+    width: 100%;
+}
+
+.input-value::placeholder {
+    color: #333;
+}

@@ -13,11 +13,14 @@
 
 body {
     margin: 0;
-    position: relative; 
 }
 
 :focus {
     outline: none;
+}
+
+.hidden {
+    display: none !important;
 }
 
 /*
@@ -53,15 +56,31 @@ body {
  * #TODO: REFACTOR CODE TO FOLLOW THIS STYLE **FOR GOOD PRACTICE** :) So far we only have that below :(
  */
 
+/*
+ * General Constants
+ */
+
 .lightblue {
     background-color:  #2f3542;
+}
+
+/*
+ * Position Formatting
+ */
+.main-card {
+	display: flex;
+    align-items: center;
+}
+.main-card-inner {
+    margin: 0 auto;
+    max-width: 900px;
 }
 
 .center-block-elem {
 	margin: 0 auto;
 }
 
-.fill-screen-y {
+.min-fill-screen-y {
 	/* height 100% might not work as expected; seems to only work starting from <html> */
     min-height: 100vh;
 }
@@ -70,12 +89,17 @@ body {
     height: calc(100vh - 400px)
 }
 
+/*
+ * Specific Element Types
+ */
 .fancy-button {
 	content: 'I am fancy'
 }
 .fancy-button:hover {
 	content: 'ooOh'
 }
+
+/* ================================================================================================== */
 
 /*
  * HEADER

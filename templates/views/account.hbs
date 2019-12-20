@@ -7,11 +7,11 @@
     </head>
     <body>
         {{> header}}        
-        <main class="container-veteran fill-screen-y">
+        <main class="container-veteran min-fill-screen-y">
             <div class="form-container">
                 <h1 class="form-text">Sign In</h1>
                 <form onsubmit="event.preventDefault();signIn()">
-                    <div id="signin-error" class="error-message" style="display:none"></div>
+                    <div id="signin-error" class="error-message hidden"></div>
                     <input class="signin-bar input-email" placeholder="Email Address" id="signin-email">
                     <input class="signin-bar input-password" placeholder="Password" id="signin-password">    
 
@@ -22,7 +22,7 @@
             <div class="form-container">
                 <h1 class="form-text">Sign Up</h1>
                 <form onsubmit="event.preventDefault();signUp()">
-                    <div id="signup-error" class="error-message" style="display:none">That email already exists!</div>
+                    <div id="signup-error" class="error-message hidden">That email already exists!</div>
                     <input class="signin-bar input-name" placeholder="Name" id="signup-name">
                     <input class="signin-bar input-email" placeholder="Email Address" id="signup-email">
                     <input class="signin-bar input-password" placeholder="Password" id="signup-password">    
@@ -32,6 +32,6 @@
             </div>
         </main>
         {{>footer}}
-        <script src="/js/account.js"></script>
+        <script src="/js/account-script.js"></script>
     </body>
 </html>

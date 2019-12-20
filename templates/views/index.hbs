@@ -4,13 +4,11 @@
 		<title>Home</title>
 		{{> head}}
 		<link rel="stylesheet" type="text/css" href="/css/home-style.css">
-
-       	<!-- <script src="../src/app.js"></script> -->
     </head>
-    <body>
-      	{{>header}}
-       	<main id="main" class="fill-screen-y">
-			<div class="mission-wrapper">
+    <body id="home">
+      	{{> header}}
+       	<main class="min-fill-screen-y main-card">
+			<div class="mission-wrapper main-card-inner">
 				<div class="intro-hook">There is life after service</div>
 				<div class="intro-followup">
 					WHERE DO YOU WANT IT TO TAKE YOU?
@@ -30,6 +28,6 @@
 				</a>
 			</div>
        	</main>
-        {{>footer}}
+        {{> footer}}
     </body>
 </html>
