@@ -1,62 +1,97 @@
-/*
- * This is a temp page for simple styling to make everything look passable.
- */
- 
-.container-veteran{
-    background-image:linear-gradient(to right, 
-    #7bed9f,
-    #2ed573);
+#sign {
+    background: url('../res/bg-login.jpg');
+    background-position: center;
+    background-size: auto 140%;
+}
+
+.switch-sign {
+    margin: 0 auto;
+    width: 75%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: row wrap
-}
-.container-veteran > :first-child {
-    margin-right: 3vw;
+    margin-bottom: 50px;
 }
 
-.form-text{
+.switch-sign > *{
+    padding: 15px 20px;
+    background-color: #333;
+    color: white;
+    flex: 1;
+    font-size: 16px;
+    border: none;
+    pointer-events: none;
+}
+
+.sign-not-active {
+    background-color: #666;
+    transition: 250ms ease all;
+    pointer-events: auto;
+}
+.sign-not-active:hover {
+    background-color: #777; 
+}
+
+#go-signin {
+    border-radius: 25px 0 0 25px;
+}
+
+#go-signup {
+    border-radius: 0 25px 25px 0;
+}
+
+.sign-wrapper {
     text-align: center;
-}
-
-.form-container{
+    margin: 30px;
+    max-width: 600px;
     padding: 50px;
-    padding-top: 10px;
-    width: 33%;
-    border: 1px solid #2c3e50;
-    border-radius: 25px;
-    background-color: #ffffff;
+    border-radius: 33px;
+    background-color: #eee;
+    flex: 1;
     box-shadow: 5px 5px 1.5rem #2c3e50;
 }
 
-.signin-bar,
 .error-message {
-    border: none;
-    margin: 10px 0;
-    border-bottom: 1px solid;
     padding: 10px;
-    width: 100%;
-}
-
-.error-message {
     text-align: center;
-    background-color: #FFDDD6;
+    /* background-color: #FFDDD6bb; */
     border: none;
-    color: #FF6F51;
+    color: #b00;
+    border: 1px solid #b00;
     font-size: 14px;
 }
 
+.form-input-verify {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.form-input-verify + .form-input-verify-placeholder {
+    display: inline-block;
+    font-size: 20px;
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.25s color ease;
+}
+.form-input-verify:focus + .form-input-verify-placeholder,
+.form-input-verify + .form-input-verify-placeholder:hover {
+    color: #666;
+}
 
-.submit-button{
+.submit-button {
     cursor: pointer;
     display: block;
     margin: 0 auto;
     margin-top: 30px;
     font-size: 15px;
-    padding: 3% 3%;
-    background-color: none;
-    border: 1px solid;
-    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    height: 50px;
     width: 60%;
     transition: color 250ms, background-color 250ms;
 }
@@ -64,11 +99,4 @@
 .submit-button:hover{
     background-color: #2c3e50;
     color:#f1f2f6;
-}
-
-.button-wrapper{
-    padding: 15px 0;
-    display:flex;
-    justify-content: space-around;
-    text-align: center;
 }

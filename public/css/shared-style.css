@@ -19,8 +19,26 @@ body {
     outline: none;
 }
 
-.hidden {
-    display: none !important;
+button {
+    cursor: pointer;
+}
+
+input[type="password"] {
+    font: large Verdana, sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #333;
+  box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /*
@@ -64,15 +82,34 @@ body {
     background-color:  #2f3542;
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* TO USE: place .hidden-transition-potato on element and toggle .hidden-transition-driver */
+/* notes: if a slide down effect occurs, it's because the element likely has 'transition: ease all' on it */
+.hidden-transition-potato {
+    transition: visibility 0s, opacity 500ms ease;
+}
+.hidden-transition-driver,
+.hidden-transition-driver * {
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    opacity: 0 !important;
+}
+
 /*
  * Position Formatting
  */
 .main-card {
 	display: flex;
     align-items: center;
+    justify-content: center;
 }
 .main-card-inner {
-    margin: 0 auto;
     max-width: 900px;
 }
 
@@ -98,6 +135,49 @@ body {
 .fancy-button:hover {
 	content: 'ooOh'
 }
+
+/*
+ * Input Box Styling
+ */
+ .form-bar {
+    padding: 10px 0;
+    margin: 0 auto;
+    width: 75%;
+    position: relative;
+}
+.form-bar .form-input {
+    margin: 10px 0;
+    padding: 20px 20px;
+    border: 1.5px solid #777;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 16px;
+    background: none;
+    transition: border 0.25s ease;
+}
+.form-bar .form-input-placeholder {
+	position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    transition: 0.25s ease all;
+}
+.form-input:focus,
+.form-input:not(:focus):valid {
+    border: 1.5px solid #000;
+}
+.form-input:focus ~ .form-input-placeholder,
+.form-input:not(:focus):valid ~ .form-input-placeholder {
+    top: 20px;
+    left: 14px;
+    font-size: 14px;
+    padding: 5px;
+    background-color: #eee;
+    color: #000;
+}
+/* END Input Box Styling */
 
 /* ================================================================================================== */
 

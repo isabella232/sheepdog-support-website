@@ -4,7 +4,7 @@ main * {
 }
 
 /* main */
-main {
+#assistance {
     background: lightgray url('../res/grass-dew.jpg');
     background-position: center;
     background-size: auto 107%;

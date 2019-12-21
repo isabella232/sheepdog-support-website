@@ -7,25 +7,53 @@
     </head>
     <body>
         {{> header}}        
-        <main class="container-veteran min-fill-screen-y">
-            <div class="form-container">
-                <h1 class="form-text">Sign In</h1>
-                <form onsubmit="event.preventDefault();signIn()">
-                    <div id="signin-error" class="error-message hidden"></div>
-                    <input class="signin-bar input-email" placeholder="Email Address" id="signin-email">
-                    <input class="signin-bar input-password" placeholder="Password" id="signin-password">    
+        <main id="sign" class="min-fill-screen-y main-card">
+            <div class="sign-wrapper main-card-inner">
+                <div class="switch-sign">
+                    <button id="go-signin">Sign In</button>
+                    <button id="go-signup" class="sign-not-active">Sign Up</button>
+                </div>
+
+                <form class="hidden-transition-potato" name="signin" novalidate>
+                    <h1 class="form-text">Sign In</h1>
+                    <div class="form-bar hidden">
+                        <div id="signin-error" class="error-message">X</div>
+                    </div>
+                    <div class="form-bar">
+                        <input type="text" class="form-input" name="signin-email" required>
+                        <span class="form-input-placeholder">Email Address</span>
+                    </div>
+                    <div class="form-bar">
+                        <input type="password" class="form-input" name="signin-password" required>
+                        <span class="form-input-placeholder">Password</span>
+                    </div>
 
                     <button class="submit-button center-block-elem">LOGIN</button>
                 </form>
-            </div>
-
-            <div class="form-container">
-                <h1 class="form-text">Sign Up</h1>
-                <form onsubmit="event.preventDefault();signUp()">
-                    <div id="signup-error" class="error-message hidden">That email already exists!</div>
-                    <input class="signin-bar input-name" placeholder="Name" id="signup-name">
-                    <input class="signin-bar input-email" placeholder="Email Address" id="signup-email">
-                    <input class="signin-bar input-password" placeholder="Password" id="signup-password">    
+                    
+                <form class="hidden-transition-potato hidden-transition-driver" name="signup" novalidate>
+                    <h1 class="form-text">Sign Up</h1>
+                       
+                    <div class="form-bar hidden">
+                        <div id="signup-error" class="error-message hidden">X</div>
+                    </div>
+                        
+                    <div class="form-bar">
+                        <input type="text" class="form-input" name="signup-name" required>
+                        <span class="form-input-placeholder">Name</span>
+					</div>
+					<div class="form-bar">
+                        <input type="text" class="form-input"  name="signup-email" required>
+                        <span class="form-input-placeholder">Email Address</span>
+					</div>
+                    <div class="form-bar">
+					    <input type="password" class="form-input"  name="signup-password" required>
+                        <span class="form-input-placeholder">Password</span>
+					</div>
+                    <div class="form-bar">
+						<input type="file" class="form-input-verify" accept="pdf" name="signup-verify" id="signup-verify" required>
+						<label class="form-input-verify-placeholder" for="signup-verify">Add PDF Verification</label>
+					</div>
 
                     <button class="submit-button center-block-elem">SIGN UP</button>
                 </form>

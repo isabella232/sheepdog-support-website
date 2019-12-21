@@ -38,7 +38,7 @@
     to right,
   rgba(226, 241, 241, 0.45),
   rgba(160, 245, 234, 0.637)),
-   url(https://images.pexels.com/photos/1340504/pexels-photo-1340504.jpeg?cs=srgb&dl=man-standing-on-stage-1340504.jpg&fm=jpg);
+   url('../res/bg-event.jpg');
   background-size: cover;
   background-repeat: no-repeat; /*Prevents background from repeating*/
   width: 100%;

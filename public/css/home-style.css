@@ -10,7 +10,7 @@ main * {
  * MAIN
  */
 #home main {
-	background: #e6852e url('https://images.squarespace-cdn.com/content/v1/5aabc9909d5abbaa5f9cff43/1538936345957-4E5YIQU071INO6PWHS55/ke17ZwdGBToddI8pDm48kNZr331BLc-Rota1ZP1Yh3h7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0hReLB75oIvKxcDxwlnLXaYNPa96OWO5Z21xzWqpQF_bv3E39NLc0xdQYNJZ7z0n0g/army-military-museum-9250+%281%29.jpg');
+	background: #e6852e url('../res/bg-home.jpg');
 	background-size: auto 137%;
 	background-position: center;
 }

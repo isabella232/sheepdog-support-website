@@ -92,6 +92,7 @@ function toggleEditArea(text, textBox) {
  * Open password area
  */
 function openPassField() {
+    
     document.querySelectorAll('.password-field').forEach(field => field.classList.toggle('hidden'))
 }
 
