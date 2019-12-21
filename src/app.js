@@ -1,15 +1,8 @@
 const path = require('path')
 const hbs = require('hbs')
 const express = require('express')
+const cookieParser = require('cookie-parser')
 require('./db/mongoose')
-
-// /*
-//  * ROUTERS
-//  */
-// const contactUsRouter = require('./unused/contactus')
-
-// // user-related
-// const portalRouter = require('./unused/portal')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -26,13 +19,15 @@ hbs.registerPartials(partialsPath)
 
 // Setup and serve static directories
 app.use(express.static(publicDirPath))
+app.use(cookieParser())
 
 // Serve pages
 app.use(express.json())
 app.use(require('./routers/index'))
 app.use(require('./routers/assistance'))
+app.use(require('./routers/account-sign'))
+app.use(require('./routers/portal'))
 app.use(require('./routers/events'))
-app.use(require('./routers/account-user'))
 app.use(require('./routers/task'))
 app.use(require('./routers/contact-us')) // TODO
 
@@ -46,7 +41,3 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
     console.log('Server is up on port', port)
 })
-
-//Must install hbs with npm
-//To do so, do npm -i hbs
-//To download express.js, do npm -i express

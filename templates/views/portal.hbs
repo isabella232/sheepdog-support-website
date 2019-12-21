@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Portal</title>
+        {{> head}}
+		<link rel="stylesheet" type="text/css" href="/css/portal-style.css">
+        
+    </head>
+    <body>
+        {{>header}}
+        <main class="min-fill-screen-y main-card">
+            <div class="user-info main-card-inner">
+                <div class="info-field">
+                    <span class="name">Full Name</span>
+                        <div class="spacer"></div>
+                    <div class="field-container">
+                        <div class="field-text"></div class="field-text">
+                        <input class="field-textbox input-value hidden" id="portal-name" placeholder="Full Name">
+                    </div>
+                    <button class="button-edit button-edit-info">O</button>
+                </div>
+                <div class="info-field">
+                    <span class="name">Email Address</span>
+                        <div class="spacer"></div>
+                    <div class="field-container">
+                        <div class="field-text"></div class="field-text">
+                        <input class="field-textbox input-value hidden" id="portal-email" placeholder="Email Address">
+                    </div>
+                    <button class="button-edit button-edit-info">O</button>
+                </div>
+                <div class="info-field">
+                    <span class="name">Password</span>
+                        <div class="spacer"></div>
+                    <div class="field-container">
+                        <div class="field-text">************ (arbitrary, testing)</div class="field-text">
+                    </div>
+                    <button class="button-edit button-edit-pass">O</button>
+                </div>
+                <div class="info-field password-field hidden">
+                        <div class="spacer"></div>
+                    <span class="name">Current Password</span>
+                        <div class="spacer"></div>
+                    <input class="input-value" id="portal-curr-pass" placeholder="Current Password">
+                        <div class="spacer"></div>
+                </div>
+                <div class="info-field password-field hidden">
+                        <div class="spacer"></div>
+                    <span class="name">New Password</span>
+                        <div class="spacer"></div>
+                    <input class="input-value" id="portal-new-pass" placeholder="New Password">
+                        <div class="spacer"></div>
+                </div>
+                <button id="button-logout">Logout</button>
+                <button id="button-save">Save</button>
+            </div>
+        </main>
+        {{>footer}}
+        <script src="/js/portal-script.js"></script>
+    </body>
+</html>
