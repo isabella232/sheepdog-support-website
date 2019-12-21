@@ -2,17 +2,10 @@
  * This is a temp page for simple styling to make everything look passable.
  */
  
- .container-veteran{
+#contact-us {
     background-image:linear-gradient(to right, 
     #7bed9f,
     #2ed573);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: row wrap
-}
-.container-veteran > :first-child {
-    margin-right: 3vw;
 }
 
 .form-text{

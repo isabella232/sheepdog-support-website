@@ -3,12 +3,12 @@
     <head>
         <title>Contact Us</title>
         {{> head}}
-		<link rel="stylesheet" type="text/css" href="/css/account-style.css">
+		<link rel="stylesheet" type="text/css" href="/css/contact-us-style.css">
     </head>
     <body>
         {{> header}}        
-        <main class="container-veteran fill-screen-y">
-            <div class="form-container">
+        <main id="contact-us" class="min-fill-screen-y main-card">
+            <div class="form-container main-card-inner">
                 <h1 class="form-text">Contact Us</h1>
                 <form onsubmit="event.preventDefault();sendForm()">
                     <div id="contact-form-error" class="error-message" style="display:none">That email already exists!</div>
