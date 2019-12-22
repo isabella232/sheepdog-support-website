@@ -12,7 +12,7 @@ const mongoose = require('mongoose')
  */
 
 const eventSchema = new mongoose.Schema({
-    desciption: {
+    description: {
         type: String,
         trim: true,
         required: true
