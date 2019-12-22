@@ -61,9 +61,10 @@ function signUp(event) {
     event.preventDefault()
 
     const userObj = {
-        name: document.getElementById('signup-name').value,
-        email: document.getElementById('signup-email').value,
-        password: document.getElementById('signup-password').value
+        name: document.forms['signup']['signup-name'].value,
+        email: document.forms['signup']['signup-email'].value,
+        password: document.forms['signup']['signup-password'].value,
+        verify: document.forms['signup']['signup-verify'].value
     }
     const jsonData = JSON.stringify(userObj);
 
