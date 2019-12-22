@@ -19,7 +19,7 @@ router.get('/events/*', (req, res) => {
 router.post('/events',auth, async (req, res)=>{
     const event = new Event({
         ...req.body,
-        owner: req.user._id
+        owner: req.user.id
     })
 
     try{

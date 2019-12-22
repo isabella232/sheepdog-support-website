@@ -23,14 +23,14 @@ function createEvent(event){
 	event.preventDefault()
 
 	const eventObj = {
-		description: document.getElementById('event-description').value,
-		location: document.getElementById('event-location').value,
-		time: document.getElementById('event-time').value
+		description: document.forms['event-creation']['event-description'].value,
+		location: document.forms['event-creation']['event-location'].value,
+		time: document.forms['event-creation']['event-time'].value
 	}
 
 	const jsonData = JSON.stringify(eventObj);
 
-	var xhr = new XMLHttpeRequest();
+	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/events', true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(jsonData);
