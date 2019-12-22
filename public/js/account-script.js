@@ -26,16 +26,14 @@ function signIn(event) {
 
     const signinErr = document.getElementById('signin-error')
     if (userObj.email === '' || userObj.password === '') {
-        return editTextAndUnhide(signinErr, "Enter Your Login Information")
+        return showText(signinErr, "Enter Your Login Information")
     }
-
-    const jsonData = JSON.stringify(userObj);
 
     // save to database
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/account/login', true);
     xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.send(jsonData)
+    xhr.send(JSON.stringify(userObj))
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
             // const response = JSON.parse(xhr.responseText)
@@ -44,14 +42,14 @@ function signIn(event) {
                 window.location.replace('/')
             }
             else if (this.status === 400) {
-                showMessageSignIn(signinErr)
+                showAppropriateTextSignIn(signinErr)
             }
         }
     }
 }
 
-const showMessageSignIn = (signinErr) => {
-    editTextAndUnhide(signinErr, 'Incorrect Email/Password')
+const showAppropriateTextSignIn = (signinErr) => {
+    showText(signinErr, 'Incorrect Email/Password')
 }
 
 /*
@@ -66,13 +64,17 @@ function signUp(event) {
         password: document.forms['signup']['signup-password'].value,
         verify: document.forms['signup']['signup-verify'].value
     }
-    const jsonData = JSON.stringify(userObj);
+
+    const signupErr = document.getElementById('signup-error')
+    if (userObj.password !== document.forms['signup']['signup-reenter'].value) {
+        return showText(signupErr, "Passwords do not match!")
+    }
 
     // save to database
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/account/signup', true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(jsonData)
+    xhr.send(JSON.stringify(userObj))
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
             const response = JSON.parse(xhr.responseText)
@@ -81,38 +83,37 @@ function signUp(event) {
                 window.location.replace('/')
             }
             else if (this.status === 400) {
-                const signupErr = document.getElementById('signup-error')
-                showMessageSignUp(response, signupErr)
+                showAppropriateTextSignUp(response, signupErr)
             }
         }
     }
 }
 
-const showMessageSignUp = (response, signupErr) => {
+const showAppropriateTextSignUp = (response, signupErr) => {
     if (response.message) {
         // Check Required
-        if (response.message.includes('required')) {
-            editTextAndUnhide(signupErr, "All information is required.")
+        if (response.message.includes('required') && document.forms['signup']['signup-reenter'].value === '') {
+            showText(signupErr, "All information is required.")
         } 
         // Check valid email
         else if (response.message.includes('invalid email')) {
-            editTextAndUnhide(signupErr, "Email is invalid.")
+            showText(signupErr, "Email is invalid.")
         }
         // Check strong Password
         else if (response.message.includes('password') || response.message.includes('shorter')) {
-            editTextAndUnhide(signupErr, "Please provide a stronger password!")
+            showText(signupErr, "Please provide a stronger password!")
         }
     }
     else if (response.name === "MongoError") {
         // Check Duplicate Emails
         const dupeErr = "E11000 duplicate key error"
         if (response.errmsg.includes(dupeErr)) {
-            editTextAndUnhide(signupErr, "That email already exists!")
+            showText(signupErr, "That email already exists!")
         }
     }
 }
 
-const editTextAndUnhide = (element, text) => {
+const showText = (element, text) => {
     element.textContent = text
-    element.parentElement.classList.remove('hidden')
+    element.classList.remove('hidden')
 }

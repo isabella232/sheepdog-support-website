@@ -16,9 +16,11 @@
 
                 <form class="hidden-transition-potato" name="signin" novalidate>
                     <h1 class="form-text">Welcome Back!</h1>
-                    <div class="form-bar hidden">
-                        <div id="signin-error" class="error-message">X</div>
+
+                    <div id="signin-error" class="form-bar error-message hidden">
+                        X
                     </div>
+
                     <div class="form-bar">
                         <input type="text" class="form-input" name="signin-email" required>
                         <span class="form-input-placeholder">Email Address</span>
@@ -34,8 +36,8 @@
                 <form class="hidden-transition-potato hidden-transition-driver" name="signup" novalidate>
                     <h1 class="form-text">Create an Account</h1>
                        
-                    <div class="form-bar hidden">
-                        <div id="signup-error" class="error-message hidden">X</div>
+                    <div id="signup-error" class="form-bar error-message hidden">
+                        X
                     </div>
                         
                     <div class="form-bar">
@@ -51,7 +53,7 @@
                         <span class="form-input-placeholder">Password</span>
 					</div>
                     <div class="form-bar">
-                        <input type="password" class="form-input" required>
+                        <input type="password" class="form-input" name="signup-reenter" required>
                         <span class="form-input-placeholder">Re-enter Password</span>
                     </div>
                     <div class="form-bar">

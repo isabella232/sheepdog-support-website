@@ -12,7 +12,7 @@ function checkLogin() {
     xhr.send()
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status !== 401) {
+            if (this.responseText !== "no-auth") {
                 document.getElementById('account').innerHTML = 'My Account'
             }
         }

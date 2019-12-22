@@ -9,6 +9,8 @@ const Task = require('./task')
  * - Properties
  * 		o Name
  * 		o Email
+ * 		o Profile Picture
+ * 		o PDF Verification
  * 		o Password
  * 			> Hashed
  * 		o Tokens
@@ -33,6 +35,13 @@ const userSchema = new mongoose.Schema({
 				throw new Error('invalid email')
 			}
 		}
+	},
+	profilePicture: {
+		// type: File,
+	},
+	verification: {
+		// type: File,
+		// required: true
 	},
 	password: {
 		type: String,

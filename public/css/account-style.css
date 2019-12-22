@@ -50,13 +50,12 @@
 }
 
 .error-message {
-    padding: 10px;
     text-align: center;
-    /* background-color: #FFDDD6bb; */
+    background-color: #FFDDD6bb;
     border: none;
     color: #b00;
     border: 1px solid #b00;
-    font-size: 14px;
+    border-radius: 6px;
 }
 
 .form-input-verify {
@@ -71,13 +70,15 @@
     display: inline-block;
     font-size: 20px;
     color: #000;
-    text-decoration: underline;
+    border-bottom: 1.5px solid black;
     cursor: pointer;
-    transition: 0.25s color ease;
+    transition: 0.25s all ease;
 }
 .form-input-verify:focus + .form-input-verify-placeholder,
 .form-input-verify + .form-input-verify-placeholder:hover {
     color: #666;
+    border-bottom: 1.5px solid transparent;
+
 }
 
 .submit-button {

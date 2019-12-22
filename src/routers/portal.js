@@ -12,10 +12,14 @@ router.get('/account/portal', auth, async(req, res) => {
 })
 
 /*
- * User Access Portal
+ * User Access Data
  */
-router.get('/account/portal/data', auth, async (req, res) => {
-    res.send(req.user)
+router.get('/account/portal/data', async (req, res) => {
+    var response = ""
+    if (!req.cookies.auth) {
+        response = "no-auth"
+    }
+    res.send(response)
 })
 
 /*
