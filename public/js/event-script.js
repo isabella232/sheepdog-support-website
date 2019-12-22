@@ -1,3 +1,5 @@
+console.log('Event scrpit loaded!')
+
 function init() {
 	var coll = document.getElementsByClassName("collapsible");
 	var i;
@@ -13,4 +15,23 @@ function init() {
 			}
 	  	});
 	}
+}
+
+document.forms["event-creation"].addEventListener('submit', (event)=> createEvent(event))
+
+function createEvent(event){
+	event.preventDefault()
+
+	const eventObj = {
+		description: document.getElementById('event-description').value,
+		location: document.getElementById('event-location').value,
+		time: document.getElementById('event-time').value
+	}
+
+	const jsonData = JSON.stringify(eventObj);
+
+	var xhr = new XMLHttpeRequest();
+	xhr.open('POST', '/events', true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(jsonData);
 }
