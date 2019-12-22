@@ -2,19 +2,29 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
-/*
- * Display Portal Page #TODO redirect middleware before AUTH
+// =========== Routes
+
+/**
+ * Get Portal Page
+ * - new middleware created for redirect
  */
-router.get('/account/portal', auth, async(req, res) => {
-    res.render('portal', function (err, html) {
-        res.send(html)
-    });
+const redirectLogin = async (req, res, next) => {
+    if (!req.cookies.auth) {
+        res.redirect('/account')
+    }
+    next()
+}
+router.get('/account/portal', redirectLogin, auth, async(req, res) => {
+    const { name, email } = req.user
+    res.render('portal', { name, email });
 })
 
-/*
- * User Access Data
+// =========== Resource Endpoints
+
+/**
+ * User Check Auth
  */
-router.get('/account/portal/data', async (req, res) => {
+router.get('/account/portal/auth', async (req, res) => {
     var response = ""
     if (!req.cookies.auth) {
         response = "no-auth"
@@ -22,7 +32,7 @@ router.get('/account/portal/data', async (req, res) => {
     res.send(response)
 })
 
-/*
+/**
  * User Update Profile
  */
 router.patch('/account/portal', auth, async (req, res) => {
@@ -46,7 +56,7 @@ router.patch('/account/portal', auth, async (req, res) => {
     }
 })
 
-/*
+/**
  * User Delete Profile (deactivate acc)
  */
 router.delete('/account/portal', auth, async (req, res) => {
@@ -56,6 +66,15 @@ router.delete('/account/portal', auth, async (req, res) => {
     } catch (e) {
         res.status(500).send()
     }
+})
+
+/**
+ * Handle Error Pages
+ */
+router.get('/account/portal/*', (req, res) => {
+    res.render('404', {
+        errorMessage: 'Portal page not found'
+    })
 })
 
 module.exports = router

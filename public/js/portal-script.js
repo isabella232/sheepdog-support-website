@@ -1,43 +1,17 @@
 console.log('Client side JavaScript is loaded!')
 
-window.addEventListener('load', getData)
 document.querySelectorAll('.button-edit-info').forEach(elem => elem.onclick = editInfo)
 document.querySelectorAll('.button-edit-pass').forEach(elem => elem.onclick = openPassField)
-document.querySelectorAll('.field-textbox').forEach(elem => elem.addEventListener('focusout', registerInfo))
+document.querySelectorAll('.field-textbox').forEach(elem => {
+    elem.addEventListener('focusout', registerInfo)
+    elem.addEventListener('keypress', unfocusOnEnter)
+})
 document.getElementById('button-logout').onclick = logout
 document.getElementById('button-save').onclick = saveData
 
-/*
- * Get user data
+/**
+ * Save changed data
  */
-function getData() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/account/portal/data')
-    xhr.send()
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status === 200) {
-                setData(JSON.parse(xhr.responseText))
-            }
-        }
-    }
-}
-
-function setData(response) {
-    document.querySelectorAll('.field-text').forEach(elem => {
-        if (elem.nextElementSibling) {
-            const compareValue = elem.nextElementSibling.id.replace('portal-', '')
-            
-            for (k in response) {
-                if (compareValue === k) {
-                    elem.nextElementSibling.value = response[k]
-                    elem.textContent = response[k]
-                }
-            }
-        }
-    })
-}
-
 function saveData() {
     const userObj = {
         name: document.getElementById('portal-name').value,
@@ -55,7 +29,7 @@ function saveData() {
             if (this.status === 200) {
                 // const response = JSON.parse(xhr.responseText)
                 // console.log(response)
-                console.log('?')
+                console.log('Saved!')
             }
         }
     }
@@ -74,6 +48,11 @@ function editInfo() {
     }
 }
 
+/**
+ * Register Input result to screen by various means
+ * - Click elsewhere
+ * - Enter key
+ */
 function registerInfo() {
     const text = this.parentElement.children[0]
     const textBox = this
@@ -81,6 +60,11 @@ function registerInfo() {
         text.textContent = textBox.value
     }
     toggleEditArea(text, textBox)
+}
+function unfocusOnEnter(e) {
+    if (e.key === 'Enter') {
+        this.blur()
+    }
 }
 
 function toggleEditArea(text, textBox) {
@@ -92,7 +76,6 @@ function toggleEditArea(text, textBox) {
  * Open password area
  */
 function openPassField() {
-    
     document.querySelectorAll('.password-field').forEach(field => field.classList.toggle('hidden'))
 }
 

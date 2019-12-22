@@ -90,4 +90,13 @@ router.post('/account/logout-all', auth, async (req, res) => {
     }
 })
 
+/**
+ * Handle Error Pages
+ */
+router.get('/account/*', (req, res) => {
+    res.render('404', {
+        errorMessage: 'Accounts page not found'
+    })
+})
+
 module.exports = router

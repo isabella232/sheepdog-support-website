@@ -1,9 +1,9 @@
 console.log('Client side JavaScript is loaded!')
 
-document.forms["signin"].addEventListener('submit', (event) => signIn(event))
-document.forms["signup"].addEventListener('submit', (event) => signUp(event))
 document.getElementById('go-signin').onclick = toggleSign
 document.getElementById('go-signup').onclick = toggleSign
+document.forms["signin"].addEventListener('submit', (event) => signIn(event))
+document.forms["signup"].addEventListener('submit', (event) => signUp(event))
 
 function toggleSign() {
     document.forms["signin"].classList.toggle('hidden-transition-driver')

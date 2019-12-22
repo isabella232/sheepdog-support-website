@@ -16,18 +16,18 @@ const auth = async (req, res, next) => {
         
         const decoded = jwt.verify(token, 'BL1T-8R0J$CT') // verify token
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token }) // search token
-
+    
         if (!user) { // if token exists
             throw new Error()
         }
-
+    
         req.token = token; // edit tokens for the purposes of login, logout
         req.user = user
+            
         next()
     } catch (e) {
         res.redirect(401, '/account')
-        // res.status(401).send({ error: 'Please authenticate.' })
     }
-}
+} 
 
 module.exports = auth
