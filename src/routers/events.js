@@ -1,5 +1,6 @@
 const Event = require('../models/events')
 const express = require('express')
+const auth = require('../middleware/auth')
 const router = new express.Router()
 
 //Routes
@@ -15,7 +16,7 @@ router.get('/events/*', (req, res) => {
 
 //Resource endpoints
 //Event Creation
-router.post('/events', async (req, res)=>{
+router.post('/events',auth, async (req, res)=>{
     const event = new Event({
         ...req.body,
         owner: req.user._id
@@ -31,10 +32,10 @@ router.post('/events', async (req, res)=>{
 })
 
 //Event Read All
-router.get('/events', async (req, res)=>{
+router.get('/events',auth, async (req, res)=>{
 
     try{
-        const event = await Event.find({})
+        const event = await Event.find({ owner: req.user._id })
         res.send(event)
     }catch(error){
         res.status(400).send(error)
@@ -42,10 +43,10 @@ router.get('/events', async (req, res)=>{
 })
 
 //Event Read Specific 
-router.get('/events/:id', async (req, res) =>{
+router.get('/events/:id',auth, async (req, res) =>{
     
     try{
-        const event = await Event.findById(req.params.id)
+        const event = await Event.findByIdAndRemove({_id:req.params._id ,owner:req.user._id})
         if(!event){
             return res.status(400).send('Error: user not found!')
         }
@@ -56,7 +57,7 @@ router.get('/events/:id', async (req, res) =>{
 })
 
 //Event Update
-router.patch('/events', async (req, res) =>{
+router.patch('/events',auth, async (req, res) =>{
     const updates = Object.keys(req.body)
     const allowedUpdates = ['desciption', 'location', 'time']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -66,7 +67,7 @@ router.patch('/events', async (req, res) =>{
     }
 
     try{
-        const event = await Event.findById(req.params.id)
+        const event = await Event.findOne({ _id: req.params._id, owner: req.user._id })
         updates.forEach((update) => event[update] = req.body[update])
         await event.save()
         if(!event){
@@ -80,9 +81,9 @@ router.patch('/events', async (req, res) =>{
 })
 
 //Delete a  specific event
-router.delete('/events', async (req, res) =>{
+router.delete('/events',auth, async (req, res) =>{
     try{
-        const event = await Event.findByIdAndDelete(req.params.id)
+        const event = await  Event.findOneAndDelete({ _id: req.params._id, owner: req.user._id })
         if(!event){
             return res.status(400).send()
         }

@@ -5,11 +5,24 @@
 		{{> head}}
 		<link rel="stylesheet" type="text/css" href="/css/event-style.css">
 
-		<script src="/js/event-script.js"></script>
+		
 	</head>
 	<body onload="init()">
 		{{> header}}
 		<main class="event-column-background min-fill-screen-y">
+			<div class="form-container">
+				<form name="event-creation">
+					<div>
+						<input type="text" name="event-description" placeholder="Description">
+					</div>
+					<div>
+						<input type="text" name="event-location" placeholder="location">
+					</div>
+					<div>
+						<input type="text" name="event-time" placeholder="Time">
+					</div>
+				</form>
+			</div>
 			<div class="event-column">
 				<li class="event">
 					<div class="collapsible">
@@ -49,5 +62,6 @@
 			</div>
 		</main>
 		{{> footer}}
+		<script src="js/event-script.js"></script>
 	</body>
 </html>
