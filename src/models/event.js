@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 /*
- * Task Schema
+ * Event Schema
  * - Properties
  * 		o Description
  * 		o Loaction
@@ -12,6 +12,11 @@ const mongoose = require('mongoose')
  */
 
 const eventSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        trim: true,
+        required: true
+    },
     description: {
         type: String,
         trim: true,
@@ -34,6 +39,6 @@ const eventSchema = new mongoose.Schema({
 	}
 })
 
-const Events = mongoose.model('Events', eventSchema)
+const Event = mongoose.model('Event', eventSchema)
 
-module.exports = Events
+module.exports = Event
