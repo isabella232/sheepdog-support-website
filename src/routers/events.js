@@ -12,7 +12,7 @@ router.get('/events', (req,res) => {
     })
 })
 router.get('/events/get-all', auth, async (req, res) => {
-    try {
+    try { 
         const event = await Event.find({ owner: req.user._id })
         res.send(event)
     } catch(error) {

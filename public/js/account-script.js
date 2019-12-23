@@ -6,8 +6,8 @@ document.forms["signin"].addEventListener('submit', (event) => signIn(event))
 document.forms["signup"].addEventListener('submit', (event) => signUp(event))
 
 function toggleSign() {
-    document.forms["signin"].classList.toggle('hidden-transition-driver')
-    document.forms["signup"].classList.toggle('hidden-transition-driver')
+    document.forms["signin"].classList.toggle('hidden-fadein-driver')
+    document.forms["signup"].classList.toggle('hidden-fadein-driver')
     document.getElementById('go-signin').classList.toggle('sign-not-active')
     document.getElementById('go-signup').classList.toggle('sign-not-active')
 }

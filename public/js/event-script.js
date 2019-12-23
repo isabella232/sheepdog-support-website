@@ -1,33 +1,19 @@
 console.log('Clientside Javascript Loaded!')
 
-window.addEventListener('load', init())
-document.forms["event-creation"].addEventListener('submit', (event) => createEvent(event))
-
-function init() {
-	var coll = document.getElementsByClassName("collapsible");
-	var i;
-	console.log(coll.length)
-	for (i = 0; i < coll.length; i++) {
-	  	coll[i].addEventListener("click", function() {
-			this.classList.toggle("active");
-			var content = this.nextElementSibling;
-			if (content.style.maxHeight){
-			content.style.maxHeight = null;
-			} else {
-			content.style.maxHeight = content.scrollHeight + "px";
-			}
-	  	});
-	}
-}
+document.addEventListener('keydown', keyToggleCreateEvent)
+document.forms["event-create"].addEventListener('submit', (event) => createEvent(event))
+document.getElementById('create-event-close').onclick = toggleCreateEvent
+document.getElementById('create-event-open').onclick = toggleCreateEvent
+document.querySelectorAll('.collapsible').forEach(elem => elem.addEventListener('click', toggleContent))
 
 function createEvent(event){
 	event.preventDefault()
 
 	const eventObj = {
-		name: document.forms['event-creation']['event-name'].value,
-		description: document.forms['event-creation']['event-description'].value,
-		location: document.forms['event-creation']['event-location'].value,
-		time: document.forms['event-creation']['event-time'].value
+		name: document.forms['event-create']['event-name'].value,
+		time: document.forms['event-create']['event-time'].value,
+		location: document.forms['event-create']['event-location'].value,
+		description: document.forms['event-create']['event-description'].value
 	}
 
 	const createEventError = document.getElementById('create-event-error')
@@ -50,11 +36,36 @@ function createEvent(event){
         }
     }
 }
-
 const showAppropriateTextCreateEvent = (response, createEventError) => {
     showText(createEventError, 'Something went wrong.')
 }
 
+function toggleCreateEvent() {
+	var popupWindow = this.closest('.popup-window') // not supported by opera mini
+	if (!popupWindow) {
+		popupWindow = document.querySelector('.popup-window') // may run into another .popup-window
+	}
+
+	popupWindow.classList.toggle('hidden-fadein-driver')
+}
+
+function keyToggleCreateEvent(e) {
+	popupWindow = document.querySelector('.popup-window') // may run into another .popup-window
+	if (e.key === 'Escape' && !popupWindow.classList.contains('hidden-fadein-driver')) {
+		return popupWindow.classList.toggle('hidden-fadein-driver')
+	}
+}
+
+function toggleContent() {
+	this.classList.toggle("not-active");
+
+	var content = this.nextElementSibling;
+	if (content.style.maxHeight) {
+		content.style.maxHeight = null;
+	} else {
+		content.style.maxHeight = content.scrollHeight + "px";
+	}
+}
 
 const showText = (element, text) => {
     element.textContent = text

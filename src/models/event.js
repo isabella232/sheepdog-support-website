@@ -17,9 +17,9 @@ const eventSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    description: {
-        type: String,
-        trim: true,
+    time:{
+        type:  String,
+        trim:true,
         required: true
     },
     location:{
@@ -27,9 +27,9 @@ const eventSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    time:{
-        type:  String,
-        trim:true,
+    description: {
+        type: String,
+        trim: true,
         required: true
     },
     owner: {
