@@ -18,6 +18,7 @@ const contactFormSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		lowercase: true,
+		required:true,
 		validate(value) {
 			if (!validator.isEmail(value)) {
 				throw new Error('Email is invalid!')

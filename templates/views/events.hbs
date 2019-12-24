@@ -7,42 +7,65 @@
 
 		
 	</head>
-	<body onload="init()">
-		{{> header}}
-		<main class="event-column-background min-fill-screen-y">
-			<div class="form-container">
-				<form name="event-creation" novalidate>
-					<div>
-						<input type="text" name="event-description" placeholder="Description">
-					</div>
-					<div>
-						<input type="text" name="event-location" placeholder="location">
-					</div>
-					<div>
-						<input type="text" name="event-time" placeholder="Time">
-					</div>
-					<button>Submit</button>
-				</form>
+	<body>
+		{{> header}}		
+		<main id="events" class="min-fill-screen-y">
+			<div class="popup-window hidden-fadein-potato hidden-fadein-driver">
+				<div class="event-create-wrapper popup-window-inner">
+					<button id="create-event-close" class="popup-close">
+						<i class="fas fa-times"></i>
+					</button>
+					
+					<form name="event-create" class="event-create auto-overflow round-scrollbar" novalidate>
+						<h1>Create Event</h1>
+						
+						<div class="form-bar">
+							<input type="text" class="form-input" name="event-name" required>
+							<span class="form-input-placeholder">Event Name</span>
+						</div>
+						<div class="form-bar">
+							<input type="date" name="event-time" placeholder="Time">
+						</div>
+						<div class="form-bar">
+							<input type="text" class="form-input" name="event-location" required>
+							<span class="form-input-placeholder">Location</span>
+						</div>
+						<div class="form-bar">
+							<textarea class="form-input" name="event-description" rows="4" required></textarea>
+							<span class="form-input-placeholder">Description</span>
+						</div>
+						<button class="submit-button">Submit</button>
+					</form>
+				</div>
 			</div>
-			<div class="event-column">
+
+			<div class="">
+				<span>Events List</span>
+				<button>X</button>
+				<button>X</button>
+				<button>X</button>
+				<button id="create-event-open">Create Event</button>
+			</div>
+			
+			<div class="events-list">
 				<li class="event">
-					<div class="collapsible">
+					<div class="collapsible not-active">
 						<h1>Event Title</h1>
 						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
 					</div>
-					<div class="content">
-						<p>Description: Lorem</p>	
+					<div class="content hidden-slidein-potato">
+						<p>Description: Lorem</p>
 						<p>Time: Ispum</p>
-						<p>Place: Merol</p>	
+						<p>Place: Merol</p>
 					</div>
 				</li>
 
 				<li class="event">
-					<div class="collapsible">
+					<div class="collapsible not-active">
 						<h1>Event Title2</h1>
 						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
 					</div>
-					<div class="content">
+					<div class="content hidden-slidein-potato">
 						<p>Description: Nice</p>
 						<p>Time: Today</p>
 						<p>Place: Here</p>	
@@ -50,11 +73,11 @@
 				</li>
 
 				<li class="event">
-					<div class="collapsible">
+					<div class="collapsible not-active">
 						<h1>Event Title3</h1>
 						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
 					</div>
-					<div class="content">
+					<div class="content hidden-slidein-potato">
 						<p>Description: Nice</p>	
 						<p>Time: Today</p>
 						<p>Place: Here</p>	

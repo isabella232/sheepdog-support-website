@@ -3,7 +3,11 @@ console.log('Client side JavaScript is loaded!')
  * Contact Us Form
  */
 
+document.forms['contact-form'].addEventListener((event) => sendForm);
+
+
 const sendForm = () => {
+    event.preventDefault();
     const formObj = {
         name: document.getElementById('contact-name').value,
         email: document.getElementById('contact-email').value,

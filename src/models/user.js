@@ -2,13 +2,15 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Task = require('./task')
+const Event = require('./event')
 
 /*
  * User Schema
  * - Properties
  * 		o Name
  * 		o Email
+ * 		o Profile Picture
+ * 		o PDF Verification
  * 		o Password
  * 			> Hashed
  * 		o Tokens
@@ -34,6 +36,13 @@ const userSchema = new mongoose.Schema({
 			}
 		}
 	},
+	profilePicture: {
+		// type: File,
+	},
+	verification: {
+		// type: File,
+		// required: true
+	},
 	password: {
 		type: String,
 		required: true,
@@ -55,10 +64,10 @@ const userSchema = new mongoose.Schema({
 
 /*
  * Relationship 
- * - Between Task Id and User's owner field
+ * - Between Event Id and User's owner field
  */
 userSchema.virtual('tasks', {
-	ref: 'Task',
+	ref: 'Event',
 	localField: '_id',
 	foreignField: 'owner'
 })
@@ -126,7 +135,7 @@ userSchema.pre('save', async function (next) {
 // Delete user tasks when user is removed
 userSchema.pre('remove', async function (next) {
 	const user = this
-	await Task.deleteMany({ owner: user._id })
+	await Event.deleteMany({ owner: user._id })
 	next()
 })
 

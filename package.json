@@ -1,23 +1,24 @@
 {
-  "name": "Sheepdog---Website",
+  "name": "sheepdog-website",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js -e js,hbs"
+    "dev": "nodemon src/app.js -e js,hbs",
+    "bryan-db": "C:/_Apps/mongodb/bin/mongod.exe --dbpath=../mongodb-data"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitprj/Sheepdog---Website.git"
+    "url": "git+https://github.com/bitprj/sheepdog-support-website.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bitprj/Sheepdog---Website/issues"
+    "url": "https://github.com/bitprj/sheepdog-support-website/issues"
   },
-  "homepage": "https://github.com/bitprj/Sheepdog---Website#readme",
+  "homepage": "https://github.com/bitprj/sheepdog-support-website#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",

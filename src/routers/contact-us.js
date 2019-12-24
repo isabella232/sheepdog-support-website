@@ -6,12 +6,9 @@ const router = new express.Router()
  * Creating the form
  */
 router.post('/contact-us/forms', async (req, res) => {
-    console.log(req.body)
-
-    const form = new ContactForm(req.body)
-    console.log(req.body)
 
     try {
+        const form = new ContactForm(req.body)
         await form.save()
         res.status(201).send(req.body)
     } catch (e) {

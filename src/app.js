@@ -25,8 +25,8 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(require('./routers/index'))
 app.use(require('./routers/assistance'))
-app.use(require('./routers/account-sign'))
 app.use(require('./routers/portal'))
+app.use(require('./routers/account-sign')) // has to be after portal
 app.use(require('./routers/events'))
 app.use(require('./routers/task'))
 app.use(require('./routers/contact-us')) // TODO
