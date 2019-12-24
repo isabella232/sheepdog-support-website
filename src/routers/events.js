@@ -81,7 +81,7 @@ router.patch('/events',auth, async (req, res) =>{
 })
 
 //Delete a  specific event
-router.delete('/events',auth, async (req, res) =>{
+router.delete('/events/:id',auth, async (req, res) =>{
     try{
         const event = await  Event.findOneAndDelete({ _id: req.params._id, owner: req.user._id })
         if(!event){
