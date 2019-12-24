@@ -27,11 +27,11 @@
                     </div>
                 </div>
                 
-                <form class="request-form-panel" action ="#">
+                <form class="request-form-panel" id="request-form" action ="#">
                     <div class="field">
                         <div class="field-title">PROGRAM</div>
                         
-                        <select class="program-selection user-input" required>
+                        <select class="program-selection user-input" id="program-box" required>
                             <option value="" disabled selected>Select One</option>
                             <option value="Financial Peace for Veterans">
                                 Financial Peace for Veterans
@@ -43,8 +43,8 @@
                         <div class="field-title">YOUR NAME</div>
                         
                         <div class="field-line">
-                            <input type="text" class="user-input" placeholder="First Name" required>
-                            <input type="text" class="user-input" placeholder="Last Name" required>
+                            <input type="text" class="user-input" placeholder="First Name" id="first-name" required>
+                            <input type="text" class="user-input" placeholder="Last Name" id="last-name" required>
                         </div>
                     </div>
                     
@@ -53,14 +53,14 @@
                         <div class="field-note">Leave blank if you are the intended recipient.</div>
                         
                         <div class="field-line">
-                            <input type="text" class="user-input" placeholder="First Name">
-                            <input type="text" class="user-input" placeholder="Last Name">
+                            <input type="text" class="user-input" placeholder="First Name" id="recipient-first-name">
+                            <input type="text" class="user-input" placeholder="Last Name" id="recipient-last-name">
                         </div>
                     </div>
                     
                     <div class="field">
                         <div class="field-title">YOUR E-MAIL ADDRESS</div>
-                        <input type="text" class="user-input" placeholder="E-mail Address" required>
+                        <input type="text" class="user-input" placeholder="E-mail Address" id="email-address" required>
                     </div>  
                     
                     <div class="field">
@@ -70,5 +70,6 @@
             </div>
         </main>
         {{>footer}}
+        <script src="/js/assistance-script.js"></script>
     </body>
 </html>

@@ -16,6 +16,11 @@ const sendForm = () => {
     }
     const jsonData = JSON.stringify(formObj);
 
+    const formErr = document.getElementById('contact-form-error')
+    if (formObj.email === '' || formObj.name === '' || formObj.subject === '' || formObj.body === '') {
+        return showText(signinErr, "Please complete the form")
+    }
+
     // save to database
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/contact-us/forms', true);
@@ -28,12 +33,17 @@ const sendForm = () => {
                 // redirect to profile or home
             }
             else if (this.status === 400) {
-                // const contactErr = document.getElementById('contact-form-error')
-                // const response = JSON.parse(xhr.responseText)
+                showAppropriateTextForm(formErr)
+                //const contactErr = document.getElementById('contact-form-error')
+                //const response = JSON.parse(xhr.responseText)
                 
-                contactErr.textContent = 'Missing information'
-                contactErr.style.display = 'block'
+                // contactErr.textContent = 'Missing information'
+                // contactErr.style.display = 'block'
             }
         }
     }
+}
+
+const showAppropriateTextForm = (fromErr) => {
+    showText(formErr, 'Please Complete the form')
 }
