@@ -14,9 +14,9 @@ const redirectLogin = async (req, res, next) => {
     }
     next()
 }
-router.get('/account/portal', redirectLogin, auth, async(req, res) => {
-    const { name, email } = req.user
-    res.render('portal', { name, email });
+router.get('/account/portal', redirectLogin, auth, async (req, res) => {
+    const { firstName, lastName, email } = req.user
+    res.render('portal', { firstName, lastName, email });
 })
 
 // =========== Resource Endpoints
@@ -38,7 +38,7 @@ router.get('/account/portal/auth', async (req, res) => {
 router.patch('/account/portal', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     console.log(updates)
-    const allowedUpdates = ['name', 'email', 'password', 'age']
+    const allowedUpdates = ['firstName', 'lastName', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {

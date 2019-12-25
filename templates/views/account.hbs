@@ -3,7 +3,6 @@
     <head>
         <title>Account Temp</title>
         {{> head}}
-		<link rel="stylesheet" type="text/css" href="/css/account-style.css">
     </head>
     <body>
         {{> header}}        
@@ -12,10 +11,11 @@
                 <div class="switch-sign">
                     <button id="go-signin">Sign In</button>
                     <button id="go-signup" class="sign-not-active">Sign Up</button>
+                    <div id="switch-select"></div>
                 </div>
 
-                <form class="hidden-fadein-potato" name="signin" novalidate>
-                    <h1 class="form-text">Welcome Back!</h1>
+                <form class="form-sign hidden-fadein-potato" name="signin" novalidate>
+                    <h1>Welcome Back!</h1>
 
                     <div id="signin-error" class="form-bar error-message hidden">
                         X
@@ -33,16 +33,23 @@
                     <button class="submit-button center-block-elem">LOGIN</button>
                 </form>
                     
-                <form class="hidden-fadein-potato hidden-fadein-driver" name="signup" novalidate>
-                    <h1 class="form-text">Create an Account</h1>
+                <form class="form-sign hidden-fadein-potato hidden-fadein-driver" name="signup" novalidate>
+                    <h1>Create an Account</h1>
                        
                     <div id="signup-error" class="form-bar error-message hidden">
                         X
                     </div>
                         
-                    <div class="form-bar">
-                        <input type="text" class="form-input" name="signup-name" required>
-                        <span class="form-input-placeholder">Name</span>
+                    <div class="form-bar form-bar__partial">
+                        <div>
+                            <input type="text" class="form-input" name="signup-firstname" required>
+                            <span class="form-input-placeholder">First Name</span>
+                        </div>
+                        
+                        <div>
+                            <input type="text" class="form-input" name="signup-lastname" required>
+                            <span class="form-input-placeholder">Last Name</span>
+                        </div>
 					</div>
 					<div class="form-bar">
                         <input type="text" class="form-input"  name="signup-email" required>

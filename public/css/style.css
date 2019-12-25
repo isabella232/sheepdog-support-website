@@ -1,0 +1,718 @@
+html {
+    --charcoalblue: #2f3542;
+    --newbeige: #d0cabd;
+    --newmaroon: #994532;
+    --isabelline: #eee;
+    --turqoiseblue: #2c3e50;
+}
+
+/*
+ * GENERAL
+ */
+
+* {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box; /* accounts for width after padding */
+}
+
+body {
+    margin: 0;
+}
+
+:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+input[type="password"] {
+    font: large Verdana, sans-serif;
+}
+
+option {
+    background: var(--isabelline)
+}
+
+/*
+ * Autofill Styling
+ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #333;
+  box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+ /* 
+  * ScrollBar 
+  */
+body::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar,
+.round-scrollbar::-webkit-scrollbar {
+    width: 16px;
+}
+.round-scrollbar::-webkit-scrollbar-track,
+.round-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+}
+body::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track,
+.round-scrollbar::-webkit-scrollbar-track {
+    background: #e1e1e1; 
+}
+body::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb,
+.round-scrollbar::-webkit-scrollbar-thumb {
+    background: #bbb; 
+}
+body::-webkit-scrollbar-thumb:hover,
+.scrollbar::-webkit-scrollbar-thumb:hover,
+.round-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+body::-webkit-scrollbar-thumb:active,
+.scrollbar::-webkit-scrollbar-thumb:active,
+.round-scrollbar::-webkit-scrollbar-thumb:active {
+    background: #999; 
+}
+
+/*
+ * True CSS Class Use
+ * - Create more reusable code. It's really important in reducing the amount of CSS to maintain.
+ *		o ie. `.lightgreen: { color: #B1FF54 }`
+ *			> The purpose of this is so you don't have to repeat `color: #B1FF54` across every 
+ * 				styling and use lightgreen as a class instead on the HTML element directly
+ *		o A more practical case is when you can reuse styling for buttons by literally just
+ *			doing `class="fancy-button"`
+ *		o Off topic, but SASS/SCSS CSS preprocessors both support variables that can fix this problem
+ *			by just doing: `$lightgreen: #B1FF54; ... .button { color: $lightgreen }` but the whole 
+ *			point is you can't do the same for button example shown above
+ *
+ * - Tips:
+ * 		o View HTML as your canvas and CSS as your API
+ *		o Another way to look a it is seeing CSS as functions and HTML as function calls
+ *			> You don't want to hardcode every function specific for everything you're doing
+ *
+ * - Important Messages:
+ *      o CSS is not a language that offers a lot of flexibility. You have to create it yourself.
+ *          But don't get carried away in merging styles like `.button.lightgreen` to create styles
+ *          specific to a lightgreen button. (That's where BEM helps in maintaining that!) You can 
+ *          only override so many styles before you begin to use `!important` and that's def a problem
+ *
+ * - Final Note:
+ *      o Sometimes it isn't worth to hassle/time to create separate reusable styling for something 
+ *          super specific like a landing page. Use your best judgement!
+ *
+ * - Note: If styles not already created, add new styles to your API
+ * - Additional Note: Someone used BEM and that's legit and offers even more scalability
+ *
+ * #TODO: REFACTOR CODE TO FOLLOW THIS STYLE **FOR GOOD PRACTICE** :) So far we only have that below :(
+ */
+
+/* ============== General Constants */
+
+/*
+ * Generic Hidden
+ */
+.hidden {
+    display: none !important;
+}
+
+/**
+ * TRANSITION HIDDENS
+ * - General Use: 
+ *      > place potato on element.
+ *      > toggle driver.
+ * - Note: There are a couple of exceptions. read corresponding description for more info 
+ */
+
+/*
+ * Slidein Hidden
+ * - Use: (exception)
+ *      place potato on element
+ *      toggle by setting max-height:scrollheight through js
+ */
+.hidden-slidein-potato {
+    transition: max-height 0.15s ease-out;
+    max-height: 0;
+    overflow: hidden;
+}
+
+/* 
+ * Fadein Hidden
+ * - Use: (same as general)
+ *      place potato on element
+ *      toggle driver through js
+ * - Notes: 
+ *      if a slide down effect occurs, it's because the element likely has 'transition: ease all' on it
+ */
+.hidden-fadein-potato {
+    transition: visibility 0s, opacity 500ms ease;
+}
+.hidden-fadein-driver,
+.hidden-fadein-driver * {
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    opacity: 0 !important;
+}
+/* END HIDDENS */
+
+.auto-overflow {
+    overflow: auto;
+    height: 100%;
+}
+
+
+/* ================== Position Formatting */
+.main-card {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-card-inner {
+    max-width: 900px;
+    box-shadow: 5px 5px 1.5rem #2c3e50;
+    border-radius: 5px;
+}
+
+.popup-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    background: #0006
+}
+
+.popup-window-inner {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    position: absolute;
+    top: 72px;
+    left: 72px;
+    right: 72px;
+    max-width: 900px;
+    height: calc(100% - 144px);
+    background: var(--isabelline);
+}
+.popup-close {
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: none;
+}
+.popup-close:hover i {
+    color: #555;
+}
+.popup-close i { 
+    font-size: 28px;
+    color: #888;
+    transition: 0.2s ease all
+}
+
+.center-block-elem {
+    display: block;
+	margin: 0 auto;
+}
+
+.min-fill-screen-y {
+	/* height 100% might not work as expected; seems to only work starting from <html> */
+    min-height: 100vh;
+}
+.fill-screen-y-head-foot {
+    height: calc(100vh - 400px)
+}
+
+
+/* ============= Specific Element Types */
+ 
+
+
+.fancy-button {
+	content: 'I am fancy'
+}
+.fancy-button:hover {
+	content: 'ooOh'
+}
+
+/*
+ * Form Styling
+ */
+.form-bar,
+.form-bar--small {
+    padding: 10px 0;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 75%;
+}
+.form-bar--small {
+    padding: 6px 0;
+}
+.form-bar__partial,
+.form-bar__partial--small {
+    padding: 0;
+}
+.form-bar__partial > * {
+    padding: 10px 0;
+    position: relative;
+}
+.form-bar__partial--small > * {
+    padding: 6px 0;
+    position: relative;
+}
+.form-bar__partial > :nth-child(2),
+.form-bar__partial--small > :nth-child(2),
+.form-bar__partial > :not(:first-child),
+.form-bar__partial--small > :not(:first-child) {
+    margin-left: 15px;
+}
+.form-input,
+.form-input--small {
+    margin: 10px 0;
+    padding: 20px;
+    border: 1.5px solid #777;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    background: none;
+    transition: border 0.25s ease;
+}
+.form-input--small {
+    margin: 6px 0;
+    padding: 12px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.form-input-placeholder--small,
+.form-input-placeholder {
+	position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 40px;
+    color: #777;
+    background-color: var(--isabelline);
+    transition: 0.25s ease all; /* all may leave problems esp with .hidden-<transition>-potato */
+}
+.form-input-placeholder--small {
+    left: 12px;
+    top: 23px;
+}
+.form-input:focus,
+.form-input--small:focus,
+.form-input:not(:focus):valid,
+.form-input--small:not(:focus):valid {
+    border: 1.5px solid #000;
+}
+.form-input--small:focus,
+.form-input--small:not(:focus):valid {
+    border: 1.5px solid #000;
+}
+.form-input:focus + .form-input-placeholder,
+.form-input--small:focus + .form-input-placeholder--small,
+.form-input:not(:focus):valid + .form-input-placeholder,
+.form-input--small:not(:focus):valid + .form-input-placeholder--small {
+    top: 0.15em;
+    left: 1em;
+    font-size: 14px;
+    padding: 5px;
+    color: #000;
+}
+.form-input--small:focus + .form-input-placeholder--small,
+.form-input--small:not(:focus):valid + .form-input-placeholder--small {
+    font-size: 12px;
+    padding: 3px;
+}
+.error-message {
+    text-align: center;
+    background-color: #FFDDD6bb;
+    border: none;
+    color: #b00;
+    border: 1px solid #b00;
+    border-radius: 5px;
+}
+.submit-button {
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 15px;
+    padding: 15px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 60%;
+    transition: background-color 250ms;
+}
+
+.submit-button:hover{
+    background-color: #2c3e50;
+}
+/* END Input form Styling */
+
+
+/* ================== HEADER */
+header {  
+    z-index: 100; 
+    height: 135px; 
+    position: relative;  
+    background-color: var(--charcoalblue);
+} 
+
+/*Container for logo */
+.header__logo-box{  
+    padding-top: .5%; 
+    padding-left:1.5%;  
+} 
+
+/* the logo link */
+.header__logo{
+    position: absolute;
+    height: 90%;
+}
+
+.header__logo img {
+    height: 100%;
+}
+
+  /*The container for the text in the header*/  
+.header__text-box {  
+    width:100%; 
+    height:auto;  
+    position: absolute; 
+      
+} 
+
+/*The actual text*/ 
+.header__text{  
+    margin-top: 25px;
+    color: white; 
+    text-align: center; 
+}
+
+/*Container for buttons*/ 
+.button-container {  
+    text-align: right;  
+    padding-right:1%; 
+}
+
+.nav-button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 16px;
+    color: white;
+    background: none;
+    cursor: pointer;
+    border: none;
+    transition: color 250ms;
+}
+
+.nav-button:hover {
+    color: #aaa;
+}
+
+.button__take-action {
+    background: #994532;
+    border-radius: 3px;
+    transition: background 250ms;
+}
+
+.button__take-action:hover {
+    color: #fff;
+    background: #753426;
+}
+
+/* =================== FOOTER */
+footer {
+    background-color: var(--charcoalblue);
+}
+
+.social-media {
+    padding: 40px;
+    text-align: center;
+}
+
+.social-media-title {
+    margin-bottom: 20px;
+    color: white;
+    font-size: 24px;
+}
+
+.social-media-icons {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+.social-media-icons:hover > * {
+    opacity: 0.6;
+}
+
+.logo {
+    border-radius: 50%;
+    margin: 5px;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-color: white;
+    color: black;
+    transition: opacity 250ms;
+}
+
+.logo i {
+    padding-top: 25%;
+}
+
+.logo:nth-child(1):hover,
+.logo:nth-child(2):hover,
+.logo:nth-child(3):hover,
+.logo:nth-child(4):hover { opacity: 1; }
+
+.sub-email {
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    border-top: solid 1px white;
+    border-bottom: solid 1px white;
+    background: none;
+    color: white;
+}
+
+.sub-email::placeholder {
+    color: white;
+}
+
+.subscribe {
+    border: none;
+    border-radius: 3px;
+    padding: 10px 30px;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 250ms;
+}
+
+.subscribe:hover {
+    background-color: #ccc;
+}
+
+.lower-info {
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+/* =================== SIGNIN/SIGNUP LOGIN */
+
+#sign {
+    background: url('../res/bg-login.jpg');
+    background-position: center;
+    background-size: auto 140%;
+}
+
+.sign-wrapper {
+    text-align: center;
+    margin: 30px;
+    max-width: 700px;
+    padding: 50px;
+    background-color: var(--isabelline);
+    flex: 1;
+}
+
+.switch-sign {
+    margin: 0 auto;
+    width: 75%;
+    display: flex;
+    position: relative;
+}
+
+.switch-sign > * {
+    padding: 15px 20px;
+    background-color: #333;
+    color: white;
+    flex: 1;
+    font-size: 16px;
+    border: none;
+    pointer-events: none;
+}
+
+#switch-select {
+    position: absolute;
+    border: 3px solid var(--isabelline);
+    border-right: 5px solid var(--isabelline);
+    border-left: 5px solid var(--isabelline);
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    pointer-events: none;
+    background: none;
+    /* transition: 0.5s left ease-out; */
+}
+.sign-not-active + #switch-select {
+    left: 0;
+}
+
+
+.sign-not-active {
+    background-color: #666;
+    transition: 250ms ease all;
+    pointer-events: auto;
+}
+.sign-not-active:hover {
+    background-color: #777; 
+}
+
+.form-sign {
+    margin-top: 50px;
+}
+
+.form-input-verify {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.form-input-verify + .form-input-verify-placeholder {
+    display: inline-block;
+    font-size: 20px;
+    color: #000;
+    border-bottom: 1.5px solid black;
+    cursor: pointer;
+    transition: 0.25s all ease;
+}
+.form-input-verify:focus + .form-input-verify-placeholder,
+.form-input-verify + .form-input-verify-placeholder:hover {
+    color: #666;
+    border-bottom: 1.5px solid transparent;
+
+}
+
+
+/* =================== ASSISTANCE */
+
+/* main */
+#assistance {
+    background: lightgray url('../res/grass-dew.jpg');
+    background-position: center;
+    background-size: auto 107%;
+}
+
+.form-wrapper {
+    margin: 0 auto;
+    max-width: 900px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+/* DESCRIPTION PANEL */
+.description-panel {
+    border-radius: 5px 0 0 5px;
+    height: 70%;
+    background: linear-gradient(to bottom, #eee, #999);
+    opacity: 0.7;
+/*    width: 40%;*/
+    flex: 2;
+    box-shadow: 5px 5px 1.5rem #2c3e50;
+    text-align: center;
+}
+
+.panel-title {
+    border-radius: 5px 0 0 0;
+    padding: 45px 24px;
+    font-size: 32px;
+    background: linear-gradient(to bottom, #666, #111);
+    color: white;
+}
+
+.description {
+    padding: 24px;
+    line-height: 20px;
+}
+
+.description .additional {
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.description .note {
+    margin-bottom: 40px;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 15px;
+}
+
+/* FORMS */
+.request-form-panel {
+    padding: 36px;
+    border-radius: 5px;
+    height: 80%;
+    background: var(--isabelline);
+/*    width: 60%;*/
+    flex: 3;
+    position: relative;
+    z-index: 1;
+    box-shadow: 5px 5px 1.5rem #2c3e50;
+}
+.request-form-panel h1 {
+    text-align: center;
+}
+
+.program-selection {
+    font-size: 16px;
+    padding: 9px;
+    border: 0;
+    border-top: 1.5px solid #777;
+    border-bottom: 1.5px solid #777;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 12px;
+    background: none;
+}
+.program-selection:invalid {
+    color: #777;    
+    font-size: 16px;
+}
+.program-selection option {
+    color: black;
+}
+
+.field-title {
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.field-note {
+    font-size: 10px;
+    margin-bottom: 0;
+}
+
+.assist-note {
+    display: block;
+    padding-bottom: 0;
+}
+
+

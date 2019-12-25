@@ -11,17 +11,26 @@
         <main class="min-fill-screen-y main-card">
             <div class="user-info main-card-inner">
                 <div class="info-field">
-                    <span class="name">Full Name</span>
-                        <div class="spacer"></div>
+                    <span class="name">First Name</span>
+                    <div class="spacer"></div>
                     <div class="field-container">
-                        <div class="field-text">{{name}}</div class="field-text">
-                        <input class="field-textbox input-value hidden" id="portal-name" placeholder="Full Name" value={{name}}>
+                        <div class="field-text">{{firstName}}</div class="field-text">
+                        <input class="field-textbox input-value hidden" id="portal-firstname" placeholder="First Name" value={{firstName}}>
+                    </div>
+                    <button class="button-edit button-edit-info">O</button>
+                </div>
+                <div class="info-field">
+                    <span class="name">Last Name</span>
+                    <div class="spacer"></div>
+                    <div class="field-container">
+                        <div class="field-text">{{lastName}}</div class="field-text">
+                        <input class="field-textbox input-value hidden" id="portal-lastname" placeholder="Last Name" value={{lastName}}>
                     </div>
                     <button class="button-edit button-edit-info">O</button>
                 </div>
                 <div class="info-field">
                     <span class="name">Email Address</span>
-                        <div class="spacer"></div>
+                    <div class="spacer"></div>
                     <div class="field-container">
                         <div class="field-text">{{email}}</div class="field-text">
                         <input class="field-textbox input-value hidden" id="portal-email" placeholder="Email Address" value={{email}}>

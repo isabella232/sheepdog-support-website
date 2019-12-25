@@ -34,8 +34,9 @@ const requestAssistanceSchema = new mongoose.Schema({
     },
     email:{
         type: String,
+        unique: true,
         lowercase: true,
-		required:true,
+        required:true,
 		validate(value) {
 			if (!validator.isEmail(value)) {
 				throw new Error('Email is invalid!')

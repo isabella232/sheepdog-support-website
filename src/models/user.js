@@ -19,7 +19,12 @@ const Event = require('./event')
  * 			> Each token is used for authentication @See ../middleware/auth.js for more
  */
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+		required: true,
+		trim: true
+    },
+    lastName: {
         type: String,
 		required: true,
 		trim: true
@@ -35,6 +40,9 @@ const userSchema = new mongoose.Schema({
 				throw new Error('invalid email')
 			}
 		}
+	},
+	location: {
+		//
 	},
 	profilePicture: {
 		// type: File,

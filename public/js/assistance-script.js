@@ -1,20 +1,34 @@
-console.log(document.getElementById('program-box').value)
+console.log('Clientside Javascript Loaded!')
 
-document.getElementById('request-form').addEventListener('submit',(event)=>submitForm(event))
+document.forms['assist-form'].addEventListener('submit', (event) => submitForm(event))
 
 function submitForm(event){
-event.preventDefault()
+    event.preventDefault()
 
-const formObj = {
-    program: document.getElementById('program-box').value,
-    firstName: document.getElementById('first-name').value,
-    lastName: document.getElementById('last-name').value,
-    recipientFirstName: document.getElementById('recipient-first-name').value,
-    recipientLastName: document.getElementById('recipient-last-name').value,
-    email: document.getElementById('email-address').value
+    const formObj = {
+        program: document.forms['assist-form']['program-box'].value,
+        firstName: document.forms['assist-form']['first-name'].value,
+        lastName: document.forms['assist-form']['last-name'].value,
+        recipientFirstName: document.forms['assist-form']['recipient-first-name'].value,
+        recipientLastName: document.forms['assist-form']['recipient-last-name'].value,
+        email: document.forms['assist-form']['email-address'].value
     }
+
     var xhr = new XMLHttpRequest();
-    xhr.open('Post', '/assistance/form', true);
+    xhr.open('POST', '/assistance', true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(formObj));
+    xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            const response = JSON.parse(xhr.responseText)   
+            if (this.status === 201) {
+                alert('[SERVER-TEST] We have received your request.')
+                // window.location.replace('/')
+            }
+            else if (this.status === 400) {
+				console.log(response)
+                // showAppropriateTextCreateEvent(response, assistanceError)
+            }
+        }
+    }
 }

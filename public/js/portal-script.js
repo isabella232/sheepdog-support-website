@@ -14,22 +14,24 @@ document.getElementById('button-save').onclick = saveData
  */
 function saveData() {
     const userObj = {
-        name: document.getElementById('portal-name').value,
+        firstName: document.getElementById('portal-firstname').value,
+        lastName: document.getElementById('portal-lastname').value,
         email: document.getElementById('portal-email').value
         // password: document.getElementById('portal-new-pass').value
     }
-    const jsonData = JSON.stringify(userObj);
+    console.log(userObj)
 
     var xhr = new XMLHttpRequest();
     xhr.open('PATCH', '/account/portal')
     xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.send(jsonData)
+    xhr.send(JSON.stringify(userObj))
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.status === 200) {
+                alert('Saved!')
+            } else {
                 // const response = JSON.parse(xhr.responseText)
                 // console.log(response)
-                console.log('Saved!')
             }
         }
     }

@@ -59,7 +59,8 @@ function signUp(event) {
     event.preventDefault()
 
     const userObj = {
-        name: document.forms['signup']['signup-name'].value,
+        firstName: document.forms['signup']['signup-firstname'].value,
+        lastName: document.forms['signup']['signup-lastname'].value,
         email: document.forms['signup']['signup-email'].value,
         password: document.forms['signup']['signup-password'].value,
         verify: document.forms['signup']['signup-verify'].value

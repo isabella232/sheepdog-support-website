@@ -1,4 +1,4 @@
-const RequestForm = require('../models/request-assistance')
+const RequestForm = require('../models/assistance')
 const express = require('express')
 const router = new express.Router()
 
@@ -14,7 +14,7 @@ router.get('/assistance/*',(req, res) => {
 })
 
 //Resource Creation Endpoint
-router.post('/assistance/form', async (req, res) =>{
+router.post('/assistance', async (req, res) =>{
     const assistForm = new RequestForm(req.body)
 
     try{
