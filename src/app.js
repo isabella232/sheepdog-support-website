@@ -28,8 +28,7 @@ app.use(require('./routers/assistance'))
 app.use(require('./routers/portal'))
 app.use(require('./routers/account-sign')) // has to be after portal
 app.use(require('./routers/events'))
-app.use(require('./routers/task'))
-app.use(require('./routers/contact-us')) // TODO
+app.use(require('./routers/contactus'))
 
 app.get('*', (req, res) => {
     res.render('404', {

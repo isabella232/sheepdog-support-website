@@ -205,7 +205,7 @@ body::-webkit-scrollbar-thumb:active,
 .popup-window-inner {
     margin-left: auto;
     margin-right: auto;
-    border-radius: 5px;
+    border-radius: 8px;
     position: absolute;
     top: 72px;
     left: 72px;
@@ -277,10 +277,12 @@ body::-webkit-scrollbar-thumb:active,
 .form-bar__partial > * {
     padding: 10px 0;
     position: relative;
+    flex: 1;
 }
 .form-bar__partial--small > * {
     padding: 6px 0;
     position: relative;
+    flex: 1;
 }
 .form-bar__partial > :nth-child(2),
 .form-bar__partial--small > :nth-child(2),
@@ -303,7 +305,10 @@ body::-webkit-scrollbar-thumb:active,
     margin: 6px 0;
     padding: 12px;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 14px;
+}
+textarea.form-input {
+    resize: vertical;
 }
 .form-input-placeholder--small,
 .form-input-placeholder {
@@ -333,7 +338,7 @@ body::-webkit-scrollbar-thumb:active,
 .form-input--small:focus + .form-input-placeholder--small,
 .form-input:not(:focus):valid + .form-input-placeholder,
 .form-input--small:not(:focus):valid + .form-input-placeholder--small {
-    top: 0.15em;
+    top: 0.5em;
     left: 1em;
     font-size: 14px;
     padding: 5px;
@@ -341,6 +346,7 @@ body::-webkit-scrollbar-thumb:active,
 }
 .form-input--small:focus + .form-input-placeholder--small,
 .form-input--small:not(:focus):valid + .form-input-placeholder--small {
+    top: 0.15em;
     font-size: 12px;
     padding: 3px;
 }
@@ -370,6 +376,7 @@ body::-webkit-scrollbar-thumb:active,
 }
 /* END Input form Styling */
 
+/* *********************************** PARTIALS ********************************* */
 
 /* ================== HEADER */
 header {  
@@ -522,6 +529,16 @@ footer {
     text-align: center;
 }
 
+/* =================== ERROR */
+.error-notify {
+    padding: 20px;
+    border-radius: 3px;
+    background: #ccc8;
+}
+
+
+/* *********************************** VIEWS ********************************* */
+
 /* =================== SIGNIN/SIGNUP LOGIN */
 
 #sign {
@@ -610,14 +627,102 @@ footer {
 
 }
 
+/* =================== EVENTS */
+#events {
+	padding: 10px;
+	background-image: linear-gradient(
+	  to right,
+	rgba(226, 241, 241, 0.45),
+	rgba(160, 245, 234, 0.637)),
+	 url('../res/bg-event.jpg');
+	background-size: cover;
+	background-repeat: no-repeat; /*Prevents background from repeating*/
+	width: 100%;
+}
+
+.event-create-wrapper {
+	text-align: center;
+}
+
+.event-create {
+	padding-top: 30px;
+	padding-bottom: 80px;
+}
+
+.event-create .auto-overflow {
+	border-radius: 10px;
+}
+
+.event-create .form-bar {
+	width: 60%;
+}
+
+.event-create button {
+    width: 300px;
+}
+
+.events-list {
+	max-width:  900px; /* sets the maximum width for each event */
+	margin: 0 auto; /* centers event column */
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+	background-color: orange;
+	border-radius: 5px 5px 0 0;
+	color: #444;
+	cursor: pointer;
+	padding: 1em 2em;
+	border: none;
+	text-align: left;
+	/* outline: none; */
+	font-size: 15px;
+	width: 100%;
+	overflow: hidden;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.collapsible:hover {
+	background-color: orange;
+}
+.not-active {
+	background-color: #f1d592;
+	transition: background-color 0.2s ease, border-radius 0s 0.15s;
+	border-radius: 5px;
+}
+
+.event-item {
+    margin: 10px 0;
+    position: relative;
+    list-style: none; /* remove bullet */
+    overflow: hidden;
+}
+/* Style the collapsible content. Note: hidden by default */
+.event-item-content {
+	border-radius: 0 0 5px 5px;
+	padding: 0 2em; /* adds border space for collapsible content */
+    background-color: #fcf6e8;
+    position: relative;
+    z-index: 1;
+}
+
+.event-logo {
+    position: absolute;
+    width: 300px;
+    top: 55px; /* 50% */
+    transform: translateY(-50%);
+    right: 25px;
+}
+
+
 
 /* =================== ASSISTANCE */
 
 /* main */
 #assistance {
-    background: lightgray url('../res/grass-dew.jpg');
+    background: lightgray url('../res/bg-assistance.jpg');
     background-position: center;
-    background-size: auto 107%;
+    background-size: auto 116%;
 }
 
 .form-wrapper {
@@ -714,5 +819,23 @@ footer {
     display: block;
     padding-bottom: 0;
 }
+
+/* ====================== CONTACT US */
+
+ #contactus {
+    background:tan url('../res/bg-contact-us.jpg');
+    background-position: center;
+    background-size: auto 150%;
+}
+
+.contactus-wrapper {    
+    text-align: center;
+    margin: 30px;
+    max-width: 700px;
+    flex: 1;
+    padding: 50px;
+    background-color: var(--isabelline);
+}
+
 
 

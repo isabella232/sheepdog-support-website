@@ -2,8 +2,8 @@ console.log('Clientside Javascript Loaded!')
 
 document.forms['assist-form'].addEventListener('submit', (event) => submitForm(event))
 
-function submitForm(event){
-    event.preventDefault()
+function submitForm(event) {
+    // event.preventDefault()
 
     const formObj = {
         program: document.forms['assist-form']['program-box'].value,
@@ -23,7 +23,7 @@ function submitForm(event){
             const response = JSON.parse(xhr.responseText)   
             if (this.status === 201) {
                 alert('[SERVER-TEST] We have received your request.')
-                // window.location.replace('/')
+                window.location.replace('/assistance')
             }
             else if (this.status === 400) {
 				console.log(response)
@@ -32,3 +32,12 @@ function submitForm(event){
         }
     }
 }
+const showAppropriateTextForm = (formErr) => {
+    showText(formErr, 'Please Complete the form')
+}
+
+const showText = (element, text) => {
+    element.textContent = text
+    element.classList.remove('hidden')
+}
+

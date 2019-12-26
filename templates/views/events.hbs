@@ -3,9 +3,6 @@
 	<head>
 		<title>Events</title>
 		{{> head}}
-		<link rel="stylesheet" type="text/css" href="/css/event-style.css">
-
-		
 	</head>
 	<body>
 		{{> header}}		
@@ -31,7 +28,7 @@
 							<span class="form-input-placeholder">Location</span>
 						</div>
 						<div class="form-bar">
-							<textarea class="form-input" name="event-description" rows="4" required></textarea>
+							<textarea class="form-input" name="event-description" rows="8" required></textarea>
 							<span class="form-input-placeholder">Description</span>
 						</div>
 						<button class="submit-button">Submit</button>
@@ -41,49 +38,14 @@
 
 			<div class="">
 				<span>Events List</span>
-				<button>X</button>
-				<button>X</button>
-				<button>X</button>
 				<button id="create-event-open">Create Event</button>
 			</div>
 			
-			<div class="events-list">
-				<li class="event">
-					<div class="collapsible not-active">
-						<h1>Event Title</h1>
-						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
-					</div>
-					<div class="content hidden-slidein-potato">
-						<p>Description: Lorem</p>
-						<p>Time: Ispum</p>
-						<p>Place: Merol</p>
-					</div>
-				</li>
-
-				<li class="event">
-					<div class="collapsible not-active">
-						<h1>Event Title2</h1>
-						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
-					</div>
-					<div class="content hidden-slidein-potato">
-						<p>Description: Nice</p>
-						<p>Time: Today</p>
-						<p>Place: Here</p>	
-					</div>
-				</li>
-
-				<li class="event">
-					<div class="collapsible not-active">
-						<h1>Event Title3</h1>
-						<!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > -->
-					</div>
-					<div class="content hidden-slidein-potato">
-						<p>Description: Nice</p>	
-						<p>Time: Today</p>
-						<p>Place: Here</p>	
-					</div>
-				</li>
-			</div>
+			{{> eventslist}}
+			
+			{{#if error}}
+				{{> error}}
+			{{/if}}
 		</main>
 		{{> footer}}
 		<script src="js/event-script.js"></script>

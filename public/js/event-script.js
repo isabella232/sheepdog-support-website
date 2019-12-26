@@ -1,13 +1,13 @@
 console.log('Clientside Javascript Loaded!')
 
-document.addEventListener('keydown', keyToggleCreateEvent)
 document.forms["event-create"].addEventListener('submit', (event) => createEvent(event))
+document.addEventListener('keydown', keyToggleCreateEvent)
 document.getElementById('create-event-close').onclick = toggleCreateEvent
 document.getElementById('create-event-open').onclick = toggleCreateEvent
 document.querySelectorAll('.collapsible').forEach(elem => elem.addEventListener('click', toggleContent))
 
 function createEvent(event){
-	event.preventDefault()
+	// event.preventDefault()
 
 	const eventObj = {
 		name: document.forms['event-create']['event-name'].value,
@@ -25,9 +25,9 @@ function createEvent(event){
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
             const response = JSON.parse(xhr.responseText)
-            if (this.status === 200) {
-                alert('[SERVER-TEST] Event Creation Successful!')
-                // window.location.replace('/')
+            if (this.status === 201) {
+                alert('Event Created!')
+                window.location.replace('/events')
             }
             else if (this.status === 400) {
 				console.log(response)

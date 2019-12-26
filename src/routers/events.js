@@ -1,17 +1,32 @@
 const express = require('express')
 const Event = require('../models/event')
+const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
 /**
  * Display Events Page
  */
-router.get('/events', (req,res) => {
-    res.render('events', {
-        // #TODO merge get-all with here
-    })
+router.get('/events', async (req, res) => {
+    try { 
+        const eventsList = await Event.find({})
+
+        if (eventsList.length === 0) {
+            return res.status(500).render('events', { error: 'There are no events to display' });
+        }
+
+        for (const event of eventsList) {
+            const ownerData = await User.findById(event.owner)
+            event.ownerFirstName = ownerData.firstName
+            event.ownerLastName = ownerData.lastName
+        }
+
+        res.render('events', { eventsList })
+    } catch (e) {
+        res.status(500).render('events', { error: 'There was a problem with the server.' });
+    }
 })
-router.get('/events/get-all', auth, async (req, res) => {
+router.get('/events/get-own', auth, async (req, res) => {
     try { 
         const event = await Event.find({ owner: req.user._id })
         res.send(event)

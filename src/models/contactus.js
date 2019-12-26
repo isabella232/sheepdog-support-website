@@ -2,14 +2,20 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 
 /*
- * ContactForm:
- * - Name
+ * ContactUs:
+ * - FirstName
+ * - LastName
  * - Email
  * - Subject
  * - Body
  */
-const contactFormSchema = new mongoose.Schema({
-    name: {
+const contactUsSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+		required: true,
+		trim: true
+    },
+    lastName: {
         type: String,
 		required: true,
 		trim: true
@@ -27,14 +33,16 @@ const contactFormSchema = new mongoose.Schema({
 	},
 	subject: {
 		type: String,
-		required: true
+		required: true,
+		trim: true
 	},
     body: {
         type: String,
-        required: true
+        required: true,
+		trim: true
     }
 })
 
-const ContactForm = mongoose.model('ContactForm', contactFormSchema)
+const ContactUs = mongoose.model('ContactUs', contactUsSchema)
 
-module.exports = ContactForm
+module.exports = ContactUs
