@@ -12,7 +12,7 @@ router.get('/events', async (req, res) => {
         const eventsList = await Event.find({})
 
         if (eventsList.length === 0) {
-            return res.status(204).render('events', { error: 'There are no events to display' });
+            return res.render('events', { error: 'There are no events to display.' });
         }
 
         for (const event of eventsList) {

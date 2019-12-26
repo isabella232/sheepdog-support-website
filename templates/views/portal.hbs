@@ -8,52 +8,84 @@
     </head>
     <body>
         {{>header}}
-        <main class="min-fill-screen-y main-card">
-            <div class="user-info main-card-inner">
-                <div class="info-field">
-                    <span class="name">First Name</span>
-                    <div class="spacer"></div>
-                    <div class="field-container">
-                        <div class="field-text">{{firstName}}</div class="field-text">
-                        <input class="field-textbox input-value hidden" id="portal-firstname" placeholder="First Name" value={{firstName}}>
+        <main id="portal" class="min-fill-screen-y main-card">
+            <div class="portal-wrapper main-card-inner">
+                <div class="portal-select-panel">
+                    <h2>My Portal</h2>
+                    <div class="portal-select-area">
+                        <button id="user-info" class="portal-select-button">User Info</button>
+                        <button id="my-events" class="portal-select-button">My Events</button>
+                        <button id="settings" class="portal-select-button">Settings</button>
+                        <div class="portal-current-select"></div>
                     </div>
-                    <button class="button-edit button-edit-info">O</button>
+
+                    <button id="button-logout">Logout</button>
                 </div>
-                <div class="info-field">
-                    <span class="name">Last Name</span>
-                    <div class="spacer"></div>
-                    <div class="field-container">
-                        <div class="field-text">{{lastName}}</div class="field-text">
-                        <input class="field-textbox input-value hidden" id="portal-lastname" placeholder="Last Name" value={{lastName}}>
-                    </div>
-                    <button class="button-edit button-edit-info">O</button>
-                </div>
-                <div class="info-field">
-                    <span class="name">Email Address</span>
-                    <div class="spacer"></div>
-                    <div class="field-container">
-                        <div class="field-text">{{email}}</div class="field-text">
-                        <input class="field-textbox input-value hidden" id="portal-email" placeholder="Email Address" value={{email}}>
-                    </div>
-                    <button class="button-edit button-edit-info">O</button>
-                </div>
-                <div class="info-field">
-                    <span class="name">Password</span>
-                        <div class="spacer"></div>
-                    <div class="field-container">
-                        <div class="field-text">************ (arbitrary, testing)</div class="field-text">
-                    </div>
-                    <button class="button-edit button-edit-pass">O</button>
-                </div>
-                <div class="password-field hidden">
-                    <span class="name">Current Password</span>
-                    <input class="input-value" id="portal-curr-pass" placeholder="Current Password">
+
+                <div class="portal-content">
+
+
+                    <div class="user-info">
+                        <div class="portal-name-block">
+                            <img class="portal-prof-pic" src="../res/unknown-user.png">
+                            <div>
+                                <h3>{{firstName}} {{lastName}}</h3>
+                                <span>Community Member</span>
+                            </div>
+                        </div>
+
+                        <div class="container-info-field">
+                            <div class="info-field">
+                                <span class="name">First Name</span>
+                                <div class="spacer"></div>
+                                <div class="field-container">
+                                    <div class="field-text">{{firstName}}</div class="field-text">
+                                    <input class="field-textbox input-value hidden" id="portal-firstname" placeholder="First Name" value={{firstName}}>
+                                </div>
+                                <button class="button-edit button-edit-info">O</button>
+                            </div>
+                            <div class="info-field">
+                                <span class="name">Last Name</span>
+                                <div class="spacer"></div>
+                                <div class="field-container">
+                                    <div class="field-text">{{lastName}}</div class="field-text">
+                                    <input class="field-textbox input-value hidden" id="portal-lastname" placeholder="Last Name" value={{lastName}}>
+                                </div>
+                                <button class="button-edit button-edit-info">O</button>
+                            </div>
+                            <div class="info-field">
+                                <span class="name">Email Address</span>
+                                <div class="spacer"></div>
+                                <div class="field-container">
+                                    <div class="field-text">{{email}}</div class="field-text">
+                                    <input class="field-textbox input-value hidden" id="portal-email" placeholder="Email Address" value={{email}}>
+                                </div>
+                                <button class="button-edit button-edit-info">O</button>
+                            </div>
+                        </div>
                         
-                    <span class="name">New Password</span>
-                    <input class="input-value" id="portal-new-pass" placeholder="New Password">
+                        <button id="button-save" class="submit-button center-block-elem">Save</button>
+
+
+
+                        
+                        {{!-- <div class="info-field">
+                            <span class="name">Password</span>
+                                <div class="spacer"></div>
+                            <div class="field-container">
+                                <div class="field-text">************ (arbitrary, testing)</div class="field-text">
+                            </div>
+                            <button class="button-edit button-edit-pass">O</button>
+                        </div>
+                        <div class="password-field hidden">
+                            <span class="name">Current Password</span>
+                            <input class="input-value" id="portal-curr-pass" placeholder="Current Password">
+                                
+                            <span class="name">New Password</span>
+                            <input class="input-value" id="portal-new-pass" placeholder="New Password">
+                        </div> --}}
+                    </div>
                 </div>
-                <button id="button-logout">Logout</button>
-                <button id="button-save">Save</button>
             </div>
         </main>
         {{>footer}}

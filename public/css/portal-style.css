@@ -1,8 +1,94 @@
+#portal {
+
+}
+
+.portal-wrapper {
+    margin: 30px;
+    max-width: 900px;
+    flex: 1;
+    background-color: var(--isabelline);
+    display: flex;
+}
+
+.portal-select-panel {
+    padding: 20px 48px 60px;
+    padding-right: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.portal-select-panel h2 {
+    margin-top: 40px;
+}
+
+.portal-select-area {
+    padding: 20px 0;
+    position: relative;
+    flex-grow: 1;
+}
+
+.portal-select-button {
+    display: block;
+    text-align: left;
+    width: 100%;
+    background: none;
+    font-size: 16px;
+    padding: 8px 0;
+    margin: 16px 0;
+}
+
+.portal-current-select {
+    position: absolute;
+    background: navy;
+    border-radius: 3px 0 0 3px;
+    width: 4px;
+    height: 36px;
+    top: 32px;
+    right: 0;
+}
+
+.portal-content {
+    padding: 50px;
+    flex: 4;
+    border-left: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+}
+
+.portal-content > * {
+    flex: 1;
+}
+
 .user-info {
-    background: pink;
-    padding: 50px 80px;
-    margin: 40px auto;
-    width: 700px;
+    /* padding: 50px; */
+    /* width: 80%; */
+    padding: 0 50px;
+}
+
+.portal-name-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.portal-name-block h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+.portal-name-block div {
+    margin-left: 30px;
+}
+
+.portal-prof-pic {
+    width: 100px;
+}
+
+.container-info-field {
+    padding: 0 40px;
+}
+
+#button-save {
+    padding: 10px;
+    width: 50%;
 }
 
 .info-field {
@@ -39,4 +125,9 @@
 
 .input-value::placeholder {
     color: #333;
+}
+
+#button-logout {
+    background: none;
+    text-align: left;
 }
