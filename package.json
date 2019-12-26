@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/app.js -e js,hbs",
-    "bryan-db": "C:/_Apps/mongodb/bin/mongod.exe --dbpath=../mongodb-data"
+    "bryan-db": "C:/_Apps/mongodb/bin/mongod.exe --dbpath=../mongodb-data",
+    "deploy": "git push heroku master"
   },
   "repository": {
     "type": "git",
