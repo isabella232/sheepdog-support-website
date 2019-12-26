@@ -20,6 +20,8 @@ router.get('/account', async (req, res) => {
 
         if (user) { // if token exists
             return res.redirect('/account/portal')
+        } else {
+            res.render('account')
         }
     } catch (e) {
         res.render('account')

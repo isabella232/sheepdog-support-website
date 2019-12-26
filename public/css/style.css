@@ -668,7 +668,7 @@ footer {
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-	background-color: orange;
+	background-color: #ccc;
 	border-radius: 5px 5px 0 0;
 	color: #444;
 	cursor: pointer;
@@ -683,10 +683,10 @@ footer {
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .collapsible:hover {
-	background-color: orange;
+	background-color: #ccc;
 }
-.not-active {
-	background-color: #f1d592;
+.collapsible-not-active {
+	background-color: beige;
 	transition: background-color 0.2s ease, border-radius 0s 0.15s;
 	border-radius: 5px;
 }
@@ -701,7 +701,8 @@ footer {
 .event-item-content {
 	border-radius: 0 0 5px 5px;
 	padding: 0 2em; /* adds border space for collapsible content */
-    background-color: #fcf6e8;
+    /* background-color: #fcf6e8; */
+    background-color: #eee;
     position: relative;
     z-index: 1;
 }

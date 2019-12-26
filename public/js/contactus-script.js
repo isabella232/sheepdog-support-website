@@ -3,7 +3,7 @@ console.log('Client side JavaScript is loaded!')
 document.forms['contactus'].addEventListener('submit', (event) => submitForm(event));
 
 function submitForm(event) {
-    // event.preventDefault()
+    event.preventDefault()
 
     const contactusObj = {
         firstName: document.forms['contactus']['firstname'].value,

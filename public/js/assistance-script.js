@@ -3,7 +3,7 @@ console.log('Clientside Javascript Loaded!')
 document.forms['assist-form'].addEventListener('submit', (event) => submitForm(event))
 
 function submitForm(event) {
-    // event.preventDefault()
+    event.preventDefault()
 
     const formObj = {
         program: document.forms['assist-form']['program-box'].value,

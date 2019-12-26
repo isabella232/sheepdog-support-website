@@ -12,13 +12,17 @@ router.get('/events', async (req, res) => {
         const eventsList = await Event.find({})
 
         if (eventsList.length === 0) {
-            return res.status(500).render('events', { error: 'There are no events to display' });
+            return res.status(204).render('events', { error: 'There are no events to display' });
         }
 
         for (const event of eventsList) {
             const ownerData = await User.findById(event.owner)
-            event.ownerFirstName = ownerData.firstName
-            event.ownerLastName = ownerData.lastName
+            if (ownerData) {
+                event.ownerFirstName = ownerData.firstName
+                event.ownerLastName = ownerData.lastName
+            } else {
+                event.ownerFirstName = '[deleted user]'
+            }
         }
 
         res.render('events', { eventsList })

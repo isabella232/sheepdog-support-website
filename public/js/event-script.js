@@ -7,7 +7,7 @@ document.getElementById('create-event-open').onclick = toggleCreateEvent
 document.querySelectorAll('.collapsible').forEach(elem => elem.addEventListener('click', toggleContent))
 
 function createEvent(event){
-	// event.preventDefault()
+	event.preventDefault()
 
 	const eventObj = {
 		name: document.forms['event-create']['event-name'].value,
@@ -57,7 +57,7 @@ function keyToggleCreateEvent(e) {
 }
 
 function toggleContent() {
-	this.classList.toggle("not-active");
+	this.classList.toggle("collapsible-not-active");
 
 	var content = this.nextElementSibling;
 	if (content.style.maxHeight) {
