@@ -22,3 +22,6 @@ mongoose.connect(process.env.MONGODB_URI + '/sheepdog-support-api', {
 	useFindAndModify: false,
     useCreateIndex: true
 })
+
+
+//heroku config:add MONGODB_URI=mongodb+srv://bitPrj:Veteran123@sheepdog-support-da8gp.mongodb.net/test?retryWrites=true hereenv
