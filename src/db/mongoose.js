@@ -13,10 +13,6 @@ const mongoose = require('mongoose')
 //NODE_ENV=development
 //This sets up the environment variables for our local machine
 
-// download heroku
-// heroku login
-// heroku git:remote -a sheepdog-support
-
 //Please do not push in the config folder or node_modules folder!!!
 //make a .ignore file for config folder and node_modules folder first and then push 
 const connectionURL = 'mongodb://127.0.0.1:27017'
@@ -28,4 +24,4 @@ mongoose.connect(process.env.MONGODB_URI + '/sheepdog-support-api', {
 })
 
 
-//heroku config:add MONGODB_URI=mongodb+srv://bitPrj:Veteran123@sheepdog-support-da8gp.mongodb.net/test?retryWrites=true hereenv
+//heroku config:add MONGODB_URI=mongodb+srv://bitPrj:Veteran1234@sheepdog-support-da8gp.mongodb.net/test?retryWrites=true hereenv

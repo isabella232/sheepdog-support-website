@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Veteran Directory</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/directory-style.css">
+        {{> head}}
+    </head>
+    <body>
+        {{>header}}
+        <main class="fill-screen-y-head-foot">
+            <div class="map-container">
+                <div id='map'></div>
+            </div>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq3HODmEnnvq9fwlDra99yrB61qlhwfX0&callback=initMap"></script>
+            <script src="js/directory.js"></script>
+        </main>
+        {{>footer}}
+    </body>
+</html>

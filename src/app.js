@@ -29,6 +29,7 @@ app.use(require('./routers/portal'))
 app.use(require('./routers/account-sign')) // has to be after portal
 app.use(require('./routers/events'))
 app.use(require('./routers/contactus'))
+app.use(require('./routers/directory'))
 
 app.get('*', (req, res) => {
     res.render('404', {
