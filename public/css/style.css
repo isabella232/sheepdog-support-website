@@ -23,6 +23,13 @@ body {
     margin: 0;
 }
 
+@media screen and (max-width: 1920px) {
+    main {
+        /* transform: scale(1.25); */
+        /* transform-origin: cente; */
+    }
+}
+
 :focus {
     outline: none;
 }
@@ -166,6 +173,7 @@ body::-webkit-scrollbar-thumb:active,
 .hidden-fadein-driver,
 .hidden-fadein-driver * {
     visibility: hidden !important;
+    width: 0 !important;
     height: 0 !important;
     padding: 0 !important;
     margin: 0 !important;

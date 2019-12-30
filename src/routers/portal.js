@@ -14,9 +14,9 @@ const redirectLogin = async (req, res, next) => {
     }
     next()
 }
-router.get('/account/portal', redirectLogin, auth, async (req, res) => {
     const { firstName, lastName, email } = req.user
     res.render('portal', { firstName, lastName, email });
+router.get('/account/portal', auth.userAuth, async (req, res) => {
 })
 
 // =========== Resource Endpoints
@@ -24,7 +24,7 @@ router.get('/account/portal', redirectLogin, auth, async (req, res) => {
 /**
  * User Check Auth
  */
-router.get('/account/portal/auth', async (req, res) => {
+router.get('/account/portal/auth', auth.userAuth, async (req, res) => {
     var response = ""
     if (!req.cookies.auth) {
         response = "no-auth"
@@ -35,7 +35,7 @@ router.get('/account/portal/auth', async (req, res) => {
 /**
  * User Update Profile
  */
-router.patch('/account/portal', auth, async (req, res) => {
+router.patch('/account/portal', auth.userAuth, async (req, res) => {
     const updates = Object.keys(req.body)
     console.log(updates)
     const allowedUpdates = ['firstName', 'lastName', 'email', 'password', 'age']
@@ -50,7 +50,7 @@ router.patch('/account/portal', auth, async (req, res) => {
 
         await req.user.save()
 
-        res.send()
+        res.send(req.user)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -59,7 +59,7 @@ router.patch('/account/portal', auth, async (req, res) => {
 /**
  * User Delete Profile (deactivate acc)
  */
-router.delete('/account/portal', auth, async (req, res) => {
+router.delete('/account/portal', auth.userAuth, async (req, res) => {
     try {
         await req.user.remove()
         res.send(req.user)

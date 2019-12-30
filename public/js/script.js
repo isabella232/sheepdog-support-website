@@ -13,7 +13,7 @@ function checkLogin() {
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.responseText !== "no-auth") {
-                document.getElementById('account').innerHTML = 'My Account'
+                document.getElementById('account').textContent = 'My Portal'
             }
         }
     }

@@ -30,7 +30,7 @@ router.get('/events', async (req, res) => {
         res.status(500).render('events', { error: 'There was a problem with the server.' });
     }
 })
-router.get('/events/get-own', auth, async (req, res) => {
+router.get('/events/get-own', auth.userAuth, async (req, res) => {
     try { 
         const event = await Event.find({ owner: req.user._id })
         res.send(event)
@@ -45,7 +45,7 @@ router.get('/events/get-own', auth, async (req, res) => {
  * Event Creation
  * - Owner ID tagged on to represent who created it
  */
-router.post('/events', auth, async (req, res) => {
+router.post('/events', auth.userAuth, async (req, res) => {
     const event = new Event({
         ...req.body,
         owner: req.user.id
@@ -62,7 +62,7 @@ router.post('/events', auth, async (req, res) => {
 /**
  * Event Read Specific 
  */
-router.get('/events/:_id', auth, async (req, res) => {
+router.get('/events/:_id', auth.userAuth, async (req, res) => {
     const _id = req.params._id
 
     try {
@@ -80,7 +80,7 @@ router.get('/events/:_id', auth, async (req, res) => {
 /**
  * Event Update
  */
-router.patch('/events/:_id', auth, async (req, res) => {
+router.patch('/events/:_id', auth.userAuth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'desciption', 'location', 'time']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -109,7 +109,7 @@ router.patch('/events/:_id', auth, async (req, res) => {
 /**
  * Delete a specific event
  */
-router.delete('/events/:_id', auth, async (req, res) =>{
+router.delete('/events/:_id', auth.userAuth, async (req, res) =>{
     try{
         const event = await Event.findOneAndDelete({ _id: req.params._id, owner: req.user._id })
 
