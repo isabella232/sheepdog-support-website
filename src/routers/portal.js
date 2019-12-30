@@ -8,15 +8,9 @@ const router = new express.Router()
  * Get Portal Page
  * - new middleware created for redirect
  */
-const redirectLogin = async (req, res, next) => {
-    if (!req.cookies.auth) {
-        res.redirect('/account')
-    }
-    next()
-}
-    const { firstName, lastName, email } = req.user
-    res.render('portal', { firstName, lastName, email });
 router.get('/account/portal', auth.userAuth, async (req, res) => {
+    const { firstName, lastName, email, username, biography, location } = req.user
+    res.render('portal', { firstName, lastName, email, username, biography, location });
 })
 
 // =========== Resource Endpoints
@@ -37,8 +31,8 @@ router.get('/account/portal/auth', auth.userAuth, async (req, res) => {
  */
 router.patch('/account/portal', auth.userAuth, async (req, res) => {
     const updates = Object.keys(req.body)
-    console.log(updates)
-    const allowedUpdates = ['firstName', 'lastName', 'email', 'password', 'age']
+    const allowedUpdates = ['firstName', 'lastName', 'username', 'biography', 'location',
+            'email', 'password']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
