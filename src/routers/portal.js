@@ -1,5 +1,6 @@
 const express = require('express')
 const auth = require('../middleware/auth')
+const Event = require('../models/event')
 const router = new express.Router()
 
 // =========== Routes
@@ -9,8 +10,26 @@ const router = new express.Router()
  * - new middleware created for redirect
  */
 router.get('/account/portal', auth.userAuth, async (req, res) => {
-    const { firstName, lastName, email, username, biography, location } = req.user
-    res.render('portal', { firstName, lastName, email, username, biography, location });
+    const { firstName, lastName, email, username, biography, location,
+            emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD } = req.user
+            
+    var myEvents = []
+    try { 
+        myEvents = await Event.find({ owner: req.user._id })
+
+        if (myEvents.length !== 0) {
+            for (const event of myEvents) {
+                event.ownerFirstName = firstName
+                event.ownerLastName = lastName
+            }
+        }
+    } catch(error) {
+        myEvents = { error: 'Unable to obtain events' }
+    }
+    const subscribedEvents = []
+
+    res.render('portal', { firstName, lastName, email, username, biography, location,
+        emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents });
 })
 
 // =========== Resource Endpoints
@@ -32,7 +51,8 @@ router.get('/account/portal/auth', auth.userAuth, async (req, res) => {
 router.patch('/account/portal', auth.userAuth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['firstName', 'lastName', 'username', 'biography', 'location',
-            'email', 'password']
+            'email', 'password', 'emailOnProf', 'locationOnProf', 'subscribedEventsOnProf',
+            'locationOnVD']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {

@@ -187,6 +187,14 @@ body::-webkit-scrollbar-thumb:active,
     height: 100%;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.three-dots {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 
 /* ================== Position Formatting */
 .main-card {
@@ -251,16 +259,66 @@ body::-webkit-scrollbar-thumb:active,
     height: calc(100vh - 400px)
 }
 
-
-/* ============= Specific Element Types */
- 
-
-
-.fancy-button {
-	content: 'I am fancy'
+.two-column-grid {
+    margin: 40px 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px 10px;
+    text-align: left;
 }
-.fancy-button:hover {
-	content: 'ooOh'
+.two-column-grid.s1-4 {
+    grid-template-columns: 1fr 4fr;
+}
+
+/* ============= Specific Element Creations */
+
+/** Toggle Switch */
+.toggle-switch-container {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25.5px;
+    margin-right: 1em;
+}
+.toggle-input { 
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+}
+.toggle-switch {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .25s ease all;
+}
+.toggle-switch:before {
+    content: "";
+    position: absolute;
+    border-radius: 3px;
+    height: 19.5px;
+    width: 19.5px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .25s ease all;
+}
+.toggle-input:checked + .toggle-switch {
+    background-color: #2196F3;
+}
+.toggle-input:checked + .toggle-switch:before {
+    transform: translateX(19.5px);
+}
+.toggle-input:disabled + .toggle-switch {
+    background: #888;
+    pointer-events: none;
+}
+.toggle-input:disabled:checked + .toggle-switch {
+    background: #333;
 }
 
 /*
@@ -710,7 +768,7 @@ footer {
 	border-radius: 0 0 5px 5px;
 	padding: 0 2em; /* adds border space for collapsible content */
     /* background-color: #fcf6e8; */
-    background-color: #eee;
+    background-color: #e8e8e8;
     position: relative;
     z-index: 1;
 }

@@ -7,45 +7,13 @@
 	<body>
 		{{> header}}		
 		<main id="events" class="min-fill-screen-y">
-			<div class="popup-window hidden-fadein-potato hidden-fadein-driver">
-				<div class="event-create-wrapper popup-window-inner">
-					<button id="create-event-close" class="popup-close">
-						<i class="fas fa-times"></i>
-					</button>
-					
-					<form name="event-create" class="event-create auto-overflow round-scrollbar" novalidate>
-						<h1>Create Event</h1>
-						
-						<div class="form-bar">
-							<input type="text" class="form-input" name="event-name" required>
-							<span class="form-input-placeholder">Event Name</span>
-						</div>
-						<div class="form-bar">
-							<input type="date" name="event-time" placeholder="Time">
-						</div>
-						<div class="form-bar">
-							<input type="text" class="form-input" name="event-location" required>
-							<span class="form-input-placeholder">Location</span>
-						</div>
-						<div class="form-bar">
-							<textarea class="form-input" name="event-description" rows="8" required></textarea>
-							<span class="form-input-placeholder">Description</span>
-						</div>
-						<button class="submit-button">Submit</button>
-					</form>
-				</div>
+			<div class="events-list">
+				{{> eventslist}}
+				
+				{{#if error}}
+					{{> error}}
+				{{/if}}
 			</div>
-
-			<div class="">
-				<span>Events List</span>
-				<button id="create-event-open">Create Event</button>
-			</div>
-			
-			{{> eventslist}}
-			
-			{{#if error}}
-				{{> error}}
-			{{/if}}
 		</main>
 		{{> footer}}
 		<script src="js/event-script.js"></script>

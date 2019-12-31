@@ -9,6 +9,34 @@
     <body>
         {{>header}}
         <main id="portal" class="min-fill-screen-y main-card">
+			<div class="popup-window hidden-fadein-potato hidden-fadein-driver">
+				<div class="event-create-wrapper popup-window-inner">
+					<button id="create-event-close" class="popup-close">
+						<i class="fas fa-times"></i>
+					</button>
+					
+					<form name="event-create" class="event-create auto-overflow round-scrollbar" novalidate>
+						<h1>Create Event</h1>
+						
+						<div class="form-bar">
+							<input type="text" class="form-input" name="event-name" required>
+							<span class="form-input-placeholder">Event Name</span>
+						</div>
+						<div class="form-bar">
+							<input type="date" name="event-time" placeholder="Time">
+						</div>
+						<div class="form-bar">
+							<input type="text" class="form-input" name="event-location" required>
+							<span class="form-input-placeholder">Location</span>
+						</div>
+						<div class="form-bar">
+							<textarea class="form-input" name="event-description" rows="8" required></textarea>
+							<span class="form-input-placeholder">Description</span>
+						</div>
+						<button class="submit-button">Submit</button>
+					</form>
+				</div>
+			</div>
             <div class="portal-wrapper main-card-inner">
                 <div class="portal-select-panel">
                     <h2>My Portal</h2>
@@ -46,17 +74,11 @@
                                 </div>
                             </div>
 
-                            <div id="biography" class="portal-biography">
-                                {{#unless biography}}
-                                    {{!-- <span class="bio-quote">"</span> --}}
-                                    Apparently, this user prefers to keep an air of mystery about them.
-                                {{/unless}}
-                                {{biography}}
-                            </div>
+                            <div id="biography" class="portal-biography">{{#unless biography}}
+                                Apparently, this user prefers to keep an air of mystery about them.
+                            {{/unless}}{{biography}}</div>
 
-                            <div id="location" class="portal-location">
-                                {{location}}
-                            </div>
+                            <div id="location" class="portal-location">{{location}}</div>
                         </div>
 
                         <form name="edit-content-info" class="edit-content hidden-fadein-potato hidden-fadein-driver" novalidate>
@@ -96,7 +118,43 @@
                         </button>
 
                         <div id="content-settings" class="hidden-fadein-potato">
-                            Show
+                            <div class="two-column-grid">
+                                <span class="bold">Email</span>
+                                <span id="email">{{email}}</span>
+                                <span class="bold">Password</span>
+                                <span class="three-dots"> ... </span>
+                            </div>
+                            
+                            <div class="portal-preferences">
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="emailonprof" class="toggle-input" disabled {{#if emailOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Email on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="locationonprof" class="toggle-input" disabled {{#if locationOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="subscribedeventsonprof" class="toggle-input" disabled {{#if subscribedEventsOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Subscribed Events on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="locationonvd" class="toggle-input" disabled {{#if locationOnVD}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Veteran's Directory
+                                </div>
+                            </div>
                         </div>
 
                         <form name="edit-content-settings" class="edit-content hidden-fadein-potato hidden-fadein-driver" novalidate>
@@ -108,11 +166,78 @@
                                 <input type="password" class="form-input" name="newpassword" required>
                                 <span class="form-input-placeholder">New Password</span>
                             </div>
+                            <div class="portal-preferences">
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="emailonprof" class="toggle-input" {{#if emailOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Email on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="locationonprof" class="toggle-input" {{#if locationOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="subscribedeventsonprof" class="toggle-input" {{#if subscribedEventsOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Subscribed Events on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="locationonvd" class="toggle-input" {{#if locationOnVD}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Veteran's Directory
+                                </div>
+                            </div>
                         </form>
                     </div>
 
                     <div id="my-events-content" class="portal-content hidden-fadein-potato hidden-fadein-driver">
-                        My Events
+                        <div class="my-events">
+                            <div class="events-header">
+                                <h2>My Events</h2>
+				                <button id="create-event-open" class="button__create-event">
+                                    <i class="far fa-edit"></i>&nbsp;<span>Create</span>
+                                </button>
+                            </div>
+                            
+                            <div class="events-container">
+                                {{#each myEvents}}
+                                    <li class="event-item">
+                                        <div class="collapsible collapsible-not-active">
+                                            <h1>{{name}}</h1>
+                                            {{!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > --}}
+                                        </div>
+
+                                        <div class="event-item-content hidden-slidein-potato">
+                                            <div class="two-column-grid s1-4">
+                                                <span>Hosted By:</span> 	<span>{{ownerFirstName}} {{ownerLastName}}</span>
+                                                <span>Time:</span> 			<span>{{time}}</span>
+                                                <span>Location:</span> 		<span>{{location}}</span>
+                                                <span>Description:</span> 	<span>{{description}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+
+                            </div>
+                        </div>
+
+                        <div class="subscribed-events">
+                            <div class="events-header">
+                                <h2>Subscribed Events</h2>
+                            </div>
+                            <div class="events-container">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

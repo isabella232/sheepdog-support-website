@@ -21,6 +21,10 @@ const Event = require('./event')
  * 		o Biography
  * 		o Location
  * 		o Profile Picture
+ * 		o Display Email on Public Profile
+ *		o Display Location on Public Profile
+ * 		o Display Subscribed Events on Public Profile
+ * 		o Display Location on Veteran's Directory
  */
 const userSchema = new mongoose.Schema({
 	username: {
@@ -96,6 +100,18 @@ const userSchema = new mongoose.Schema({
 	profilePicture: {
 		// type: File,
 	},
+	emailOnProf: {
+		type: Boolean,
+	},
+	locationOnProf: {
+		type: Boolean,
+	},
+	subscribedEventsOnProf: {
+		type: Boolean,
+	},
+	locationOnVD: {
+		type: Boolean,
+	}
 })
 
 /*

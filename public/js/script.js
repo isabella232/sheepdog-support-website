@@ -1,6 +1,7 @@
 console.log('general script loaded!')
 
 window.addEventListener('load', init())
+document.querySelectorAll('.collapsible').forEach(elem => elem.addEventListener('click', toggleContent))
 
 function init() {
     checkLogin()
@@ -17,4 +18,15 @@ function checkLogin() {
             }
         }
     }
+}
+
+function toggleContent() {
+	this.classList.toggle("collapsible-not-active");
+
+	var content = this.nextElementSibling;
+	if (content.style.maxHeight) {
+		content.style.maxHeight = null;
+	} else {
+		content.style.maxHeight = content.scrollHeight + "px";
+	}
 }
