@@ -28,8 +28,7 @@ function signIn(event) {
     if (userObj.email === '' || userObj.password === '') {
         return showText(signinErr, "Enter Your Login Information")
     }
-
-    // save to database
+ 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/account/login', true);
     xhr.setRequestHeader("Content-Type", "application/json")
@@ -49,7 +48,7 @@ function signIn(event) {
 }
 
 const showAppropriateTextSignIn = (signinErr) => {
-    showText(signinErr, 'Incorrect Email/Password')
+    showText(signinErr, 'Invalid Combination')
 }
 
 /*
@@ -59,15 +58,16 @@ function signUp(event) {
     event.preventDefault()
 
     const userObj = {
-        firstName: document.forms['signup']['signup-firstname'].value,
-        lastName: document.forms['signup']['signup-lastname'].value,
-        email: document.forms['signup']['signup-email'].value,
-        password: document.forms['signup']['signup-password'].value,
-        verify: document.forms['signup']['signup-verify'].value
+        firstName: document.forms['signup']['firstname'].value,
+        lastName: document.forms['signup']['lastname'].value,
+        username: document.forms['signup']['username'].value,
+        email: document.forms['signup']['email'].value,
+        password: document.forms['signup']['password'].value,
+        verify: document.forms['signup']['verify'].value
     }
 
     const signupErr = document.getElementById('signup-error')
-    if (userObj.password !== document.forms['signup']['signup-reenter'].value) {
+    if (userObj.password !== document.forms['signup']['reenter'].value) {
         return showText(signupErr, "Passwords do not match!")
     }
 
@@ -111,6 +111,8 @@ const showAppropriateTextSignUp = (response, signupErr) => {
         if (response.errmsg.includes(dupeErr)) {
             showText(signupErr, "That email already exists!")
         }
+    } else {
+        showText(signupErr, "Invalid input!")
     }
 }
 

@@ -7,49 +7,52 @@ const Event = require('./event')
 /*
  * User Schema
  * - Properties
- * 		o Name
+ * 		o Username
  * 		o Email
- * 		o Profile Picture
- * 		o PDF Verification
  * 		o Password
  * 			> Hashed
  * 		o Tokens
  * 			> List of all login sessions
  * 			> Current implementation is encoded object id
  * 			> Each token is used for authentication @See ../middleware/auth.js for more
+ * 		o PDF Verification
+ * 		o First Name
+ * 		o Last Name
+ * 		o Biography
+ * 		o Location
+ * 		o Profile Picture
+ * 		o Display Email on Public Profile
+ *		o Display Location on Public Profile
+ * 		o Display Subscribed Events on Public Profile
+ * 		o Display Location on Veteran's Directory
  */
 const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
+	username: {
+		type: String,
+		unique: true,
 		required: true,
-		trim: true
-    },
-    lastName: {
-        type: String,
-		required: true,
-		trim: true
-    },
+		trim: true,
+		lowercase: true,
+		minlength: 4,
+		maxlength: 16,
+		validate(value) {
+			if (!validator.matches(value, '[a-zA-Z0-9_]')) {
+				throw new Error('only numbers and letters allowed')
+			}
+		}
+	},
     email: {
 		type: String,
 		unique: true,
 		required: true,
 		trim: true,
 		lowercase: true,
+		maxlength: 255,
 		validate(value) {
 			if (!validator.isEmail(value)) {
 				throw new Error('invalid email')
 			}
 		}
-	},
-	location: {
-		//
-	},
-	profilePicture: {
-		// type: File,
-	},
-	verification: {
-		// type: File,
-		// required: true
 	},
 	password: {
 		type: String,
@@ -67,7 +70,48 @@ const userSchema = new mongoose.Schema({
 			type: String,
 			required: true
 		}
-	}]
+	}],
+	verification: {
+		// type: File,
+		// required: true
+	},
+    firstName: {
+        type: String,
+		required: true,
+		maxlength: 69,
+		trim: true
+    },
+    lastName: {
+        type: String,
+		required: true,
+		maxlength: 69,
+		trim: true
+	},
+	biography: {
+		type: String,
+		trim: true,
+		maxlength: 500
+	},
+	location: {
+		type: String,
+		maxlength: 255,
+		trim: true
+	},
+	profilePicture: {
+		// type: File,
+	},
+	emailOnProf: {
+		type: Boolean,
+	},
+	locationOnProf: {
+		type: Boolean,
+	},
+	subscribedEventsOnProf: {
+		type: Boolean,
+	},
+	locationOnVD: {
+		type: Boolean,
+	}
 })
 
 /*

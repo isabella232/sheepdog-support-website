@@ -1,6 +1,7 @@
 console.log('general script loaded!')
 
 window.addEventListener('load', init())
+document.querySelectorAll('.collapsible').forEach(elem => elem.addEventListener('click', toggleContent))
 
 function init() {
     checkLogin()
@@ -13,8 +14,19 @@ function checkLogin() {
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.responseText !== "no-auth") {
-                document.getElementById('account').innerHTML = 'My Account'
+                document.getElementById('account').textContent = 'My Portal'
             }
         }
     }
+}
+
+function toggleContent() {
+	this.classList.toggle("collapsible-not-active");
+
+	var content = this.nextElementSibling;
+	if (content.style.maxHeight) {
+		content.style.maxHeight = null;
+	} else {
+		content.style.maxHeight = content.scrollHeight + "px";
+	}
 }

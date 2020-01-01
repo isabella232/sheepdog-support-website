@@ -53,6 +53,7 @@ router.post('/account/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
+        console.log('LMAO')
 
         res.cookie('auth', 'Bearer ' + token, { /* maxAge: 604800 ,*/ httpOnly: true })
         res.send(user)
@@ -64,7 +65,7 @@ router.post('/account/login', async (req, res) => {
 /*
  * User Logout
  */
-router.post('/account/logout', auth, async (req, res) => {
+router.post('/account/logout', auth.userAuth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => { // delete from database
             return token.token !== req.token
@@ -81,7 +82,7 @@ router.post('/account/logout', auth, async (req, res) => {
 /*
  * User Logout of All Sessions
  */
-router.post('/account/logout-all', auth, async (req, res) => {
+router.post('/account/logout-all', auth.userAuth, async (req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()

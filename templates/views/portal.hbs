@@ -9,81 +9,235 @@
     <body>
         {{>header}}
         <main id="portal" class="min-fill-screen-y main-card">
+			<div class="popup-window hidden-fadein-potato hidden-fadein-driver">
+				<div class="event-create-wrapper popup-window-inner">
+					<button id="create-event-close" class="popup-close">
+						<i class="fas fa-times"></i>
+					</button>
+					
+					<form name="event-create" class="event-create auto-overflow round-scrollbar" novalidate>
+						<h1>Create Event</h1>
+						
+						<div class="form-bar">
+							<input type="text" class="form-input" name="event-name" required>
+							<span class="form-input-placeholder">Event Name</span>
+						</div>
+						<div class="form-bar">
+							<input type="date" name="event-time" placeholder="Time">
+						</div>
+						<div class="form-bar">
+							<input type="text" class="form-input" name="event-location" required>
+							<span class="form-input-placeholder">Location</span>
+						</div>
+						<div class="form-bar">
+							<textarea class="form-input" name="event-description" rows="8" required></textarea>
+							<span class="form-input-placeholder">Description</span>
+						</div>
+						<button class="submit-button">Submit</button>
+					</form>
+				</div>
+			</div>
             <div class="portal-wrapper main-card-inner">
                 <div class="portal-select-panel">
                     <h2>My Portal</h2>
                     <div class="portal-select-area">
-                        <button id="user-info" class="portal-select-button">User Info</button>
-                        <button id="my-events" class="portal-select-button">My Events</button>
-                        <button id="settings" class="portal-select-button">Settings</button>
-                        <div class="portal-current-select"></div>
+                        <button id="user-info" class="portal-select-button">
+                            <i class="fas fa-user-alt"></i> User Info
+                        </button>
+                        <button id="settings" class="portal-select-button">
+                            <i class="fas fa-cog"></i> Settings
+                        </button>
+                        <button id="my-events" class="portal-select-button">
+                            <i class="fas fa-calendar-week"></i> Events
+                        </button>
+                        <div id="portal-current-select" style="top: 28px;"></div>
                     </div>
 
-                    <button id="button-logout">Logout</button>
+                    <button id="button-logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </div>
 
-                <div class="portal-content">
+                <div class="portal-content-container">
+                    <div id="user-info-content" class="portal-content hidden-fadein-potato">
+                        <button id="button__edit-content-info" class="button__edit-content">
+                            <i class="far fa-edit"></i>&nbsp;<span>Edit</span>
+                        </button>
 
-
-                    <div class="user-info">
-                        <div class="portal-name-block">
-                            <img class="portal-prof-pic" src="../res/unknown-user.png">
-                            <div>
-                                <h3>{{firstName}} {{lastName}}</h3>
-                                <span>Community Member</span>
+                        <div id="content-info" class="hidden-fadein-potato">
+                            <div class="portal-name-block">
+                                <img class="portal-prof-pic" src="../res/unknown-user.png">
+                                <div>
+                                    <h3 id="fullname">{{firstName}} {{lastName}}</h3>
+                                    <div class="portal-username">@<span id="username">{{username}}</span></div>
+                                    <span>Community Member</span>
+                                </div>
                             </div>
+
+                            <div id="biography" class="portal-biography">{{#unless biography}}
+                                Apparently, this user prefers to keep an air of mystery about them.
+                            {{/unless}}{{biography}}</div>
+
+                            <div id="location" class="portal-location">{{location}}</div>
                         </div>
 
-                        <div class="container-info-field">
-                            <div class="info-field">
-                                <span class="name">First Name</span>
-                                <div class="spacer"></div>
-                                <div class="field-container">
-                                    <div class="field-text">{{firstName}}</div class="field-text">
-                                    <input class="field-textbox input-value hidden" id="portal-firstname" placeholder="First Name" value={{firstName}}>
+                        <form name="edit-content-info" class="edit-content hidden-fadein-potato hidden-fadein-driver" novalidate>
+                            <div class="form-bar">
+                                <input type="file" class="form-input-verify" accept="img" name="profpic" required>
+                                <label class="form-input-verify-placeholder" for="profpic">Upload Profile Picture</label>
+                            </div>
+                            <div class="form-bar form-bar__partial">
+                                <div>
+                                    <input type="text" class="form-input" name="firstname" required value="{{firstName}}">
+                                    <span class="form-input-placeholder">First Name</span>
                                 </div>
-                                <button class="button-edit button-edit-info">O</button>
-                            </div>
-                            <div class="info-field">
-                                <span class="name">Last Name</span>
-                                <div class="spacer"></div>
-                                <div class="field-container">
-                                    <div class="field-text">{{lastName}}</div class="field-text">
-                                    <input class="field-textbox input-value hidden" id="portal-lastname" placeholder="Last Name" value={{lastName}}>
-                                </div>
-                                <button class="button-edit button-edit-info">O</button>
-                            </div>
-                            <div class="info-field">
-                                <span class="name">Email Address</span>
-                                <div class="spacer"></div>
-                                <div class="field-container">
-                                    <div class="field-text">{{email}}</div class="field-text">
-                                    <input class="field-textbox input-value hidden" id="portal-email" placeholder="Email Address" value={{email}}>
-                                </div>
-                                <button class="button-edit button-edit-info">O</button>
-                            </div>
-                        </div>
-                        
-                        <button id="button-save" class="submit-button center-block-elem">Save</button>
-
-
-
-                        
-                        {{!-- <div class="info-field">
-                            <span class="name">Password</span>
-                                <div class="spacer"></div>
-                            <div class="field-container">
-                                <div class="field-text">************ (arbitrary, testing)</div class="field-text">
-                            </div>
-                            <button class="button-edit button-edit-pass">O</button>
-                        </div>
-                        <div class="password-field hidden">
-                            <span class="name">Current Password</span>
-                            <input class="input-value" id="portal-curr-pass" placeholder="Current Password">
                                 
-                            <span class="name">New Password</span>
-                            <input class="input-value" id="portal-new-pass" placeholder="New Password">
-                        </div> --}}
+                                <div>
+                                    <input type="text" class="form-input" name="lastname" required value="{{lastName}}">
+                                    <span class="form-input-placeholder">Last Name</span>
+                                </div>
+                            </div>
+                            <div class="form-bar">
+                                <input type="text" class="form-input" name="username" required value="{{username}}">
+                                <span class="form-input-placeholder">Username</span>
+                            </div>
+                            <div class="form-bar">
+                                <textarea class="form-input" name="biography" rows="8" required>{{biography}}</textarea>
+                                <span class="form-input-placeholder">About Me</span>
+                            </div>
+                            <div class="form-bar">
+                                <input type="text" class="form-input" name="location" required value="{{location}}">
+                                <span class="form-input-placeholder">Location</span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="settings-content" class="portal-content hidden-fadein-potato hidden-fadein-driver">
+                        <button id="button__edit-content-settings" class="button__edit-content">
+                            <i class="far fa-edit"></i>&nbsp;<span>Edit</span>
+                        </button>
+
+                        <div id="content-settings" class="hidden-fadein-potato">
+                            <div class="two-column-grid">
+                                <span class="bold">Email</span>
+                                <span id="email">{{email}}</span>
+                                <span class="bold">Password</span>
+                                <span class="three-dots"> ... </span>
+                            </div>
+                            
+                            <div class="portal-preferences">
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="emailonprof" class="toggle-input" disabled {{#if emailOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Email on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="locationonprof" class="toggle-input" disabled {{#if locationOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="subscribedeventsonprof" class="toggle-input" disabled {{#if subscribedEventsOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Subscribed Events on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" id="locationonvd" class="toggle-input" disabled {{#if locationOnVD}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Veteran's Directory
+                                </div>
+                            </div>
+                        </div>
+
+                        <form name="edit-content-settings" class="edit-content hidden-fadein-potato hidden-fadein-driver" novalidate>
+                            <div class="form-bar">
+                                <input type="text" class="form-input" name="email" required value="{{email}}">
+                                <span class="form-input-placeholder">Email</span>
+                            </div>
+                            <div class="form-bar">
+                                <input type="password" class="form-input" name="newpassword" required>
+                                <span class="form-input-placeholder">New Password</span>
+                            </div>
+                            <div class="portal-preferences">
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="emailonprof" class="toggle-input" {{#if emailOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Email on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="locationonprof" class="toggle-input" {{#if locationOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="subscribedeventsonprof" class="toggle-input" {{#if subscribedEventsOnProf}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Subscribed Events on Public Profile
+                                </div>
+                                <div class="form-bar">
+                                    <label class="toggle-switch-container">
+                                        <input type="checkbox" name="locationonvd" class="toggle-input" {{#if locationOnVD}}checked{{/if}}>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    Display Location on Veteran's Directory
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="my-events-content" class="portal-content hidden-fadein-potato hidden-fadein-driver">
+                        <div class="my-events">
+                            <div class="events-header">
+                                <h2>My Events</h2>
+				                <button id="create-event-open" class="button__create-event">
+                                    <i class="far fa-edit"></i>&nbsp;<span>Create</span>
+                                </button>
+                            </div>
+                            
+                            <div class="events-container">
+                                {{#each myEvents}}
+                                    <li class="event-item">
+                                        <div class="collapsible collapsible-not-active">
+                                            <h1>{{name}}</h1>
+                                            {{!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" > --}}
+                                        </div>
+
+                                        <div class="event-item-content hidden-slidein-potato">
+                                            <div class="two-column-grid s1-4">
+                                                <span>Hosted By:</span> 	<span>{{ownerFirstName}} {{ownerLastName}}</span>
+                                                <span>Time:</span> 			<span>{{time}}</span>
+                                                <span>Location:</span> 		<span>{{location}}</span>
+                                                <span>Description:</span> 	<span>{{description}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+
+                            </div>
+                        </div>
+
+                        <div class="subscribed-events">
+                            <div class="events-header">
+                                <h2>Subscribed Events</h2>
+                            </div>
+                            <div class="events-container">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 const express = require('express')
 const auth = require('../middleware/auth')
+const Event = require('../models/event')
 const router = new express.Router()
 
 // =========== Routes
@@ -8,15 +9,27 @@ const router = new express.Router()
  * Get Portal Page
  * - new middleware created for redirect
  */
-const redirectLogin = async (req, res, next) => {
-    if (!req.cookies.auth) {
-        res.redirect('/account')
+router.get('/account/portal', auth.userAuth, async (req, res) => {
+    const { firstName, lastName, email, username, biography, location,
+            emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD } = req.user
+            
+    var myEvents = []
+    try { 
+        myEvents = await Event.find({ owner: req.user._id })
+
+        if (myEvents.length !== 0) {
+            for (const event of myEvents) {
+                event.ownerFirstName = firstName
+                event.ownerLastName = lastName
+            }
+        }
+    } catch(error) {
+        myEvents = { error: 'Unable to obtain events' }
     }
-    next()
-}
-router.get('/account/portal', redirectLogin, auth, async (req, res) => {
-    const { firstName, lastName, email } = req.user
-    res.render('portal', { firstName, lastName, email });
+    const subscribedEvents = []
+
+    res.render('portal', { firstName, lastName, email, username, biography, location,
+        emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents });
 })
 
 // =========== Resource Endpoints
@@ -24,7 +37,7 @@ router.get('/account/portal', redirectLogin, auth, async (req, res) => {
 /**
  * User Check Auth
  */
-router.get('/account/portal/auth', async (req, res) => {
+router.get('/account/portal/auth', auth.userAuth, async (req, res) => {
     var response = ""
     if (!req.cookies.auth) {
         response = "no-auth"
@@ -35,10 +48,11 @@ router.get('/account/portal/auth', async (req, res) => {
 /**
  * User Update Profile
  */
-router.patch('/account/portal', auth, async (req, res) => {
+router.patch('/account/portal', auth.userAuth, async (req, res) => {
     const updates = Object.keys(req.body)
-    console.log(updates)
-    const allowedUpdates = ['firstName', 'lastName', 'email', 'password', 'age']
+    const allowedUpdates = ['firstName', 'lastName', 'username', 'biography', 'location',
+            'email', 'password', 'emailOnProf', 'locationOnProf', 'subscribedEventsOnProf',
+            'locationOnVD']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
@@ -50,7 +64,7 @@ router.patch('/account/portal', auth, async (req, res) => {
 
         await req.user.save()
 
-        res.send()
+        res.send(req.user)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -59,7 +73,7 @@ router.patch('/account/portal', auth, async (req, res) => {
 /**
  * User Delete Profile (deactivate acc)
  */
-router.delete('/account/portal', auth, async (req, res) => {
+router.delete('/account/portal', auth.userAuth, async (req, res) => {
     try {
         await req.user.remove()
         res.send(req.user)

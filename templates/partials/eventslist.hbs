@@ -1,18 +1,17 @@
-<div class="events-list">
-	{{#each eventsList}}
-		<li class="event-item">
-			<div class="collapsible collapsible-not-active">
-				<h1>{{name}}</h1>
-				<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" >
-			</div>
+{{#each eventsList}}
+	<li class="event-item">
+		<div class="collapsible collapsible-not-active">
+			<h1>{{name}}</h1>
+			<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="event-logo" >
+		</div>
 
-			<div class="event-item-content hidden-slidein-potato">
-				<p>Hosted By: {{ownerFirstName}} {{ownerLastName}}</p>
-				<p>Description: {{description}}</p>
-				<p>Time: {{time}}</p>
-				<p>Location: {{location}}</p>
-				
+		<div class="event-item-content hidden-slidein-potato">
+			<div class="two-column-grid s1-4">
+				<span>Hosted By:</span> 	<span>{{ownerFirstName}} {{ownerLastName}}</span>
+				<span>Time:</span> 			<span>{{time}}</span>
+				<span>Location:</span> 		<span>{{location}}</span>
+				<span>Description:</span> 	<span>{{description}}</span>
 			</div>
-		</li>
-	{{/each}}
-</div>
+		</div>
+	</li>
+{{/each}}
