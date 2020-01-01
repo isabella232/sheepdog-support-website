@@ -9,11 +9,16 @@
     <body>
         {{>header}}
         <main class="min-fill-screen-y">
+            <form class="search-bar">
+                <input placeholder="Veteran Facility Name">
+                <button>Search</button>
+            </form>
             <div class="map-container">
                 <div id='map'></div>
             </div>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap"></script>
-            <script src="js/directory.js"></script>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDf23BdJHCWYsNv3Iin43vvQ87X9xflOk&callback=initMap" async defer></script>
+            <script type="text/javascript" src="js/directory-lib/directory-script.js"></script>
+            {{!-- <script type="text/javascript" data-main="js/directory-app" src="js/directory-lib/require.js"></script> --}}
         </main>
         {{>footer}}
     </body>

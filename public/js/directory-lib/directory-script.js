@@ -1,7 +1,25 @@
 console.log('Directory Script LOADED!')
 
+const locationForm = document.querySelector('form')
+const search = document.querySelector('input')
+var map;
+
+document.getElementById('Google_Api').innerHTML = 
+
+locationForm.addEventListener('submit', (event)=>{
+    event.preventDefault()
+    const facilityName = search.value
+
+    fetch('/directory?name=' + facilityName).then((response) =>{
+        response.json().then((data) => {
+            console.log(data)
+            //map.setCenter(data)
+        })
+    })
+})
+
 function initMap(){
-    const map = new google.maps.Map(
+    map = new google.maps.Map(
         document.getElementById('map'), {
             center: {lat: -34.397, lng: 150.644},
             zoom: 8
@@ -29,8 +47,6 @@ function initMap(){
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
-    
-
     // const marker = new google.maps.Marker({
     //     Position:pos,
     //     map:map,
@@ -47,6 +63,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       // The marker, positioned at Uluru
 }
 
-const currentPos = () =>{
-    
+function findLocation(map, infoWindow, pos){
+    infoWindow.setPosition(pos);
+    infoWindow.setContent('Location found.');
+    infoWindow.open(map);
+    map.setCenter(pos);
 }
