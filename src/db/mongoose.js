@@ -15,7 +15,8 @@ const mongoose = require('mongoose')
 
 //Please do not push in the config folder or node_modules folder!!!
 //make a .ignore file for config folder and node_modules folder first and then push 
-const connectionURL = 'mongodb://127.0.0.1:27017'
+//const connectionURL = 'mongodb://127.0.0.1:27017'
+
 mongoose.connect(process.env.MONGODB_URI + '/sheepdog-support-api', {
     useNewUrlParser: true,
 	useUnifiedTopology: true,

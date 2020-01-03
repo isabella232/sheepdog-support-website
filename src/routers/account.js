@@ -34,6 +34,7 @@ router.get('/account', async (req, res) => {
  */
 router.post('/account/signup', async (req, res) => {
     const user = new User(req.body)
+    user.verified = false;
 
     try {
         await user.save()

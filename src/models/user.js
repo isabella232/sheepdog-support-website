@@ -75,6 +75,9 @@ const userSchema = new mongoose.Schema({
 		// type: File,
 		// required: true
 	},
+	verified:{
+		type: Boolean
+	},
     firstName: {
         type: String,
 		required: true,
