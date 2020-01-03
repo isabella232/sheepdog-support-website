@@ -1,5 +1,6 @@
 console.log('Client side JavaScript is loaded!')
 
+
 document.getElementById('go-signin').onclick = toggleSign
 document.getElementById('go-signup').onclick = toggleSign
 document.forms["signin"].addEventListener('submit', (event) => signIn(event))
@@ -62,8 +63,7 @@ function signUp(event) {
         lastName: document.forms['signup']['lastname'].value,
         username: document.forms['signup']['username'].value,
         email: document.forms['signup']['email'].value,
-        password: document.forms['signup']['password'].value,
-        verify: document.forms['signup']['verify'].value
+        password: document.forms['signup']['password'].value
     }
 
     const signupErr = document.getElementById('signup-error')
@@ -71,29 +71,52 @@ function signUp(event) {
         return showText(signupErr, "Passwords do not match!")
     }
 
+    const formData = new FormData();
+    const fileObj = document.getElementById('signup-verify').files[0]
+
+    formData.append('veteranFile', fileObj)
+
+    //Replaces the bottom code using axios
+    //Chains two promises together to let us upload both the JSON object and the file at the same time
+    //Can replace the top code as well if you guys want
+    axios.post('/account/signup', userObj).then((data)=>{
+        //data returns current user info, including if they are verified or not
+        console.log(data)
+        axios.post('/account/signup/veteranFile-upload', formData).then(()=>{
+            //window.location.replace('/')
+        })    
+    }).catch( function (error){
+        showAppropriateTextSignUp(error.response.data, signupErr)
+    })
+
     // save to database
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/account/signup', true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(userObj))
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            const response = JSON.parse(xhr.responseText)
-            if (this.status === 201) {
-                console.log('Signed up!')
-                window.location.replace('/')
-            }
-            else if (this.status === 400) {
-                showAppropriateTextSignUp(response, signupErr)
-            }
-        }
-    }
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/account/signup', true);
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    // xhr.send(JSON.stringify(userObj))
+    // xhr.onreadystatechange = function () {
+    //     if (this.readyState === XMLHttpRequest.DONE) {
+    //         const response = JSON.parse(xhr.responseText)
+    //         if (this.status === 201) {
+    //             console.log('Signed up!')
+                
+    //         }
+    //         else if (this.status === 400) {
+    //             showAppropriateTextSignUp(response, signupErr)
+    //         }
+    //     }
+    // }
+
 }
 
 const showAppropriateTextSignUp = (response, signupErr) => {
+    console.log(response.message)
+    console.log(response)
     if (response.message) {
         // Check Required
-        if (response.message.includes('required') && document.forms['signup']['signup-reenter'].value === '') {
+
+        if (response.message.includes('required')) {
+            
             showText(signupErr, "All information is required.")
         } 
         // Check valid email

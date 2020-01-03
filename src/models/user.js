@@ -71,13 +71,8 @@ const userSchema = new mongoose.Schema({
 			required: true
 		}
 	}],
-	veteranFile: {
-		type: buffer,
-		required: true
-	},
 	verified:{
-		type: Boolean,
-		required: true
+		type: Boolean
 	},
     firstName: {
         type: String,
@@ -127,6 +122,7 @@ userSchema.virtual('tasks', {
 	localField: '_id',
 	foreignField: 'owner'
 })
+
 
 /*
  * Hide Private Data

@@ -2,7 +2,8 @@ const express = require('express')
 const multer  = require('multer')
 const shrap = require('sharp')
 const User = require('../models/user')
-const auth = require('../middleware/auth')
+const VeteranFile = require('../models/veteranFile')
+const { userAuth } = require('../middleware/auth')
 const router = new express.Router()
 
 /*
@@ -50,6 +51,33 @@ router.post('/account/signup', async (req, res) => {
 })
 
 /*
+ * File Upload
+ */
+const upload = multer({
+    limits:{
+        fileSize:1000000
+    },
+    fileFilter(req, file, cb){
+        if(!file.originalname.match(/\.(pdf)$/)){
+            return cb(new Error('Please upload a pdf!'))
+        }
+        cb(undefined, true)
+    }
+})
+
+router.post('/account/signup/veteranFile-upload', userAuth, upload.single('veteranFile'),async (req, res, next) =>{
+    if(!req.file){
+        return new Error('Please Submit a PDF File')
+    }
+
+    const veteranFile = new VeteranFile({owner: req.user._id, veteranFile: req.file.buffer})
+    await veteranFile.save()
+    res.send()
+}, (error, req, res, next) =>{
+    res.status(400).send({error: error.message})
+})
+
+/*
  * User Login
  */
 router.post('/account/login', async (req, res) => {
@@ -68,7 +96,7 @@ router.post('/account/login', async (req, res) => {
 /*
  * User Logout
  */
-router.post('/account/logout', auth.userAuth, async (req, res) => {
+router.post('/account/logout', userAuth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => { // delete from database
             return token.token !== req.token
@@ -85,7 +113,9 @@ router.post('/account/logout', auth.userAuth, async (req, res) => {
 /*
  * User Logout of All Sessions
  */
-router.post('/account/logout-all', auth.userAuth, async (req, res) => {
+router.post('/account/logout-all', 
+
+userAuth, async (req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()
@@ -96,9 +126,7 @@ router.post('/account/logout-all', auth.userAuth, async (req, res) => {
     }
 })
 
-/*
- * Pdf File Upload
- */
+
 
 /**
  * Handle Error Pages
