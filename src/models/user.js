@@ -71,12 +71,13 @@ const userSchema = new mongoose.Schema({
 			required: true
 		}
 	}],
-	verification: {
-		// type: File,
-		// required: true
+	veteranFile: {
+		type: buffer,
+		required: true
 	},
 	verified:{
-		type: Boolean
+		type: Boolean,
+		required: true
 	},
     firstName: {
         type: String,
@@ -138,6 +139,7 @@ userSchema.methods.toJSON = function () {
 
 	delete userObject.password
 	delete userObject.tokens
+	
 
 	return userObject
 }

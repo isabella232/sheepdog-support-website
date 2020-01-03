@@ -1,4 +1,6 @@
 const express = require('express')
+const multer  = require('multer')
+const shrap = require('sharp')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
@@ -93,6 +95,10 @@ router.post('/account/logout-all', auth.userAuth, async (req, res) => {
         res.status(500).send()
     }
 })
+
+/*
+ * Pdf File Upload
+ */
 
 /**
  * Handle Error Pages
