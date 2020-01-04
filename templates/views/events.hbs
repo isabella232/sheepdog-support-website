@@ -7,13 +7,14 @@
 	<body>
 		{{> header}}		
 		<main id="events" class="min-fill-screen-y">
-			<div class="events-list">
-				{{> eventslist}}
+			<input type="text" id="search-query" onkeyup="myFunction()" placeholder="Search for names..">
+			
+			<div class="events-list">{{> eventslist}}</div>
 				
-				{{#if error}}
-					{{> error}}
-				{{/if}}
-			</div>
+			{{#if error}}
+				{{> error}}
+			{{/if}}
+
 		</main>
 		{{> footer}}
 		<script src="js/event-script.js"></script>

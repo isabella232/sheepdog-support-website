@@ -4,11 +4,13 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
+
+
 /**
  * Display Events Page
  */
 router.get('/events', async (req, res) => {
-    try { 
+    try {
         const eventsList = await Event.find({})
 
         if (eventsList.length === 0) {
