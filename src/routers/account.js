@@ -46,7 +46,7 @@ router.post('/account/signup', async (req, res) => {
         res.cookie('auth', 'Bearer ' + token, { /* maxAge: 604800, */ httpOnly: true })
         res.status(201).send(user)
     } catch (e) {
-        res.status(400).send(e)
+        res.status(400).send({errorMessage:e.message})
     }
 })
 

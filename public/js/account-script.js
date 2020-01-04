@@ -29,23 +29,34 @@ function signIn(event) {
     if (userObj.email === '' || userObj.password === '') {
         return showText(signinErr, "Enter Your Login Information")
     }
- 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/account/login', true);
-    xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.send(JSON.stringify(userObj))
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            // const response = JSON.parse(xhr.responseText)
-            if (this.status === 200) {
-                console.log('Logged in!')
-                window.location.replace('/')
-            }
-            else if (this.status === 400) {
-                showAppropriateTextSignIn(signinErr)
-            }
+
+    axios.post('account/login', userObj).then((profile)=>{
+        if(profile.data.verified){
+            window.location.replace('/account/portal')
+        }else{
+            console.log("Verification Pending")
         }
-    }
+    }).catch(function (error){
+        console.log(error)
+        showAppropriateTextSignIn(error.response.data)
+    })
+ 
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/account/login', true);
+    // xhr.setRequestHeader("Content-Type", "application/json")
+    // xhr.send(JSON.stringify(userObj))
+    // xhr.onreadystatechange = function () {
+    //     if (this.readyState === XMLHttpRequest.DONE) {
+    //         // const response = JSON.parse(xhr.responseText)
+    //         if (this.status === 200) {
+    //             console.log('Logged in!')
+    //             window.location.replace('/')
+    //         }
+    //         else if (this.status === 400) {
+    //             showAppropriateTextSignIn(signinErr)
+    //         }
+    //     }
+    // }
 }
 
 const showAppropriateTextSignIn = (signinErr) => {
@@ -79,11 +90,12 @@ function signUp(event) {
     //Replaces the bottom code using axios
     //Chains two promises together to let us upload both the JSON object and the file at the same time
     //Can replace the top code as well if you guys want
-    axios.post('/account/signup', userObj).then((data)=>{
+    axios.post('/account/signup', userObj).then((profile)=>{
         //data returns current user info, including if they are verified or not
-        console.log(data)
+        console.log('Hello????')
         axios.post('/account/signup/veteranFile-upload', formData).then(()=>{
             //window.location.replace('/')
+            console.log('Hello?')
         })    
     }).catch( function (error){
         showAppropriateTextSignUp(error.response.data, signupErr)

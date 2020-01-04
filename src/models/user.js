@@ -113,6 +113,7 @@ const userSchema = new mongoose.Schema({
 	}
 })
 
+
 /*
  * Relationship 
  * - Between Event Id and User's owner field

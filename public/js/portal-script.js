@@ -59,6 +59,7 @@ const saveUserInfo = (inst) => {
         if (this.readyState === XMLHttpRequest.DONE) {
             const response = JSON.parse(xhr.responseText)
             if (this.status === 200) {
+                
                 registerUserObj(userObj, response)
                 toggleEditContent(inst)
             } else {
