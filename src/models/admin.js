@@ -44,7 +44,10 @@ const adminSchema = new mongoose.Schema({
                 throw new Error('Age must be a positive number')
             }
         }
-    }
+	},
+	admin: {
+		type: Boolean
+	}
 })
 
 const Admin = mongoose.model('Admin', adminSchema)

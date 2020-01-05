@@ -97,7 +97,7 @@ const userSchema = new mongoose.Schema({
 		trim: true
 	},
 	profilePicture: {
-		// type: File,
+		 type: Buffer,
 	},
 	emailOnProf: {
 		type: Boolean,
@@ -113,6 +113,12 @@ const userSchema = new mongoose.Schema({
 	}
 })
 
+
+userSchema.virtual('file', {
+	ref:'VeteranFile',
+	localField: '_id',
+	foreignField:'owner'
+})
 
 /*
  * Relationship 

@@ -1,6 +1,8 @@
 const express = require('express')
 const auth = require('../middleware/auth')
 const Event = require('../models/event')
+const VeteranFile = require('../models/veteranFile')
+const User = require('../models/user')
 const router = new express.Router()
 
 // =========== Routes
@@ -79,6 +81,38 @@ router.delete('/account/portal', auth.userAuth, async (req, res) => {
         res.send(req.user)
     } catch (e) {
         res.status(500).send()
+    }
+})
+
+/*
+ *  Grabs ALL Users including the file they upload
+ */
+
+router.get('/account/portal/Users', auth.userAuth, async (req, res) =>{
+    try{
+        //Grabs all users
+
+        await VeteranFile.find({}).populate({
+            path:'owner',
+            populate:{
+                path:'user',
+                model:'User'
+                }
+            }).exec(function(err, data){
+            if (err){
+                return res.status(400).send(err)
+            }
+            res.send(data)
+        })
+
+        // users.forEach( async function (user){
+        //     await user.populate('file').execPopulate()
+        //     console.log(user)
+        // })
+          
+        
+    }catch(error){
+        res.status(400).send(error)
     }
 })
 
