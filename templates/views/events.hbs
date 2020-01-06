@@ -10,7 +10,9 @@
 		{{> header}}		
 		<main id="events" class="min-fill-screen-y">
 			
-			<input type="text" id="event-search-query" placeholder="Search for event names..">
+			<li class="event-filter">
+				<input type="text" id="event-search-query" class="event-filter-query" placeholder="Search for event names..">
+			</li>
 			<li class="event-filter">
 				<input type="checkbox" id="event-filter-activate-date" class="event-filter-active">Date
 				<input type="date" id="event-filter-input-date-start" class="event-filter-query" placeholder="Specify a start date">
@@ -25,6 +27,7 @@
 				<input type="text" id="event-filter-input-location" class="event-filter-query" placeholder="Specify a location">
 
 			</li>
+			<button class="update-events-search">Update search</button>
 			<div class="events-list">{{> eventslist}}</div>
 				
 			{{#if error}}
