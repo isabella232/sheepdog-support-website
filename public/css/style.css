@@ -770,6 +770,10 @@ footer {
 	border-radius: 5px;
 }
 
+.event-filter {
+    list-style: none; /* remove bullet */
+}
+
 .event-item {
     margin: 10px 0;
     position: relative;
@@ -793,7 +797,6 @@ footer {
     transform: translateY(-50%);
     right: 25px;
 }
-
 
 
 /* =================== ASSISTANCE */
