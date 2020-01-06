@@ -1,15 +1,16 @@
 console.log('Clientside Javascript Loaded!')
 
-function filterByEventName(event, query) {
-        var eventParam = event.find(".event-name") // find event parameter to compare with filter
+function filterByEventName(event) {
+        var eventParam = $(event).find("h1.event-name")// find event parameter to compare with filter
+        var query = $(document).find("#event-search-query").val().toLowerCase()
         return eventParam.text().toLowerCase().indexOf(query) > -1 // compare
 }
 
 function filterByDate(event) {
-    if ($(document).find("#event-filter-activate-date").checked) {
-        var eventParam = $(this).find(".time") // find event parameter to compare with filter
-        var startDate = $(document).find("event-filter-input-date-start").val().toLowerCase
-        var endDate = $(document).find("event-filter-input-date-end").val().toLowerCase
+    if ($(document).find("#event-filter-activate-date").prop("checked")) {
+        var eventParam = $(event).find(".time") // find event parameter to compare with filter
+        var startDate = $(document).find("#event-filter-input-date-start").val().toLowerCase()
+        var endDate = $(document).find("#event-filter-input-date-end").val().toLowerCase()  
         return eventParam.text().toLowerCase() >= startDate &&
                eventParam.text().toLowerCase() <= endDate
     }
@@ -17,18 +18,18 @@ function filterByDate(event) {
 }
 
 function filterByUser(event) {
-    if ($(document).find("#event-filter-activate-user").checked) {
-        var eventParam = $(this).find(".owner") // find event parameter to compare with filter
-        var filterVal = $(document).find("event-filter-input-user").val().toLowerCase
+    if ($(document).find("#event-filter-activate-user").prop("checked")) {
+        var eventParam = $(event).find(".owner") // find event parameter to compare with filter
+        var filterVal = $(document).find("#event-filter-input-user").val().toLowerCase()
         return eventParam.text().toLowerCase().indexOf(filterVal) > -1 // compare
     }
     return true
 }
 
 function filterByLocation(event) {
-    if ($(document).find("#event-filter-activate-location").checked) {
-        var eventParam = $(this).find(".location") // find event parameter to compare with filter
-        var filterVal = $(document).find("event-filter-input-location").val().toLowerCase
+    if ($(document).find("#event-filter-activate-location").prop("checked")) {
+        var eventParam = $(event).find(".location") // find event parameter to compare with filter
+        var filterVal = $(document).find("#event-filter-input-location").val().toLowerCase()
         return eventParam.text().toLowerCase().indexOf(filterVal) > -1 // compare
     }
     return true
@@ -62,7 +63,20 @@ function sortMeBy(arg, sel, elem, order) {
     $element.detach().appendTo($selector);
 }
 
-
+function updateSearchResults() {
+    var events = $("div.events-list").children() // get all events
+    var eventFilters = [filterByDate, filterByLocation, filterByUser, filterByEventName] // filters to apply
+    events.filter(function() {
+        for (var i = 0; i < eventFilters.length; i++) {
+            if (!eventFilters[i]($(this))) {
+                $(this).toggle(false)
+                return false
+            }
+        }
+        $(this).toggle(true)
+        return true
+    })
+}
 // Array.from(document.getElementsByClassName('events-list')[0].children).forEach(node=>console.log(node.getElementsByClassName('owner')[0].innerText))
 
 // https://www.w3schools.com/bootstrap/bootstrap_filters.asp
@@ -73,22 +87,11 @@ $(document).ready(function(){
     // TODO display three most followed events
 // TODO https://www.devbridge.com/sourcery/components/jquery-autocomplete/
 // TODO update events based on checkbox too
-// TODO filters are recognized but not respecting checkbox
-    $("#event-search-query, .event-filter-query").on("keyup", function() { 
-        var query = $(this).val().toLowerCase();
-        var events = $("div.events-list").children()
-    
-        events.filter(function() {
-            show = filterByDate($(this)) &&
-                    filterByUser($(this)) &&
-                    filterByLocation($(this)) &&
-                    filterByEventName($(this), query) // always use this filter by default
-            $(this).toggle(show) // show or hide event
-        });
-    })
+    $("#event-search-query").keyup(function() { updateSearchResults() })
+    $(".event-filter-query, .event-filter-active event-filter-input-date-start, event-filter-input-date-end").change(function() { updateSearchResults() });
+    $("update-events-search").click(function() { updateSearchResults() })
 })
-// John is too salty to delete this dead code >:( jk keep this for reference since it's easier to read for vanilla users
-// it does the fairly same thing as the lines above
+// John is too salty to delete this dead code >:( jk keep this for reference in case Jquery is too slow for searching
 
 // function sorter(eventL, eventR, criteria) {
 //     arg1 = eventL.getElementsByClassName(criteria)[0].innerText
