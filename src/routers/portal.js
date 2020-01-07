@@ -90,7 +90,6 @@ router.delete('/account/portal', auth.userAuth, async (req, res) => {
 
 router.get('/account/portal/Users', auth.userAuth, async (req, res) =>{
     try{
-        //Grabs all users
 
         await VeteranFile.find({}).populate({
             path:'owner',
@@ -104,11 +103,6 @@ router.get('/account/portal/Users', auth.userAuth, async (req, res) =>{
             }
             res.send(data)
         })
-
-        // users.forEach( async function (user){
-        //     await user.populate('file').execPopulate()
-        //     console.log(user)
-        // })
           
         
     }catch(error){
