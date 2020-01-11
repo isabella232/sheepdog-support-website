@@ -1,9 +1,13 @@
 console.log('Clientside Javascript Loaded!')
 
+function subscribe() {
+    var isSubscribed = this
+}
+
 function filterByEventName(event) {
-        var eventParam = $(event).find("h1.event-name")// find event parameter to compare with filter
-        var query = $(document).find("#event-search-query").val().toLowerCase()
-        return eventParam.text().toLowerCase().indexOf(query) > -1 // compare
+    var eventParam = $(event).find("h1.event-name")// find event parameter to compare with filter
+    var query = $(document).find("#event-search-query").val().toLowerCase()
+    return eventParam.text().toLowerCase().indexOf(query) > -1 // compare
 }
 
 function filterByDate(event) {
@@ -85,10 +89,8 @@ $(document).ready(function(){
     // default display is by date, ascending
     sortMeBy("time", "div.events-list", "li", "asc");
     // TODO display three most followed events
-// TODO https://www.devbridge.com/sourcery/components/jquery-autocomplete/
-// TODO update events based on checkbox too
-    $("#event-search-query").keyup(function() { updateSearchResults() })
-    $(".event-filter-query, .event-filter-active event-filter-input-date-start, event-filter-input-date-end").change(function() { updateSearchResults() });
+    $("#event-search-query, .event-filter-query").keyup(function() { updateSearchResults() })
+    $(".event-filter-active, event-filter-input-date-start, event-filter-input-date-end").change(function() { updateSearchResults() });
     $("update-events-search").click(function() { updateSearchResults() })
 })
 // John is too salty to delete this dead code >:( jk keep this for reference in case Jquery is too slow for searching
