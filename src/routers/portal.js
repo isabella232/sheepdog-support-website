@@ -88,9 +88,8 @@ router.delete('/account/portal', auth.userAuth, async (req, res) => {
  *  Grabs ALL Users including the file they upload
  */
 
-router.get('/account/portal/Users', auth.userAuth, async (req, res) =>{
+router.get('/account/portal/Users', auth.adminAuth, async (req, res) =>{
     try{
-
         await VeteranFile.find({}).populate({
             path:'owner',
             populate:{
@@ -109,6 +108,24 @@ router.get('/account/portal/Users', auth.userAuth, async (req, res) =>{
         res.status(400).send(error)
     }
 })
+
+/*
+ * Verification Update, Verifies user
+ */
+    router.patch('/account/portal/Users/:_id', auth.userAuth, async (req, res) =>{
+        try {
+            const user = await User.findById(req.params._id)
+            user.verified = true
+            await user.save()
+                if(!user){
+                    return res.status(404).send()
+                }
+            res.status(200).send(user)
+        }catch(error){
+            res.status(400).send(error)
+        }
+
+    })
 
 /**
  * Handle Error Pages

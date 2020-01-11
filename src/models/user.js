@@ -3,6 +3,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Event = require('./event')
+const veteranFile = require('./veteranFile')
 
 /*
  * User Schema

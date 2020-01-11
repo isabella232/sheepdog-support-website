@@ -1,3 +1,5 @@
+
+
 console.log('Client side JavaScript is loaded!')
 
 
@@ -90,17 +92,20 @@ function signUp(event) {
     //Replaces the bottom code using axios
     //Chains two promises together to let us upload both the JSON object and the file at the same time
     //Can replace the top code as well if you guys want
-    axios.post('/account/signup', userObj).then((profile)=>{
-        //data returns current user info, including if they are verified or not
-        console.log('Hello????')
-        axios.post('/account/signup/veteranFile-upload', formData).then(()=>{
-            //window.location.replace('/')
-            console.log('Hello?')
-        })    
-    }).catch( function (error){
-        showAppropriateTextSignUp(error.response.data, signupErr)
-    })
-
+    if(document.getElementById('signup-verify').files[0] !== undefined){
+        axios.post('/account/signup',userObj ).then(() =>{
+            axios.post('/account/signup/veteranFile-upload', formData).then(()=> {
+                showText(signupErr, 'Verification Pending')
+            }).catch(error => {
+                showAppropriateTextSignUp(error.response.data, signupErr)
+            })
+        }).catch(error => {
+                showAppropriateTextSignUp(error.response.data, signupErr)
+        })
+    }else{
+        showText(signupErr, 'All information is required')
+    }
+    
     // save to database
     // var xhr = new XMLHttpRequest();
     // xhr.open('POST', '/account/signup', true);
@@ -122,8 +127,7 @@ function signUp(event) {
 }
 
 const showAppropriateTextSignUp = (response, signupErr) => {
-    console.log(response.message)
-    console.log(response)
+    console.log(signupErr)
     if (response.message) {
         // Check Required
 
@@ -152,6 +156,7 @@ const showAppropriateTextSignUp = (response, signupErr) => {
 }
 
 const showText = (element, text) => {
+    
     element.textContent = text
     element.classList.remove('hidden')
 }

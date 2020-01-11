@@ -14,7 +14,15 @@ document.addEventListener('keydown', keyToggleCreateEvent)
 document.getElementById('create-event-close').onclick = toggleCreateEvent
 document.getElementById('create-event-open').onclick = toggleCreateEvent
 
+document.getElementById('verify-list-content').onclick = toUsers
+
 document.getElementById('button-logout').onclick = logout
+
+function toUsers (){
+    hideAllContents()
+    document.getElementById('verify-list-content').classList.remove('hidden-fadein-driver')
+    document.getElementById('portal-current-select').style.top = '130px';
+}
 
 function toMyEvents() {
     hideAllContents()

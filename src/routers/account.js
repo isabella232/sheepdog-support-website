@@ -39,6 +39,8 @@ router.post('/account/signup', async (req, res) => {
     const user = new User(req.body)
     user.verified = false;
 
+    
+
     try {
         await user.save()
         const token = await user.generateAuthToken()
@@ -69,6 +71,9 @@ router.post('/account/signup/veteranFile-upload', userAuth, upload.single('veter
     if(!req.file){
         return new Error('Please Submit a PDF File')
     }
+
+    console.log('NOOOOOO')
+    console.log(req)
 
     const veteranFile = new VeteranFile({owner: req.user._id, veteranFile: req.file.buffer})
     await veteranFile.save()
