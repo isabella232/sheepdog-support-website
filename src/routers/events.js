@@ -84,7 +84,7 @@ router.get('/events/:_id', auth.userAuth, async (req, res) => {
  */
 router.patch('/events/:_id', auth.userAuth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'desciption', 'location', 'time']
+    const allowedUpdates = ['name', 'desciption', 'location', 'time', 'subscribers']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
     if (!isValidOperation) {
@@ -106,6 +106,42 @@ router.patch('/events/:_id', auth.userAuth, async (req, res) => {
         res.status(400).send(error)
     }
 
+})
+
+/**
+ * Update Subscriber Status (In Progress)
+ */
+router.patch('/events/:_eventid', auth.userAuth, async (req, res) =>{
+    try {
+        const event = await Event.findOne({ _id: req.params._eventid })
+
+        /* get current user */
+        const token = req.cookies.auth.replace('Bearer ', '') // if token exists
+
+        const decoded = jwt.verify(token, 'BL1T-8R0J$CT') // verify token
+        const user = await User.findOne({ _id: decoded._id, 'tokens.token': token }) // search token
+    
+        if (!user) { // if token exists
+            throw new Error()
+        }
+    
+        req.token = token; // edit tokens for the purposes of login, logout
+        req.user = user
+
+        /* get current user */
+        if (!event) {
+            res.status(404).send()
+        }
+
+        if (!event.userIds.includes(user._id)) {
+            event.userIds.push(user._id)
+        }
+
+        await event.save()
+        res.send(event)
+    }catch(error){
+        res.status(400).send(error)
+    }
 })
 
 /**
