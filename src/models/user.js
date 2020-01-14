@@ -111,6 +111,9 @@ const userSchema = new mongoose.Schema({
 	},
 	locationOnVD: {
 		type: Boolean,
+	},
+	eventIds: {
+		type: Array
 	}
 })
 

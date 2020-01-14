@@ -1,7 +1,9 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const Event = require('../models/event')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+
 const router = new express.Router()
 
 
@@ -17,6 +19,17 @@ router.get('/events', async (req, res) => {
             return res.render('events', { error: 'There are no events to display.' });
         }
 
+        var loggedIn = false
+        const authorization = req.cookies.auth
+        if (authorization) {
+            var token = authorization.replace('Bearer ', '') // if token exists
+            const decoded = jwt.verify(token, 'BL1T-8R0J$CT') // verify token
+            loggedIn = await User.findOne({ _id: decoded._id, 'tokens.token': token }) // search token
+        } else {
+            loggedIn = false
+        }
+        
+
         for (const event of eventsList) {
             const ownerData = await User.findById(event.owner)
             if (ownerData) {
@@ -27,8 +40,9 @@ router.get('/events', async (req, res) => {
             }
         }
 
-        res.render('events', { eventsList })
+        res.render('events', { eventsList, loggedIn })
     } catch (e) {
+        console.log(e)
         res.status(500).render('events', { error: 'There was a problem with the server.' });
     }
 })
@@ -111,9 +125,11 @@ router.patch('/events/:_id', auth.userAuth, async (req, res) => {
 /**
  * Update Subscriber Status (In Progress)
  */
-router.patch('/events/:_eventid', auth.userAuth, async (req, res) =>{
+router.post('/events/subscribe', auth.userAuth, async (req, res) =>{
+
     try {
-        const event = await Event.findOne({ _id: req.params._eventid })
+        eventId = req.body['id']
+        const event = await Event.findOne({ _id: eventId })
 
         /* get current user */
         const token = req.cookies.auth.replace('Bearer ', '') // if token exists
@@ -133,13 +149,29 @@ router.patch('/events/:_eventid', auth.userAuth, async (req, res) =>{
             res.status(404).send()
         }
 
+        var subscribed = false
         if (!event.userIds.includes(user._id)) {
+            // subscribe and add ids
+            console.log("Subscribed")
             event.userIds.push(user._id)
+            user.eventIds.push(eventId)
+            subscribed = true
+        } else {
+            // unsubscribe and remove ids
+            console.log("Unsubscribed")
+            var index = event.userIds.indexOf(user._id)
+            event.userIds.splice(index, 1);
+            index = user.eventIds.indexOf(eventId)
+            user.eventIds.splice(index, 1)
+            subscribed = false
         }
 
         await event.save()
-        res.send(event)
+        await user.save()
+
+        res.send(subscribed)
     }catch(error){
+        console.log(error)
         res.status(400).send(error)
     }
 })

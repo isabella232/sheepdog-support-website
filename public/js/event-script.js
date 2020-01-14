@@ -1,7 +1,26 @@
 console.log('Clientside Javascript Loaded!')
 
-function subscribe() {
-    var isSubscribed = this
+function subscribe(eventId) {
+    axios.post('events/subscribe', {
+        id: eventId
+    }).then((res)=>{
+        if(res.status == 200) {
+            if (res.data) {
+                console.log("Subscribed")
+                console.log(this.innerText)
+                document.getElementById(eventId).innerText = "Unsubscribe"
+                
+            } else {
+                console.log("Unsubscribed")
+                console.log(this)
+                document.getElementById(eventId).innerText = "Subscribe"
+            }
+        } else {
+            console.log("Could not subscribe")
+        }
+    }).catch(function (error){
+        console.log("Error connecting when subscribing")
+    })
 }
 
 function filterByEventName(event) {
