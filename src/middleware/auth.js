@@ -15,6 +15,7 @@ const User = require('../models/user')
   */
 const userAuth = async (req, res, next) => {
     try {
+        
         // const token = req.header('Authorization').replace('Bearer ', '')
         const token = req.cookies.auth.replace('Bearer ', '') // if token exists
         

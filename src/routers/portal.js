@@ -13,7 +13,7 @@ const router = new express.Router()
  */
 router.get('/account/portal', auth.userAuth, async (req, res) => {
     const { firstName, lastName, email, username, biography, location,
-            emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD } = req.user
+            emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD} = req.user
             
     var myEvents = []
     try { 
@@ -29,13 +29,21 @@ router.get('/account/portal', auth.userAuth, async (req, res) => {
         myEvents = { error: 'Unable to obtain events' }
     }
     const subscribedEvents = []
-
-    res.render('portal', { firstName, lastName, email, username, biography, location,
-        emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents });
+        
+        if(!req.user.admin){
+            console.log('BOO')
+            res.render('portal', { firstName, lastName, email, username, biography, location,
+                emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents });
+        }else{
+            console.log('Hello')
+            res.render('portal',{
+                firstName, lastName, email, username, biography, location,
+                emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents
+            });
+        }
 })
 
 // =========== Resource Endpoints
-
 /**
  * User Check Auth
  */
@@ -89,42 +97,50 @@ router.delete('/account/portal', auth.userAuth, async (req, res) => {
  */
 
 router.get('/account/portal/Users', auth.adminAuth, async (req, res) =>{
-    try{
-        await VeteranFile.find({}).populate({
-            path:'owner',
-            populate:{
-                path:'user',
-                model:'User'
+    if(req.user.admin ){
+        try{
+            await VeteranFile.find({}).populate({
+                path:'owner',
+                populate:{
+                    path:'user',
+                    model:'User'
+                    }
+                }).exec(function(err, data){
+                if (err){
+                    return res.status(400).send(err)
                 }
-            }).exec(function(err, data){
-            if (err){
-                return res.status(400).send(err)
-            }
-            res.send(data)
-        })
-          
-        
-    }catch(error){
-        res.status(400).send(error)
+                res.send(data)
+            })
+              
+            
+        }catch(error){
+            res.status(400).send(error)
+        }
+    }else{
+        res.status(400).send(new Error('Not authorized'))
     }
+    
 })
 
 /*
  * Verification Update, Verifies user
  */
     router.patch('/account/portal/Users/:_id', auth.userAuth, async (req, res) =>{
-        try {
-            const user = await User.findById(req.params._id)
-            user.verified = true
-            await user.save()
-                if(!user){
-                    return res.status(404).send()
-                }
-            res.status(200).send(user)
-        }catch(error){
-            res.status(400).send(error)
+        if(req.user.admin){
+            try {
+                const user = await User.findById(req.params._id)
+                user.verified = true
+                await user.save()
+                    if(!user){
+                        return res.status(404).send()
+                    }
+                res.status(200).send(user)
+            }catch(error){
+                res.status(400).send(error)
+            }
+        }else{
+            res.status(400).send(new Error('Not authorized'))
         }
-
     })
 
 /**

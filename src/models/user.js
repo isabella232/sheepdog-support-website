@@ -73,7 +73,8 @@ const userSchema = new mongoose.Schema({
 		}
 	}],
 	verified:{
-		type: Boolean
+		type: Boolean,
+		default: false
 	},
     firstName: {
         type: String,
@@ -111,6 +112,10 @@ const userSchema = new mongoose.Schema({
 	},
 	locationOnVD: {
 		type: Boolean,
+	},
+	admin:{
+		type: Boolean,
+		default: false
 	}
 })
 

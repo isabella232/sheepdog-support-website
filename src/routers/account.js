@@ -37,14 +37,10 @@ router.get('/account', async (req, res) => {
  */
 router.post('/account/signup', async (req, res) => {
     const user = new User(req.body)
-    user.verified = false;
-
-    
 
     try {
         await user.save()
         const token = await user.generateAuthToken()
-
         res.cookie('auth', 'Bearer ' + token, { /* maxAge: 604800, */ httpOnly: true })
         res.status(201).send(user)
     } catch (e) {
@@ -67,16 +63,24 @@ const upload = multer({
     }
 })
 
-router.post('/account/signup/veteranFile-upload', userAuth, upload.single('veteranFile'),async (req, res, next) =>{
+router.post('/account/signup/veteranFile-upload', userAuth,upload.single('veteranFile'),async (req, res, next) =>{
     if(!req.file){
-        return new Error('Please Submit a PDF File')
+        return res.send({errorMessage:'Please Submit a Pdf File!'})
     }
-
-    console.log('NOOOOOO')
-    console.log(req)
-
+   
     const veteranFile = new VeteranFile({owner: req.user._id, veteranFile: req.file.buffer})
     await veteranFile.save()
+
+    //Deletes User token
+    //Upon sign up, a user should NOT be logged in
+    //We only need this token to link the user model and veteranFile model together
+    req.user.tokens = req.user.tokens.filter((token) => { // delete from database
+        return token.token !== req.token
+    })
+    await req.user.save()
+
+    res.clearCookie('auth') // delete cookie
+
     res.send()
 }, (error, req, res, next) =>{
     res.status(400).send({error: error.message})
@@ -88,8 +92,10 @@ router.post('/account/signup/veteranFile-upload', userAuth, upload.single('veter
 router.post('/account/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
+        if(!user.verified){
+            return res.send({errorMessage: 'Verification Pending'})
+        }
         const token = await user.generateAuthToken()
-        console.log('LMAO')
 
         res.cookie('auth', 'Bearer ' + token, { /* maxAge: 604800 ,*/ httpOnly: true })
         res.send(user)
