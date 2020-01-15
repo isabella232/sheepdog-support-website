@@ -11,7 +11,7 @@
 				<span>Time:</span> 			<span class="time">{{time}}</span>
 				<span>Location:</span> 		<span class="location">{{location}}</span>
 				<span>Description:</span> 	<span class="description">{{description}}</span>
-				{{#if ../loggedIn}}
+				{{#if ../user}}
 					<button id="{{_id}}" style="display:block" onclick=subscribe("{{_id}}")>Subscribe</button>  <span class="subscribers">{{subscribers}}</span>
 				{{else}}
 					<button id="{{_id}}" style="display:none" onclick=subscribe("{{_id}}")>Subscribe</button>  <span class="subscribers">{{subscribers}}</span>

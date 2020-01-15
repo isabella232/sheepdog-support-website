@@ -13,7 +13,7 @@ const router = new express.Router()
  */
 router.get('/account/portal', auth.userAuth, async (req, res) => {
     const { firstName, lastName, email, username, biography, location,
-            emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD} = req.user
+            emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, eventIds } = req.user
             
     var myEvents = []
     try { 
@@ -28,19 +28,14 @@ router.get('/account/portal', auth.userAuth, async (req, res) => {
     } catch(error) {
         myEvents = { error: 'Unable to obtain events' }
     }
-    const subscribedEvents = []
-        
-        if(!req.user.admin){
-            console.log('BOO')
-            res.render('portal', { firstName, lastName, email, username, biography, location,
-                emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents });
-        }else{
-            console.log('Hello')
-            res.render('portal',{
-                firstName, lastName, email, username, biography, location,
-                emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents
-            });
-        }
+    var subscribedEvents = []
+    for (var i = 0; i < eventIds.length; i++) {
+        var event = await Event.findOne({ _id: eventIds[i]})
+        subscribedEvents.push(event)
+    }
+    console.log(subscribedEvents)
+    res.render('portal', { firstName, lastName, email, username, biography, location,
+        emailOnProf, locationOnProf, subscribedEventsOnProf, locationOnVD, myEvents, subscribedEvents });
 })
 
 // =========== Resource Endpoints
