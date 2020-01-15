@@ -1,3 +1,6 @@
+
+
+
 console.log('general script loaded!')
 
 window.addEventListener('load', init())
@@ -8,16 +11,24 @@ function init() {
 }
 
 function checkLogin() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/account/portal/auth')
-    xhr.send()
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.responseText !== "no-auth") {
-                document.getElementById('account').textContent = 'My Portal'
-            }
-        }
-    }
+
+    axios.get('/account/portal/auth').then((data)=>{
+        document.getElementById('account').textContent = 'My Portal'
+        
+    }).catch(function(error){
+        console.log(error)
+    })
+   
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('GET', '/account/portal/auth')
+    // xhr.send()
+    // xhr.onreadystatechange = function () {
+    //     if (this.readyState === XMLHttpRequest.DONE) {
+    //         if (this.responseText !== "no-auth") {
+    //             document.getElementById('account').textContent = 'My Portal'
+    //         }
+    //     }
+    // }
 }
 
 function toggleContent() {
