@@ -113,10 +113,13 @@ const userSchema = new mongoose.Schema({
 	locationOnVD: {
 		type: Boolean,
 	},
-	admin:{
+	eventIds: {
+		type: Array
+  },
+	admin: {
 		type: Boolean,
 		default: false
-	}
+  }
 })
 
 

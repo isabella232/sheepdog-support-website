@@ -1,7 +1,26 @@
 console.log('Clientside Javascript Loaded!')
 
-function subscribe() {
-    var isSubscribed = this
+function subscribe(eventId) {
+    axios.post('events/subscribe', {
+        id: eventId
+    }).then((res)=>{
+        if(res.status == 200) {
+            if (res.data) {
+                console.log("Subscribed")
+                console.log(this.innerText)
+                document.getElementById(eventId).innerText = "Unsubscribe"
+                
+            } else {
+                console.log("Unsubscribed")
+                console.log(this)
+                document.getElementById(eventId).innerText = "Subscribe"
+            }
+        } else {
+            console.log("Could not subscribe")
+        }
+    }).catch(function (error){
+        console.log("Error connecting when subscribing")
+    })
 }
 
 function filterByEventName(event) {
@@ -70,14 +89,22 @@ function sortMeBy(arg, sel, elem, order) {
 function updateSearchResults() {
     var events = $("div.events-list").children() // get all events
     var eventFilters = [filterByDate, filterByLocation, filterByUser, filterByEventName] // filters to apply
+    var events_shown = 0
+    var max_shown = 3
+
     events.filter(function() {
-        for (var i = 0; i < eventFilters.length; i++) {
+        if (events_shown >= max_shown) { // enough events shown, hide the rest
+            $(this).toggle(false)
+            return false
+        }
+        for (var i = 0; i < eventFilters.length; i++) { // go through each filter
             if (!eventFilters[i]($(this))) {
-                $(this).toggle(false)
-                return false
+                $(this).toggle(false) // hide event
+                return false // move on to next event
             }
         }
-        $(this).toggle(true)
+        $(this).toggle(true) // all filters passed, show event
+        events_shown += 1            
         return true
     })
 }
@@ -87,6 +114,7 @@ function updateSearchResults() {
 // main function
 $(document).ready(function(){
     // default display is by date, ascending
+    updateSearchResults()
     sortMeBy("time", "div.events-list", "li", "asc");
     // TODO display three most followed events
     $("#event-search-query, .event-filter-query").keyup(function() { updateSearchResults() })
