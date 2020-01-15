@@ -19,17 +19,15 @@ router.get('/events', async (req, res) => {
             return res.render('events', { error: 'There are no events to display.' });
         }
 
-        var loggedIn = false
-        const authorization = req.cookies.auth
-        if (authorization) {
-            var token = authorization.replace('Bearer ', '') // if token exists
+        const cookie = req.cookies.auth
+        var user = false
+        if (cookie) {
+            var token = cookie.replace('Bearer ', '') // if token exists
             const decoded = jwt.verify(token, 'BL1T-8R0J$CT') // verify token
-            loggedIn = await User.findOne({ _id: decoded._id, 'tokens.token': token }) // search token
-        } else {
-            loggedIn = false
+            user = await User.findOne({ _id: decoded._id, 'tokens.token': token }) // search token
         }
         
-
+        // TODO default always shows "Subscribe", never "Unsubscribe"
         for (const event of eventsList) {
             const ownerData = await User.findById(event.owner)
             if (ownerData) {
@@ -39,8 +37,8 @@ router.get('/events', async (req, res) => {
                 event.ownerFirstName = '[deleted user]'
             }
         }
-
-        res.render('events', { eventsList, loggedIn })
+        console.log(user)
+        res.render('events', { eventsList, user })
     } catch (e) {
         console.log(e)
         res.status(500).render('events', { error: 'There was a problem with the server.' });
