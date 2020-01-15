@@ -8,9 +8,12 @@ document.getElementById('go-signup').onclick = toggleSign
 document.forms["signin"].addEventListener('submit', (event) => signIn(event))
 document.forms["signup"].addEventListener('submit', (event) => signUp(event))
 
+
+//This has something to do with the Portal PAge being switched
 function toggleSign() {
     document.forms["signin"].classList.toggle('hidden-fadein-driver')
     document.forms["signup"].classList.toggle('hidden-fadein-driver')
+    //For sign-in/sign-up buttons
     document.getElementById('go-signin').classList.toggle('sign-not-active')
     document.getElementById('go-signup').classList.toggle('sign-not-active')
 }
@@ -36,7 +39,7 @@ function signIn(event) {
         if(profile.data.verified){
             window.location.replace('/account/portal')
         }else{
-            console.log("Verification Pending")
+            showText(signinErr, "Verification Pending")
         }
     }).catch(function (error){
         console.log(error)
@@ -92,9 +95,11 @@ function signUp(event) {
     //Replaces the bottom code using axios
     //Chains two promises together to let us upload both the JSON object and the file at the same time
     //Can replace the top code as well if you guys want
+    
     if(document.getElementById('signup-verify').files[0] !== undefined){
-        axios.post('/account/signup',userObj ).then(() =>{
-            axios.post('/account/signup/veteranFile-upload', formData).then(()=> {
+        axios.post('/account/signup',userObj ).then((profile) =>{
+            axios.post('/account/signup/veteranFile-upload', formData).then((data)=> {
+                console.log(data)
                 showText(signupErr, 'Verification Pending')
             }).catch(error => {
                 showAppropriateTextSignUp(error.response.data, signupErr)
@@ -127,21 +132,26 @@ function signUp(event) {
 }
 
 const showAppropriateTextSignUp = (response, signupErr) => {
-    console.log(signupErr)
-    if (response.message) {
-        // Check Required
 
-        if (response.message.includes('required')) {
+    if (response) {
+        // Check Required
+        console.log(response.errorMessage)
+        console.log(response.errorMessage.includes('shorter') && response.errorMessage.includes('username'))
+        if (response.errorMessage.includes('required')) {
             
             showText(signupErr, "All information is required.")
         } 
         // Check valid email
-        else if (response.message.includes('invalid email')) {
+        else if (response.errorMessage.includes('invalid email')) {
             showText(signupErr, "Email is invalid.")
         }
         // Check strong Password
-        else if (response.message.includes('password') || response.message.includes('shorter')) {
+        else if (response.errorMessage.includes('password') && response.errorMessage.includes('shorter')) {
             showText(signupErr, "Please provide a stronger password!")
+        }
+        else if (response.errorMessage.includes('username') && response.errorMessage.includes('shorter')){
+            console.log('Hello?')
+            showText(signupErr, "Username must be more than 4 characters")
         }
     }
     else if (response.name === "MongoError") {
