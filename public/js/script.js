@@ -13,6 +13,7 @@ function init() {
 function checkLogin() {
 
     axios.get('/account/portal/auth').then((data)=>{
+        console.log(data)
         document.getElementById('account').textContent = 'My Portal'
         
     }).catch(function(error){

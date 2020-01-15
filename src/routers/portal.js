@@ -48,10 +48,11 @@ router.get('/account/portal', auth.userAuth, async (req, res) => {
  * User Check Auth
  */
 router.get('/account/portal/auth', auth.userAuth, async (req, res) => {
-    var response = ""
-    if (!req.cookies.auth) {
+    let response = ""
+    if (!req.token) {
         response = "no-auth"
     }
+    console.log('Checking login')
     res.send(response)
 })
 
